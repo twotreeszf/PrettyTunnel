@@ -1,0 +1,6 @@
+language: objective-c
+
+script: 
+ - ./build-libgpg-error.sh
+ - ./build-libgcrypt.sh
+ - xcrun -sdk iphoneos lipo -info ./lib/*.a
