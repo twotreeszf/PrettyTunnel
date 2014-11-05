@@ -56,9 +56,7 @@
     [self.activeSockets addObject:proxySocket];
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
-    {
         [self.delegate socksProxy:self clientDidConnect:proxySocket];
-    }
 }
 
 - (NSUInteger)connectionCount

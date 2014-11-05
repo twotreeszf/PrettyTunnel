@@ -16,9 +16,6 @@
 		7D75E3151A0A068300E022F2 /* PrettyTunnelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */; };
 		7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */; };
 		7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */; };
-		7D75E32E1A0A097E00E022F2 /* GCDAsyncProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3281A0A097E00E022F2 /* GCDAsyncProxySocket.m */; };
-		7D75E32F1A0A097E00E022F2 /* SOCKSProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E32B1A0A097E00E022F2 /* SOCKSProxy.m */; };
-		7D75E3301A0A097E00E022F2 /* SOCKSProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E32D1A0A097E00E022F2 /* SOCKSProxySocket.m */; };
 		7D75E3451A0A0AA800E022F2 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3331A0A0AA800E022F2 /* DDAbstractDatabaseLogger.m */; };
 		7D75E3461A0A0AA800E022F2 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3351A0A0AA800E022F2 /* DDASLLogger.m */; };
 		7D75E3471A0A0AA800E022F2 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3371A0A0AA800E022F2 /* DDFileLogger.m */; };
@@ -28,6 +25,8 @@
 		7D75E34B1A0A0AA800E022F2 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3411A0A0AA800E022F2 /* DDDispatchQueueLogFormatter.m */; };
 		7D75E34C1A0A0AA800E022F2 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3431A0A0AA800E022F2 /* DDMultiFormatter.m */; };
 		7D75E34D1A0A0AA800E022F2 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D75E3441A0A0AA800E022F2 /* README.txt */; };
+		7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */; };
+		7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,12 +57,6 @@
 		7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		7D75E3211A0A08C200E022F2 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		7D75E3271A0A097E00E022F2 /* GCDAsyncProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncProxySocket.h; sourceTree = "<group>"; };
-		7D75E3281A0A097E00E022F2 /* GCDAsyncProxySocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncProxySocket.m; sourceTree = "<group>"; };
-		7D75E32A1A0A097E00E022F2 /* SOCKSProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxy.h; sourceTree = "<group>"; };
-		7D75E32B1A0A097E00E022F2 /* SOCKSProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxy.m; sourceTree = "<group>"; };
-		7D75E32C1A0A097E00E022F2 /* SOCKSProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxySocket.h; sourceTree = "<group>"; };
-		7D75E32D1A0A097E00E022F2 /* SOCKSProxySocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxySocket.m; sourceTree = "<group>"; };
 		7D75E3321A0A0AA800E022F2 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		7D75E3331A0A0AA800E022F2 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		7D75E3341A0A0AA800E022F2 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -82,6 +75,10 @@
 		7D75E3421A0A0AA800E022F2 /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
 		7D75E3431A0A0AA800E022F2 /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
 		7D75E3441A0A0AA800E022F2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxy.h; sourceTree = "<group>"; };
+		7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxy.m; sourceTree = "<group>"; };
+		7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxySocket.h; sourceTree = "<group>"; };
+		7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxySocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,30 +175,12 @@
 		7D75E3251A0A097E00E022F2 /* SocksV5Proxy */ = {
 			isa = PBXGroup;
 			children = (
-				7D75E3261A0A097E00E022F2 /* Client */,
-				7D75E3291A0A097E00E022F2 /* Server */,
+				7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */,
+				7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */,
+				7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */,
+				7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */,
 			);
 			path = SocksV5Proxy;
-			sourceTree = "<group>";
-		};
-		7D75E3261A0A097E00E022F2 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				7D75E3271A0A097E00E022F2 /* GCDAsyncProxySocket.h */,
-				7D75E3281A0A097E00E022F2 /* GCDAsyncProxySocket.m */,
-			);
-			path = Client;
-			sourceTree = "<group>";
-		};
-		7D75E3291A0A097E00E022F2 /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				7D75E32A1A0A097E00E022F2 /* SOCKSProxy.h */,
-				7D75E32B1A0A097E00E022F2 /* SOCKSProxy.m */,
-				7D75E32C1A0A097E00E022F2 /* SOCKSProxySocket.h */,
-				7D75E32D1A0A097E00E022F2 /* SOCKSProxySocket.m */,
-			);
-			path = Server;
 			sourceTree = "<group>";
 		};
 		7D75E3311A0A0AA800E022F2 /* CocoaLumberjack */ = {
@@ -338,20 +317,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D75E3481A0A0AA800E022F2 /* DDLog.m in Sources */,
+				7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */,
 				7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */,
 				7D75E34B1A0A0AA800E022F2 /* DDDispatchQueueLogFormatter.m in Sources */,
 				7D75E3471A0A0AA800E022F2 /* DDFileLogger.m in Sources */,
 				7D75E34C1A0A0AA800E022F2 /* DDMultiFormatter.m in Sources */,
 				7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */,
 				7D75E3011A0A068300E022F2 /* ViewController.m in Sources */,
-				7D75E3301A0A097E00E022F2 /* SOCKSProxySocket.m in Sources */,
 				7D75E3491A0A0AA800E022F2 /* DDTTYLogger.m in Sources */,
 				7D75E3461A0A0AA800E022F2 /* DDASLLogger.m in Sources */,
-				7D75E32E1A0A097E00E022F2 /* GCDAsyncProxySocket.m in Sources */,
 				7D75E34A1A0A0AA800E022F2 /* DDContextFilterLogFormatter.m in Sources */,
 				7D75E3451A0A0AA800E022F2 /* DDAbstractDatabaseLogger.m in Sources */,
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
-				7D75E32F1A0A097E00E022F2 /* SOCKSProxy.m in Sources */,
+				7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */,
 				7D75E2FB1A0A068300E022F2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

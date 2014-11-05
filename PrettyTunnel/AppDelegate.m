@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SocksV5Proxy/Server/SOCKSProxy.h"
+#import "SOCKSProxy.h"
 
 @interface AppDelegate ()
 {
