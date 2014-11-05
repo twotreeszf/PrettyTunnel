@@ -11,7 +11,6 @@
 
 @interface SOCKSProxy ()
 @property (nonatomic, strong) GCDAsyncSocket* listeningSocket;
-@property (nonatomic) dispatch_queue_t listeningQueue;
 @property (nonatomic, strong) NSMutableSet* activeSockets;
 @property (nonatomic) NSUInteger totalBytesWritten;
 @property (nonatomic) NSUInteger totalBytesRead;
@@ -19,16 +18,6 @@
 @end
 
 @implementation SOCKSProxy
-
-- (id)init
-{
-    if (self = [super init])
-    {
-        self.listeningQueue = dispatch_queue_create("SOCKS delegate queue", 0);
-        self.callbackQueue = dispatch_get_main_queue();
-    }
-    return self;
-}
 
 - (void)startProxy
 {
@@ -38,7 +27,7 @@
 - (void)startProxyOnPort:(uint16_t)port
 {
     [self disconnect];
-    self.listeningSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:self.listeningQueue];
+    self.listeningSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     self.activeSockets = [NSMutableSet set];
     _listeningPort = port;
     NSError* error = nil;
@@ -68,9 +57,7 @@
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
     {
-        dispatch_async(self.callbackQueue, ^{
-            [self.delegate socksProxy:self clientDidConnect:proxySocket];
-        });
+        [self.delegate socksProxy:self clientDidConnect:proxySocket];
     }
 }
 
@@ -89,15 +76,10 @@
 
 - (void)proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError*)error
 {
-    dispatch_async(self.listeningQueue, ^{
-        [self.activeSockets removeObject:proxySocket];
-    });
+    [self.activeSockets removeObject:proxySocket];
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidDisconnect:)])
-    {
-        dispatch_async(self.callbackQueue, ^{
-            [self.delegate socksProxy:self clientDidDisconnect:proxySocket];
-        });
-    }
+        [self.delegate socksProxy:self clientDidDisconnect:proxySocket];
 }
 
 - (void)proxySocket:(SOCKSProxySocket*)proxySocket didReadDataOfLength:(NSUInteger)numBytes

@@ -45,7 +45,7 @@
     {
         _delegate = delegate;
         self.delegateQueue = dispatch_queue_create("SOCKSProxySocket socket delegate queue", 0);
-        self.callbackQueue = dispatch_queue_create("SOCKSProxySocket callback queue", 0);
+        self.callbackQueue = dispatch_get_main_queue();
         self.proxySocket = socket;
         self.proxySocket.delegate = self;
         self.proxySocket.delegateQueue = self.delegateQueue;

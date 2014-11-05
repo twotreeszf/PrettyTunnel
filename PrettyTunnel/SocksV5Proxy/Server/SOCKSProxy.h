@@ -24,7 +24,6 @@
 
 @property (nonatomic, readonly) uint16_t listeningPort;
 @property (nonatomic, weak) id<SOCKSProxyDelegate> delegate;
-@property (nonatomic) dispatch_queue_t callbackQueue;
 @property (nonatomic, readonly) NSUInteger connectionCount;
 
 /**
