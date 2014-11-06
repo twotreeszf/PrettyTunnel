@@ -20,19 +20,19 @@
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
 	_proxy = [SOCKSProxy new];
-	[_proxy startProxyOnPort:7070];
+	[_proxy startProxyWithRemoteHost:@"www.kikjoy.com" RemotePort:22 UserName:@"fasttunnel" Password:@"bagemima" LocalPort:7070];
 	
     return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application
 {
-	[_proxy startProxyOnPort:7070];
+	
 }
 
 - (void)applicationDidEnterBackground:(UIApplication*)application
 {
-	[_proxy disconnect];
+	
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application

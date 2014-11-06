@@ -1,0 +1,15 @@
+//
+//  Prefix.pch
+//  PrettyTunnel
+//
+//  Created by zhang fan on 14/11/6.
+//
+//
+
+#ifdef __OBJC__
+	#import <UIKit/UIKit.h>
+	#import <Foundation/Foundation.h>
+#endif
+
+#import "Misc/ErrorCheck.h"
+#import "Misc/NSOperationQueue+GlobalQueue.h"

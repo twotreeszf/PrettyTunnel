@@ -8,23 +8,63 @@
 
 #import "SOCKSProxy.h"
 #import "SOCKSProxySocket.h"
+#import "SSHSession/SSHSession.h"
 
 @interface SOCKSProxy ()
-@property (nonatomic, strong) GCDAsyncSocket* listeningSocket;
-@property (nonatomic, strong) NSMutableSet* activeSockets;
-@property (nonatomic) NSUInteger totalBytesWritten;
-@property (nonatomic) NSUInteger totalBytesRead;
+
+@property (nonatomic, strong) SSHSession*		ssh;
+@property (nonatomic, strong) GCDAsyncSocket*	listeningSocket;
+@property (nonatomic, strong) NSMutableSet*		activeSockets;
+@property (nonatomic) NSUInteger				totalBytesWritten;
+@property (nonatomic) NSUInteger				totalBytesRead;
+
+- (void)_startProxyOnPort:(uint16_t)port;
 
 @end
 
 @implementation SOCKSProxy
 
-- (void)startProxy
+- (void)startProxyWithRemoteHost:(NSString*)remoteHost
+					  RemotePort:(uint16_t)remotePort
+						UserName:(NSString*)userName
+						Password:(NSString*)password
+					   LocalPort:(uint16_t)localPort;
 {
-    [self startProxyOnPort:9050];
+	_ssh = [SSHSession new];
+	
+	[[NSOperationQueue globalQueue] addOperationWithBlock:^
+	{
+		int ret = LIBSSH2_ERROR_NONE;
+		{
+			ret = [_ssh connectToHost:remoteHost Port:remotePort Username:userName Password:password];
+			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+			
+			[self _startProxyOnPort:localPort];
+		}
+		
+	Exit0:
+		if (LIBSSH2_ERROR_NONE == ret && [_delegate respondsToSelector:@selector(sshSessionSuccessed)])
+		{
+			[_delegate sshSessionSuccessed];
+		}
+		else if ([_delegate respondsToSelector:@selector(sshSessionFailed:)])
+		{
+			SSHFailedReason reason;
+			if (LIBSSH2_ERROR_SOCKET_TIMEOUT == ret)
+				reason = SSHFR_CouldNotConnect;
+			else if (LIBSSH2_ERROR_SOCKET_DISCONNECT == ret)
+				reason = SSHFR_ServerDisconnected;
+			else if (LIBSSH2_ERROR_AUTHENTICATION_FAILED == ret)
+				reason = SSHFR_UsernamePasswordInvalid;
+			else
+				reason = SSHFR_Unknown;
+			
+			[_delegate sshSessionFailed:reason];
+		}
+	}];
 }
 
-- (void)startProxyOnPort:(uint16_t)port
+- (void)_startProxyOnPort:(uint16_t)port
 {
     [self disconnect];
     self.listeningSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];

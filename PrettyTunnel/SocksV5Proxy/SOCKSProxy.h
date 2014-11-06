@@ -10,44 +10,42 @@
 #import "GCDAsyncSocket.h"
 #import "SOCKSProxySocket.h"
 
+typedef NS_ENUM(NSUInteger, SSHFailedReason)
+{
+    SSHFR_CouldNotConnect,
+    SSHFR_UsernamePasswordInvalid,
+    SSHFR_ServerDisconnected,
+    SSHFR_Unknown
+};
+
 @class SOCKSProxy;
 
 @protocol SOCKSProxyDelegate <NSObject>
+@optional
+- (void) sshSessionFailed: (SSHFailedReason)reason;
+- (void) sshSessionSuccessed;
+
 - (void) socksProxy:(SOCKSProxy*)socksProxy clientDidConnect:(SOCKSProxySocket*)clientSocket;
 - (void) socksProxy:(SOCKSProxy*)socksProxy clientDidDisconnect:(SOCKSProxySocket*)clientSocket;
 @end
 
-/**
- *  SOCKS proxy server implementation.
- */
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 @interface SOCKSProxy : NSObject <GCDAsyncSocketDelegate, SOCKSProxySocketDelegate>
 
-@property (nonatomic, readonly) uint16_t listeningPort;
-@property (nonatomic, weak) id<SOCKSProxyDelegate> delegate;
-@property (nonatomic, readonly) NSUInteger connectionCount;
+@property (nonatomic, weak) id<SOCKSProxyDelegate>	delegate;
 
-/**
- *  Total number of bytes written during lifetime of SOCKSProxy.
- *  @see resetNetworkStatistics
- */
-@property (nonatomic, readonly) NSUInteger totalBytesWritten;
+@property (nonatomic, readonly) uint16_t			listeningPort;
+@property (nonatomic, readonly) NSUInteger			connectionCount;
+@property (nonatomic, readonly) NSUInteger			totalBytesWritten;
+@property (nonatomic, readonly) NSUInteger			totalBytesRead;
 
-/**
- *  Total number of bytes read during lifetime of SOCKSProxy.
- *  @see resetNetworkStatistics
- */
-@property (nonatomic, readonly) NSUInteger totalBytesRead;
-
-/**
- *  Sets `totalBytesWritten` and `totalBytesRead` to 0.
- *  @see totalBytesWritten
- *  @see totalBytesRead
- */
-- (void) resetNetworkStatistics;
-
-
-- (void) startProxy; // defaults to port 9050
-- (void) startProxyOnPort:(uint16_t)port;
-- (void) disconnect;
+- (void)startProxyWithRemoteHost:(NSString*)remoteHost
+					  RemotePort:(uint16_t)remotePort
+						UserName:(NSString*)userName
+						Password:(NSString*)password
+					   LocalPort:(uint16_t)localPort;
+- (void)disconnect;
+- (void)resetNetworkStatistics;
 
 @end

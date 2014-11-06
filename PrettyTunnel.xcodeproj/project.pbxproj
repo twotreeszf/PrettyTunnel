@@ -27,6 +27,14 @@
 		7D75E34D1A0A0AA800E022F2 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D75E3441A0A0AA800E022F2 /* README.txt */; };
 		7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */; };
 		7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */; };
+		7DEE9A831A0B7A0400E52C04 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A801A0B7A0400E52C04 /* libcrypto.a */; };
+		7DEE9A841A0B7A0400E52C04 /* libssh2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A811A0B7A0400E52C04 /* libssh2.a */; };
+		7DEE9A851A0B7A0400E52C04 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A821A0B7A0400E52C04 /* libssl.a */; };
+		7DEE9A871A0B7A1D00E52C04 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A861A0B7A1D00E52C04 /* libz.dylib */; };
+		7DEE9A8C1A0B7CB700E52C04 /* SSHSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A8B1A0B7CB700E52C04 /* SSHSession.m */; };
+		7DEE9A8F1A0B7FBA00E52C04 /* SSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A8E1A0B7FBA00E52C04 /* SSHChannel.m */; };
+		7DEE9A921A0BA29600E52C04 /* SSHGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A911A0BA29600E52C04 /* SSHGlobal.m */; };
+		7DEE9A951A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +87,20 @@
 		7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxy.m; sourceTree = "<group>"; };
 		7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxySocket.h; sourceTree = "<group>"; };
 		7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxySocket.m; sourceTree = "<group>"; };
+		7DEE9A7A1A0B779300E52C04 /* ErrorCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorCheck.h; sourceTree = "<group>"; };
+		7DEE9A7B1A0B780100E52C04 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		7DEE9A801A0B7A0400E52C04 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "PrettyTunnel/framework/libssh2-for-iOS/lib/libcrypto.a"; sourceTree = "<group>"; };
+		7DEE9A811A0B7A0400E52C04 /* libssh2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssh2.a; path = "PrettyTunnel/framework/libssh2-for-iOS/lib/libssh2.a"; sourceTree = "<group>"; };
+		7DEE9A821A0B7A0400E52C04 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "PrettyTunnel/framework/libssh2-for-iOS/lib/libssl.a"; sourceTree = "<group>"; };
+		7DEE9A861A0B7A1D00E52C04 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7DEE9A8A1A0B7CB700E52C04 /* SSHSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHSession.h; sourceTree = "<group>"; };
+		7DEE9A8B1A0B7CB700E52C04 /* SSHSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHSession.m; sourceTree = "<group>"; };
+		7DEE9A8D1A0B7FBA00E52C04 /* SSHChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHChannel.h; sourceTree = "<group>"; };
+		7DEE9A8E1A0B7FBA00E52C04 /* SSHChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHChannel.m; sourceTree = "<group>"; };
+		7DEE9A901A0BA29600E52C04 /* SSHGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHGlobal.h; sourceTree = "<group>"; };
+		7DEE9A911A0BA29600E52C04 /* SSHGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHGlobal.m; sourceTree = "<group>"; };
+		7DEE9A931A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+GlobalQueue.h"; sourceTree = "<group>"; };
+		7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+GlobalQueue.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +108,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DEE9A871A0B7A1D00E52C04 /* libz.dylib in Frameworks */,
+				7DEE9A831A0B7A0400E52C04 /* libcrypto.a in Frameworks */,
+				7DEE9A841A0B7A0400E52C04 /* libssh2.a in Frameworks */,
+				7DEE9A851A0B7A0400E52C04 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				7D75E2F71A0A068300E022F2 /* PrettyTunnel */,
+				7DEE9A881A0B7A4E00E52C04 /* Frameworks */,
 				7D75E3111A0A068300E022F2 /* PrettyTunnelTests */,
 				7D75E2F61A0A068300E022F2 /* Products */,
 			);
@@ -120,6 +147,7 @@
 		7D75E2F71A0A068300E022F2 /* PrettyTunnel */ = {
 			isa = PBXGroup;
 			children = (
+				7DEE9A791A0B779300E52C04 /* Misc */,
 				7D75E3311A0A0AA800E022F2 /* CocoaLumberjack */,
 				7D75E3251A0A097E00E022F2 /* SocksV5Proxy */,
 				7D75E31E1A0A08C200E022F2 /* GCDAsyncSocket */,
@@ -140,6 +168,7 @@
 			children = (
 				7D75E2F91A0A068300E022F2 /* Info.plist */,
 				7D75E2FA1A0A068300E022F2 /* main.m */,
+				7DEE9A7B1A0B780100E52C04 /* Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,6 +204,7 @@
 		7D75E3251A0A097E00E022F2 /* SocksV5Proxy */ = {
 			isa = PBXGroup;
 			children = (
+				7DEE9A891A0B7C8A00E52C04 /* SSHSession */,
 				7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */,
 				7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */,
 				7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */,
@@ -216,6 +246,40 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7DEE9A791A0B779300E52C04 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				7DEE9A931A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.h */,
+				7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */,
+				7DEE9A7A1A0B779300E52C04 /* ErrorCheck.h */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		7DEE9A881A0B7A4E00E52C04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DEE9A861A0B7A1D00E52C04 /* libz.dylib */,
+				7DEE9A801A0B7A0400E52C04 /* libcrypto.a */,
+				7DEE9A811A0B7A0400E52C04 /* libssh2.a */,
+				7DEE9A821A0B7A0400E52C04 /* libssl.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DEE9A891A0B7C8A00E52C04 /* SSHSession */ = {
+			isa = PBXGroup;
+			children = (
+				7DEE9A8A1A0B7CB700E52C04 /* SSHSession.h */,
+				7DEE9A8B1A0B7CB700E52C04 /* SSHSession.m */,
+				7DEE9A8D1A0B7FBA00E52C04 /* SSHChannel.h */,
+				7DEE9A8E1A0B7FBA00E52C04 /* SSHChannel.m */,
+				7DEE9A901A0BA29600E52C04 /* SSHGlobal.h */,
+				7DEE9A911A0BA29600E52C04 /* SSHGlobal.m */,
+			);
+			path = SSHSession;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -224,6 +288,7 @@
 			buildConfigurationList = 7D75E3181A0A068300E022F2 /* Build configuration list for PBXNativeTarget "PrettyTunnel" */;
 			buildPhases = (
 				7D75E2F11A0A068300E022F2 /* Sources */,
+				7DEE9A741A0B6F1900E52C04 /* Run Script */,
 				7D75E2F21A0A068300E022F2 /* Frameworks */,
 				7D75E2F31A0A068300E022F2 /* Resources */,
 			);
@@ -311,11 +376,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7DEE9A741A0B6F1900E52C04 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7D75E2F11A0A068300E022F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DEE9A8F1A0B7FBA00E52C04 /* SSHChannel.m in Sources */,
 				7D75E3481A0A0AA800E022F2 /* DDLog.m in Sources */,
 				7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */,
 				7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */,
@@ -325,12 +408,15 @@
 				7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */,
 				7D75E3011A0A068300E022F2 /* ViewController.m in Sources */,
 				7D75E3491A0A0AA800E022F2 /* DDTTYLogger.m in Sources */,
+				7DEE9A951A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m in Sources */,
+				7DEE9A8C1A0B7CB700E52C04 /* SSHSession.m in Sources */,
 				7D75E3461A0A0AA800E022F2 /* DDASLLogger.m in Sources */,
 				7D75E34A1A0A0AA800E022F2 /* DDContextFilterLogFormatter.m in Sources */,
 				7D75E3451A0A0AA800E022F2 /* DDAbstractDatabaseLogger.m in Sources */,
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
 				7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */,
 				7D75E2FB1A0A068300E022F2 /* main.m in Sources */,
+				7DEE9A921A0BA29600E52C04 /* SSHGlobal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +461,7 @@
 		7D75E3161A0A068300E022F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -395,6 +481,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrettyTunnel/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -411,13 +499,14 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "PrettyTunnel/framework/libssh2-for-iOS/include";
 			};
 			name = Debug;
 		};
 		7D75E3171A0A068300E022F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -436,6 +525,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrettyTunnel/Prefix.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -446,6 +537,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "PrettyTunnel/framework/libssh2-for-iOS/include";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -456,6 +548,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PrettyTunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PrettyTunnel/framework/libssh2-for-iOS/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -466,6 +562,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PrettyTunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PrettyTunnel/framework/libssh2-for-iOS/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
