@@ -32,68 +32,130 @@
     [self disconnect];
 }
 
-- (int)connectToHost: (NSString*)host Port:(UInt16)port Username:(NSString*)username Password:(NSString*)password
++ (BOOL)isSocketError:(int)error
 {
-	X_ASSERT([host length]);
-	X_ASSERT(port);
-	X_ASSERT([username length]);
-	X_ASSERT([password length]);
+    BOOL ret;
+
+    switch (error)
+    {
+    case LIBSSH2_ERROR_SOCKET_NONE:
+    case LIBSSH2_ERROR_SOCKET_DISCONNECT:
+	case LIBSSH2_ERROR_SOCKET_RECV:
+	case LIBSSH2_ERROR_SOCKET_SEND:
+	case LIBSSH2_ERROR_SOCKET_TIMEOUT:
+			ret = YES;
+		break;
+
+    default:
+			ret = NO;
+        break;
+    }
+
+    return ret;
+}
+
++ (BOOL)isChannelError:(int)error
+{
+	BOOL ret;
 	
-	int ret = LIBSSH2_ERROR_NONE;
+	switch (error)
 	{
-		_host		= host;
-		_port		= port;
-		_userName	= username;
-		_password	= password;
-		
-		ret = [self reconnect];
-		ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+		case LIBSSH2_ERROR_CHANNEL_CLOSED:
+		case LIBSSH2_ERROR_CHANNEL_EOF_SENT:
+		case LIBSSH2_ERROR_CHANNEL_FAILURE:
+		case LIBSSH2_ERROR_CHANNEL_OUTOFORDER:
+		case LIBSSH2_ERROR_CHANNEL_PACKET_EXCEEDED:
+		case LIBSSH2_ERROR_CHANNEL_REQUEST_DENIED:
+		case LIBSSH2_ERROR_CHANNEL_UNKNOWN:
+		case LIBSSH2_ERROR_CHANNEL_WINDOW_EXCEEDED:
+			ret = YES;
+			break;
+			
+		default:
+			ret = NO;
+			break;
 	}
-Exit0:
+	
 	return ret;
+}
+
+- (int)connectToHost:(NSString*)host Port:(UInt16)port Username:(NSString*)username Password:(NSString*)password
+{
+    X_ASSERT([host length]);
+    X_ASSERT(port);
+    X_ASSERT([username length]);
+    X_ASSERT([password length]);
+
+    int ret = LIBSSH2_ERROR_NONE;
+    {
+        _host = host;
+        _port = port;
+        _userName = username;
+        _password = password;
+
+        ret = [self reconnect];
+        ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+    }
+Exit0:
+    return ret;
 }
 
 - (int)reconnect
 {
-	int ret = LIBSSH2_ERROR_NONE;
+	@synchronized(self)
 	{
-		NSArray* addrs = [GCDAsyncSocket lookupHost:_host port:_port error:nil];
-		ERROR_CHECK_BOOLEX([addrs count], ret = LIBSSH2_ERROR_SOCKET_NONE);
+		int ret = LIBSSH2_ERROR_NONE;
+		{
+			NSArray* addrs = [GCDAsyncSocket lookupHost:_host port:_port error:nil];
+			ERROR_CHECK_BOOLEX([addrs count], ret = LIBSSH2_ERROR_SOCKET_NONE);
+			
+			NSData* addr = addrs[0];
+			_socket = socket(AF_INET, SOCK_STREAM, 0);
+			ret = connect(_socket, (struct sockaddr*)(addr.bytes), addr.length);
+			ERROR_CHECK_BOOLEX(!ret, ret = LIBSSH2_ERROR_SOCKET_NONE);
+			
+			ret = libssh2_session_handshake(_session, _socket);
+			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+			
+			ret = libssh2_userauth_password(_session, [_userName UTF8String], [_password UTF8String]);
+			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+			
+			libssh2_session_set_blocking(_session, 0);
+			
+			_conected = YES;
+		}
 		
-		NSData* addr = addrs[0];
-		_socket = socket(AF_INET, SOCK_STREAM, 0);
-		ret = connect(_socket, (struct sockaddr*)(addr.bytes), addr.length);
-		ERROR_CHECK_BOOLEX(!ret, ret = LIBSSH2_ERROR_SOCKET_NONE);
-
-		ret = libssh2_session_handshake(_session, _socket);
-		ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
-		
-		ret = libssh2_userauth_password(_session, [_userName UTF8String], [_password UTF8String]);
-		ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
-		
-		libssh2_session_set_blocking(_session, 0);
+	Exit0:
+		return ret;
 	}
-	
-Exit0:
-	return ret;
 }
 
 - (void)disconnect
 {
-	if (_conected)
-		libssh2_session_disconnect(_session, "bye bye");
+	@synchronized(self)
+	{
+		if (_conected)
+			libssh2_session_disconnect(_session, "bye bye");
+		
+		if (_session)
+		{
+			libssh2_session_free(_session);
+			_session = 0;
+		}
+		
+		if (_socket)
+		{
+			close(_socket);
+			_socket = 0;
+		}
+		
+		_conected = NO;
+	}
+}
 
-	if (_session)
-	{
-		libssh2_session_free(_session);
-		_session = 0;
-	}
-	
-	if (_socket)
-	{
-		close(_socket);
-		_socket = 0;
-	}
+- (BOOL)isConnected
+{
+	return _conected;
 }
 
 - (int)waitSession: (NSUInteger)timeoutSec;
@@ -102,50 +164,57 @@ Exit0:
 	X_ASSERT(_socket);
 	
 	struct timeval timeout;
-	timeout.tv_sec = 10;
+	timeout.tv_sec = timeoutSec;
 	timeout.tv_usec = 0;
 
 	fd_set fd;
 	FD_ZERO(&fd);
 	FD_SET(_socket, &fd);
 	
-	/* now make sure we wait in the correct direction */
-	int dir = libssh2_session_block_directions(_session);
-	
-	fd_set* writefd;
-	fd_set* readfd;
-	if (dir & LIBSSH2_SESSION_BLOCK_INBOUND)
-		readfd = &fd;
-	
-	if (dir & LIBSSH2_SESSION_BLOCK_OUTBOUND)
-		writefd = &fd;
-	
-	int ret = select(_socket + 1, readfd, writefd, NULL, &timeout);
+	int ret = select(_socket + 1, &fd, &fd, NULL, &timeout);
 	return ret;
+}
+
+- (int)lastError
+{
+	return libssh2_session_last_error(_session, NULL, NULL, 0);
 }
 
 - (SSHChannel*)channelDirectTCPIPWithSourceHost:(NSString*)sourceHost SourcePort:(UInt16)sourcePort DestHost:(NSString*)destHost DestPort:(UInt16)destPort
 {
-	X_ASSERT([sourceHost length]);
-	X_ASSERT(sourcePort);
-	X_ASSERT([destHost length]);
-	X_ASSERT(destPort);
-	
-	SSHChannel* channel;
-	{
-		LIBSSH2_CHANNEL* channel_;
-		while ((channel_ = libssh2_channel_open_session(_session)) == NULL &&
-			   libssh2_session_last_error(_session, NULL, NULL, 0) == LIBSSH2_ERROR_EAGAIN)
-		{
-			[self waitSession:1];
-		}
-		ERROR_CHECK_BOOL(channel_);
+    X_ASSERT([sourceHost length]);
+    X_ASSERT(sourcePort);
+    X_ASSERT([destHost length]);
+    X_ASSERT(destPort);
+
+    SSHChannel* channel;
+    {
+        LIBSSH2_CHANNEL* channel_;
+        while (true)
+        {
+			int lastError;
+            @synchronized(self)
+            {
+                channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
+				lastError = [self lastError];
+			}
+			
+			if (channel_)
+				break;
+			else if (!channel_ && LIBSSH2_ERROR_EAGAIN == lastError)
+			{
+				[self waitSession:1];
+			}
+			else
+				break;
+        }
+        ERROR_CHECK_BOOL(channel_);
 		
-		channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
-	}
-	
+        channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
+    }
+
 Exit0:
-	return channel;
+    return channel;
 }
 
 @end

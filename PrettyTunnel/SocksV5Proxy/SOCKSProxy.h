@@ -10,19 +10,11 @@
 #import "GCDAsyncSocket.h"
 #import "SOCKSProxySocket.h"
 
-typedef NS_ENUM(NSUInteger, SSHFailedReason)
-{
-    SSHFR_CouldNotConnect,
-    SSHFR_UsernamePasswordInvalid,
-    SSHFR_ServerDisconnected,
-    SSHFR_Unknown
-};
-
 @class SOCKSProxy;
 
 @protocol SOCKSProxyDelegate <NSObject>
 @optional
-- (void) sshSessionFailed: (SSHFailedReason)reason;
+- (void) sshSessionFailed: (int)error;
 - (void) sshSessionSuccessed;
 
 - (void) socksProxy:(SOCKSProxy*)socksProxy clientDidConnect:(SOCKSProxySocket*)clientSocket;

@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
+#import "SSHSession/SSHSession.h"
 
 @class SOCKSProxySocket;
 
 @protocol SOCKSProxySocketDelegate <NSObject>
 @optional
+- (void) sshSessionFailed;
 - (void) proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError *)error;
 - (void) proxySocket:(SOCKSProxySocket*)proxySocket didReadDataOfLength:(NSUInteger)numBytes;
 - (void) proxySocket:(SOCKSProxySocket*)proxySocket didWriteDataOfLength:(NSUInteger)numBytes;
@@ -27,6 +29,6 @@
 @property (nonatomic, readonly) NSUInteger					totalBytesWritten;
 @property (nonatomic, readonly) NSUInteger					totalBytesRead;
 
-- (id) initWithSocket:(GCDAsyncSocket*)socket delegate:(id<SOCKSProxySocketDelegate>)delegate;
+- (id) initWithSocket:(GCDAsyncSocket*)socket SSHSession:(SSHSession*)sshSession delegate:(id<SOCKSProxySocketDelegate>)delegate;
 
 @end

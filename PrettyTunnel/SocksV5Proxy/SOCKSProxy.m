@@ -49,24 +49,13 @@
 		}
 		else if ([_delegate respondsToSelector:@selector(sshSessionFailed:)])
 		{
-			SSHFailedReason reason;
-			if (LIBSSH2_ERROR_SOCKET_TIMEOUT == ret)
-				reason = SSHFR_CouldNotConnect;
-			else if (LIBSSH2_ERROR_SOCKET_DISCONNECT == ret)
-				reason = SSHFR_ServerDisconnected;
-			else if (LIBSSH2_ERROR_AUTHENTICATION_FAILED == ret)
-				reason = SSHFR_UsernamePasswordInvalid;
-			else
-				reason = SSHFR_Unknown;
-			
-			[_delegate sshSessionFailed:reason];
+			[_delegate sshSessionFailed:ret];
 		}
 	}];
 }
 
 - (void)_startProxyOnPort:(uint16_t)port
 {
-    [self disconnect];
     self.listeningSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     self.activeSockets = [NSMutableSet set];
     _listeningPort = port;
@@ -81,22 +70,25 @@
 
 - (void)socket:(GCDAsyncSocket*)sock didAcceptNewSocket:(GCDAsyncSocket*)newSocket
 {
-    NSLog(@"Accepted new socket: %@", newSocket);
+	if ([_ssh isConnected])
+	{
+		NSLog(@"Accepted new socket: %@", newSocket);
 #if TARGET_OS_IPHONE
-    [newSocket performBlock:^{
-        BOOL enableBackground = [newSocket enableBackgroundingOnSocket];
-        if (!enableBackground) {
-            NSLog(@"Error enabling background on new socket %@", newSocket);
-        } else {
-            NSLog(@"Backgrounding enabled for new socket: %@", newSocket);
-        }
-    }];
+		[newSocket performBlock:^{
+			BOOL enableBackground = [newSocket enableBackgroundingOnSocket];
+			if (!enableBackground) {
+				NSLog(@"Error enabling background on new socket %@", newSocket);
+			} else {
+				NSLog(@"Backgrounding enabled for new socket: %@", newSocket);
+			}
+		}];
 #endif
-    SOCKSProxySocket* proxySocket = [[SOCKSProxySocket alloc] initWithSocket:newSocket delegate:self];
-    [self.activeSockets addObject:proxySocket];
-
-    if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
-        [self.delegate socksProxy:self clientDidConnect:proxySocket];
+		SOCKSProxySocket* proxySocket = [[SOCKSProxySocket alloc] initWithSocket:newSocket SSHSession:_ssh delegate:self];
+		[self.activeSockets addObject:proxySocket];
+		
+		if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
+			[self.delegate socksProxy:self clientDidConnect:proxySocket];
+	}
 }
 
 - (NSUInteger)connectionCount
@@ -110,6 +102,17 @@
     [self.listeningSocket disconnect];
     self.listeningSocket.delegate = nil;
     self.listeningSocket = nil;
+	
+	[_ssh disconnect];
+	
+	[self resetNetworkStatistics];
+}
+
+- (void)sshSessionFailed
+{
+	[self disconnect];
+	
+	[_delegate sshSessionFailed:LIBSSH2_ERROR_SOCKET_NONE];
 }
 
 - (void)proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError*)error

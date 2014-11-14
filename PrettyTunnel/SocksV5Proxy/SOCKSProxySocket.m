@@ -17,8 +17,6 @@
 #define SOCKS_CONNECT_REPLY 10300
 #define SOCKS_INCOMING_READ 10400
 #define SOCKS_INCOMING_WRITE 10401
-#define SOCKS_OUTGOING_READ 10500
-#define SOCKS_OUTGOING_WRITE 10501
 
 // Timeouts
 #define TIMEOUT_CONNECT 8.00
@@ -29,32 +27,42 @@
 #include <arpa/inet.h>
 
 @interface SOCKSProxySocket ()
-@property (nonatomic, strong) GCDAsyncSocket* proxySocket;
-@property (nonatomic, strong) GCDAsyncSocket* outgoingSocket;
-@property (nonatomic) dispatch_queue_t delegateQueue;
-@property (nonatomic) NSUInteger totalBytesWritten;
-@property (nonatomic) NSUInteger totalBytesRead;
+@property (nonatomic, weak) SSHSession*			sshSession;
+@property (nonatomic, strong) SSHChannel*		sshChannel;
+@property (nonatomic, strong) NSOperation*		sshOperation;
+@property (nonatomic, assign) BOOL				isCancel;
+
+@property (nonatomic, strong) GCDAsyncSocket*	proxySocket;
+@property (nonatomic) dispatch_queue_t			delegateQueue;
+@property (nonatomic) NSUInteger				totalBytesWritten;
+@property (nonatomic) NSUInteger				totalBytesRead;
 @end
 
 @implementation SOCKSProxySocket
 
-- (id)initWithSocket:(GCDAsyncSocket*)socket
-            delegate:(id<SOCKSProxySocketDelegate>)delegate
+- (id) initWithSocket:(GCDAsyncSocket*)socket SSHSession:(SSHSession*)sshSession delegate:(id<SOCKSProxySocketDelegate>)delegate;
 {
     if (self = [super init])
     {
+		_sshSession	= sshSession;
         _delegate = delegate;
+		
         self.delegateQueue = dispatch_queue_create("SOCKSProxySocket socket delegate queue", 0);
-        self.callbackQueue = dispatch_get_main_queue();
+		self.callbackQueue = dispatch_get_main_queue();
+		
         self.proxySocket = socket;
         self.proxySocket.delegate = self;
         self.proxySocket.delegateQueue = self.delegateQueue;
-        self.outgoingSocket =
-            [[GCDAsyncSocket alloc] initWithDelegate:self
-                                       delegateQueue:self.delegateQueue];
+		
         [self socksOpen];
     }
     return self;
+}
+
+- (void)dealloc
+{
+	[_proxySocket disconnect];
+	[_sshOperation waitUntilFinished];
 }
 
 - (void)socket:(GCDAsyncSocket*)sock
@@ -139,43 +147,90 @@
     }
     else if (tag == SOCKS_CONNECT_PORT)
     {
+		// create channel for current proxy socket
         uint16_t rawPort;
         memcpy(&rawPort, [data bytes], 2);
         _destinationPort = NSSwapBigShortToHost(rawPort);
-        NSError* error = nil;
-        [self.outgoingSocket connectToHost:self.destinationHost onPort:self.destinationPort error:&error];
+		
+		_sshChannel = [_sshSession channelDirectTCPIPWithSourceHost:_proxySocket.localHost
+														 SourcePort:_proxySocket.localPort
+														   DestHost:_destinationHost
+														   DestPort:_destinationPort];
+		// SSH failed
+		if (!_sshChannel)
+		{
+			if (self.delegate && [self.delegate respondsToSelector:@selector(sshSessionFailed)])
+			{
+				dispatch_async(self.callbackQueue, ^{
+					[self.delegate sshSessionFailed];
+				});
+			}
+		}
+		else
+		{
+			// send response to proxy socket
+			
+			// We write out 5 bytes which we expect to be:
+			// 0: ver  = 5
+			// 1: rep  = 0
+			// 2: rsv  = 0
+			// 3: atyp = 3
+			// 4: size = size of addr field
+			NSUInteger responseLength = 5 + _destinationHost.length + 2;
+			uint8_t* responseBytes = malloc(responseLength * sizeof(uint8_t));
+			responseBytes[0] = 5;
+			responseBytes[1] = 0;
+			responseBytes[2] = 0;
+			responseBytes[3] = 3;
+			responseBytes[4] = (uint8_t)_destinationHost.length;
+			memcpy(responseBytes + 5, [_destinationHost UTF8String], _destinationHost.length);
+			uint16_t bigEndianPort = NSSwapHostShortToBig(_destinationPort);
+			NSUInteger portLength = 2;
+			memcpy(responseBytes + 5 + _destinationHost.length, &bigEndianPort, portLength);
+			NSData* responseData = [NSData dataWithBytesNoCopy:responseBytes length:responseLength freeWhenDone:YES];
+			[self.proxySocket writeData:responseData withTimeout:-1 tag:SOCKS_CONNECT_REPLY];
+			[self.proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
+			
+			// start read channel operation
+			NSBlockOperation* opt = [NSBlockOperation new];
+			[opt addExecutionBlock:^{
+				[self readChannel];
+			}];
+			
+			[[NSOperationQueue globalQueue] addOperation:opt];
+			_sshOperation = opt;
+		}
     }
     else if (tag == SOCKS_INCOMING_READ)
     {
-        [self.outgoingSocket writeData:data withTimeout:-1 tag:SOCKS_OUTGOING_WRITE];
-        [self.outgoingSocket readDataWithTimeout:-1 tag:SOCKS_OUTGOING_READ];
-        [self.proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
-        NSUInteger dataLength = data.length;
-        self.totalBytesWritten += dataLength;
-        if (self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(proxySocket:didWriteDataOfLength:)])
-        {
-            dispatch_async(self.callbackQueue, ^{
-				[self.delegate proxySocket:self didWriteDataOfLength:dataLength];
-            });
-        }
-    }
-    else if (tag == SOCKS_OUTGOING_READ)
-    {
-        [self.proxySocket writeData:data withTimeout:-1 tag:SOCKS_INCOMING_WRITE];
-        [self.proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
-        [self.outgoingSocket readDataWithTimeout:-1 tag:SOCKS_OUTGOING_READ];
-        NSUInteger dataLength = data.length;
-        self.totalBytesRead += dataLength;
-        if (self.delegate &&
-            [self.delegate
-                respondsToSelector:@selector(proxySocket:didReadDataOfLength:)])
-        {
-            dispatch_async(self.callbackQueue, ^{
-				[self.delegate proxySocket:self didReadDataOfLength:dataLength];
-            });
-        }
+		// write data from proxy socket to SSH channel
+		int ret = [_sshChannel write:data];
+		if (ret > 0)
+		{
+			[self.proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
+			NSUInteger dataLength = data.length;
+			self.totalBytesWritten += dataLength;
+			if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocket:didWriteDataOfLength:)])
+			{
+				dispatch_async(self.callbackQueue, ^{
+					[self.delegate proxySocket:self didWriteDataOfLength:dataLength];
+				});
+			}
+		}
+		else
+		{
+			if([SSHSession isSocketError:ret])
+			{
+				if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocket:didWriteDataOfLength:)])
+				{
+					dispatch_async(self.callbackQueue, ^{
+						[self.delegate sshSessionFailed];
+					});
+				}
+			}
+			
+			[_proxySocket disconnect];
+		}
     }
 }
 
@@ -197,6 +252,9 @@
 
 - (void)socketDidDisconnect:(GCDAsyncSocket*)sock withError:(NSError*)err
 {
+	[_sshChannel close];
+	_isCancel = YES;
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocketDidDisconnect:withError:)])
     {
         dispatch_async(self.callbackQueue, ^{
@@ -205,28 +263,54 @@
     }
 }
 
-- (void)socket:(GCDAsyncSocket*)sock didConnectToHost:(NSString*)host port:(uint16_t)port
+- (void)readChannel
 {
-    // We write out 5 bytes which we expect to be:
-    // 0: ver  = 5
-    // 1: rep  = 0
-    // 2: rsv  = 0
-    // 3: atyp = 3
-    // 4: size = size of addr field
-    NSUInteger responseLength = 5 + host.length + 2;
-    uint8_t* responseBytes = malloc(responseLength * sizeof(uint8_t));
-    responseBytes[0] = 5;
-    responseBytes[1] = 0;
-    responseBytes[2] = 0;
-    responseBytes[3] = 3;
-    responseBytes[4] = (uint8_t)host.length;
-    memcpy(responseBytes + 5, [host UTF8String], host.length);
-    uint16_t bigEndianPort = NSSwapHostShortToBig(port);
-    NSUInteger portLength = 2;
-    memcpy(responseBytes + 5 + host.length, &bigEndianPort, portLength);
-    NSData* responseData = [NSData dataWithBytesNoCopy:responseBytes length:responseLength freeWhenDone:YES];
-    [self.proxySocket writeData:responseData withTimeout:-1 tag:SOCKS_CONNECT_REPLY];
-    [self.proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
+	while (![_sshChannel isEOF] && !_isCancel)
+	{
+		@autoreleasepool
+		{
+			NSData* data;
+			int ret = [_sshChannel read:&data];
+			if (LIBSSH2_ERROR_EAGAIN == ret || 0 == ret)
+			{
+				[_sshChannel waitSession];
+				continue;
+			}
+			
+			// read data failed
+			if (!data)
+			{
+				if([SSHSession isSocketError:ret])
+				{
+					if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocket:didWriteDataOfLength:)])
+					{
+						dispatch_async(self.callbackQueue, ^{
+							[self.delegate sshSessionFailed];
+						});
+					}
+				}
+				
+				[_proxySocket disconnect];
+				break;
+			}
+			
+			// read data success
+			dispatch_async(_delegateQueue, ^
+						   {
+							   [self.proxySocket writeData:data withTimeout:-1 tag:SOCKS_INCOMING_WRITE];
+							   
+							   NSUInteger dataLength = data.length;
+							   self.totalBytesRead += dataLength;
+							   
+							   if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocket:didReadDataOfLength:)])
+							   {
+								   dispatch_async(self.callbackQueue, ^{
+									   [self.delegate proxySocket:self didReadDataOfLength:dataLength];
+								   });
+							   }
+						   });
+		}
+	}
 }
 
 @end
