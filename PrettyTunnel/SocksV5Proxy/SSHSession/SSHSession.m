@@ -102,55 +102,49 @@ Exit0:
 
 - (int)reconnect
 {
-	@synchronized(self)
-	{
-		int ret = LIBSSH2_ERROR_NONE;
-		{
-			NSArray* addrs = [GCDAsyncSocket lookupHost:_host port:_port error:nil];
-			ERROR_CHECK_BOOLEX([addrs count], ret = LIBSSH2_ERROR_SOCKET_NONE);
-			
-			NSData* addr = addrs[0];
-			_socket = socket(AF_INET, SOCK_STREAM, 0);
-			ret = connect(_socket, (struct sockaddr*)(addr.bytes), addr.length);
-			ERROR_CHECK_BOOLEX(!ret, ret = LIBSSH2_ERROR_SOCKET_NONE);
-			
-			ret = libssh2_session_handshake(_session, _socket);
-			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
-			
-			ret = libssh2_userauth_password(_session, [_userName UTF8String], [_password UTF8String]);
-			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
-			
-			libssh2_session_set_blocking(_session, 0);
-			
-			_conected = YES;
-		}
-		
-	Exit0:
-		return ret;
-	}
+    int ret = LIBSSH2_ERROR_NONE;
+    {
+        NSArray* addrs = [GCDAsyncSocket lookupHost:_host port:_port error:nil];
+        ERROR_CHECK_BOOLEX([addrs count], ret = LIBSSH2_ERROR_SOCKET_NONE);
+
+        NSData* addr = addrs[0];
+        _socket = socket(AF_INET, SOCK_STREAM, 0);
+        ret = connect(_socket, (struct sockaddr*)(addr.bytes), addr.length);
+        ERROR_CHECK_BOOLEX(!ret, ret = LIBSSH2_ERROR_SOCKET_NONE);
+
+        ret = libssh2_session_handshake(_session, _socket);
+        ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+
+        ret = libssh2_userauth_password(_session, [_userName UTF8String], [_password UTF8String]);
+        ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
+
+        libssh2_session_set_blocking(_session, 0);
+
+        _conected = YES;
+    }
+
+Exit0:
+    return ret;
 }
 
 - (void)disconnect
 {
-	@synchronized(self)
-	{
-		if (_conected)
-			libssh2_session_disconnect(_session, "bye bye");
-		
-		if (_session)
-		{
-			libssh2_session_free(_session);
-			_session = 0;
-		}
-		
-		if (_socket)
-		{
-			close(_socket);
-			_socket = 0;
-		}
-		
-		_conected = NO;
-	}
+    if (_conected)
+        libssh2_session_disconnect(_session, "bye bye");
+
+    if (_session)
+    {
+        libssh2_session_free(_session);
+        _session = 0;
+    }
+
+    if (_socket)
+    {
+        close(_socket);
+        _socket = 0;
+    }
+
+    _conected = NO;
 }
 
 - (BOOL)isConnected
@@ -158,7 +152,61 @@ Exit0:
 	return _conected;
 }
 
-- (int)waitSession: (NSUInteger)timeoutSec;
+- (SSHSessionStatus)waitSessionRead: (NSUInteger)timeoutSec
+{
+	X_ASSERT(_session);
+	X_ASSERT(_socket);
+	
+	struct timeval timeout;
+	timeout.tv_sec = timeoutSec;
+	timeout.tv_usec = 0;
+	
+	fd_set fdRead;
+	FD_ZERO(&fdRead);
+	FD_SET(_socket, &fdRead);
+	
+	int ret = select(_socket + 1, &fdRead, NULL, NULL, &timeout);
+	if (ret > 0)
+		return SSHSS_Read;
+	else if (!ret)
+		return SSHSS_None;
+	else if (-1 == ret)
+		return SSHSS_Except;
+	else
+	{
+		X_ASSERT(false);
+		return SSHSS_None;
+	}
+}
+
+- (SSHSessionStatus)waitSessionWrite:(NSUInteger)timeoutSec
+{
+	X_ASSERT(_session);
+	X_ASSERT(_socket);
+	
+	struct timeval timeout;
+	timeout.tv_sec = timeoutSec;
+	timeout.tv_usec = 0;
+	
+	fd_set fdWrite;
+	FD_ZERO(&fdWrite);
+	FD_SET(_socket, &fdWrite);
+	
+	int ret = select(_socket + 1, NULL, &fdWrite, NULL, &timeout);
+	if (ret > 0)
+		return SSHSS_Write;
+	else if (!ret)
+		return SSHSS_None;
+	else if (-1 == ret)
+		return SSHSS_Except;
+	else
+	{
+		X_ASSERT(false);
+		return SSHSS_None;
+	}
+}
+
+- (SSHSessionStatus)waitSessionAny:(NSUInteger)timeoutSec
 {
 	X_ASSERT(_session);
 	X_ASSERT(_socket);
@@ -167,12 +215,40 @@ Exit0:
 	timeout.tv_sec = timeoutSec;
 	timeout.tv_usec = 0;
 
-	fd_set fd;
-	FD_ZERO(&fd);
-	FD_SET(_socket, &fd);
+	fd_set fdRead;
+	FD_ZERO(&fdRead);
+	FD_SET(_socket, &fdRead);
 	
-	int ret = select(_socket + 1, &fd, &fd, NULL, &timeout);
-	return ret;
+	fd_set fdWrite;
+	FD_ZERO(&fdWrite);
+	FD_SET(_socket, &fdWrite);
+	
+	fd_set fdExcept;
+	FD_ZERO(&fdExcept);
+	FD_SET(_socket, &fdExcept);
+	
+	int ret = select(_socket + 1, &fdRead, &fdWrite, &fdExcept, &timeout);
+	if (ret > 0)
+	{
+		SSHSessionStatus status = SSHSS_None;
+		if (FD_ISSET(_socket, &fdRead))
+			status |= SSHSS_Read;
+		if (FD_ISSET(_socket, &fdWrite))
+			status |= SSHSS_Write;
+		if (FD_ISSET(_socket, &fdExcept))
+			status |= SSHSS_Except;
+		
+		return status;
+	}
+	else if (!ret)
+		return SSHSS_None;
+	else if (-1 == ret)
+		return SSHSS_Except;
+	else
+	{
+		X_ASSERT(false);
+		return SSHSS_None;
+	}
 }
 
 - (int)lastError
@@ -192,24 +268,21 @@ Exit0:
         LIBSSH2_CHANNEL* channel_;
         while (true)
         {
-			int lastError;
-            @synchronized(self)
+            int lastError;
+            channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
+            lastError = [self lastError];
+
+            if (channel_)
+                break;
+            else if (!channel_ && LIBSSH2_ERROR_EAGAIN == lastError)
             {
-                channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
-				lastError = [self lastError];
-			}
-			
-			if (channel_)
-				break;
-			else if (!channel_ && LIBSSH2_ERROR_EAGAIN == lastError)
-			{
-				[self waitSession:1];
-			}
-			else
-				break;
+                [self waitSessionWrite:1];
+            }
+            else
+                break;
         }
         ERROR_CHECK_BOOL(channel_);
-		
+
         channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
     }
 

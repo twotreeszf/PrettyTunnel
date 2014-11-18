@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D2E59D01A1B468D00C196CB /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */; };
+		7D2E59D11A1B468D00C196CB /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CF1A1B468D00C196CB /* NSMutableArray+Stack.m */; };
+		7D2E59D41A1B48F100C196CB /* SSHProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59D31A1B48F100C196CB /* SSHProxy.m */; };
 		7D75E2FB1A0A068300E022F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E2FA1A0A068300E022F2 /* main.m */; };
 		7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E2FD1A0A068300E022F2 /* AppDelegate.m */; };
 		7D75E3011A0A068300E022F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3001A0A068300E022F2 /* ViewController.m */; };
@@ -48,6 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
+		7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
+		7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Stack.h"; sourceTree = "<group>"; };
+		7D2E59CF1A1B468D00C196CB /* NSMutableArray+Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Stack.m"; sourceTree = "<group>"; };
+		7D2E59D21A1B48F100C196CB /* SSHProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHProxy.h; sourceTree = "<group>"; };
+		7D2E59D31A1B48F100C196CB /* SSHProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHProxy.m; sourceTree = "<group>"; };
+		7D2E59D51A1B774B00C196CB /* SSHProxyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHProxyDelegate.h; sourceTree = "<group>"; };
 		7D75E2F51A0A068300E022F2 /* PrettyTunnel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrettyTunnel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D75E2F91A0A068300E022F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D75E2FA1A0A068300E022F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -209,6 +219,9 @@
 				7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */,
 				7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */,
 				7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */,
+				7D2E59D21A1B48F100C196CB /* SSHProxy.h */,
+				7D2E59D31A1B48F100C196CB /* SSHProxy.m */,
+				7D2E59D51A1B774B00C196CB /* SSHProxyDelegate.h */,
 			);
 			path = SocksV5Proxy;
 			sourceTree = "<group>";
@@ -249,6 +262,10 @@
 		7DEE9A791A0B779300E52C04 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */,
+				7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */,
+				7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */,
+				7D2E59CF1A1B468D00C196CB /* NSMutableArray+Stack.m */,
 				7DEE9A931A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.h */,
 				7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */,
 				7DEE9A7A1A0B779300E52C04 /* ErrorCheck.h */,
@@ -398,9 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D2E59D11A1B468D00C196CB /* NSMutableArray+Stack.m in Sources */,
 				7DEE9A8F1A0B7FBA00E52C04 /* SSHChannel.m in Sources */,
 				7D75E3481A0A0AA800E022F2 /* DDLog.m in Sources */,
+				7D2E59D41A1B48F100C196CB /* SSHProxy.m in Sources */,
 				7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */,
+				7D2E59D01A1B468D00C196CB /* NSMutableArray+Queue.m in Sources */,
 				7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */,
 				7D75E34B1A0A0AA800E022F2 /* DDDispatchQueueLogFormatter.m in Sources */,
 				7D75E3471A0A0AA800E022F2 /* DDFileLogger.m in Sources */,

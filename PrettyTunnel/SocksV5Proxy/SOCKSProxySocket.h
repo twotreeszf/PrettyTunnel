@@ -9,26 +9,36 @@
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
 #import "SSHSession/SSHSession.h"
+#import "SSHProxyDelegate.h"
+
+typedef NS_ENUM(NSUInteger, ProxySocketStatus)
+{
+	PSS_None = 0,
+	PSS_InitLocalProxy,
+	PSS_RequestNewChannel,
+	PSS_ProxyReady,
+	PSS_RequestCloseChannel
+};
 
 @class SOCKSProxySocket;
 
-@protocol SOCKSProxySocketDelegate <NSObject>
-@optional
-- (void) sshSessionFailed;
-- (void) proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError *)error;
-- (void) proxySocket:(SOCKSProxySocket*)proxySocket didReadDataOfLength:(NSUInteger)numBytes;
-- (void) proxySocket:(SOCKSProxySocket*)proxySocket didWriteDataOfLength:(NSUInteger)numBytes;
-@end
-
 @interface SOCKSProxySocket : NSObject <GCDAsyncSocketDelegate>
 
-@property (nonatomic, strong, readonly) NSString*			destinationHost;
-@property (nonatomic, readonly) uint16_t					destinationPort;
-@property (nonatomic, weak) id<SOCKSProxySocketDelegate>	delegate;
-@property (nonatomic) dispatch_queue_t						callbackQueue;
-@property (nonatomic, readonly) NSUInteger					totalBytesWritten;
-@property (nonatomic, readonly) NSUInteger					totalBytesRead;
+@property (nonatomic, strong, readonly) NSString*						destinationHost;
+@property (nonatomic, readonly)			uint16_t						destinationPort;
+@property (nonatomic, readonly)			NSUInteger						totalBytesWritten;
+@property (nonatomic, readonly)			NSUInteger						totalBytesRead;
 
-- (id) initWithSocket:(GCDAsyncSocket*)socket SSHSession:(SSHSession*)sshSession delegate:(id<SOCKSProxySocketDelegate>)delegate;
+@property (nonatomic, assign)			ProxySocketStatus				state;
+@property (nonatomic, strong)			NSMutableArray*					writeDataQueue;
+@property (nonatomic, weak)				id<SOCKSProxySocketDelegate>	delegate;
+@property (nonatomic, readonly)			dispatch_queue_t				socketQueue;
+@property (nonatomic, strong)			SSHChannel*						sshChannel;
+
+- (id)initWithSocket:(GCDAsyncSocket*)socket delegate:(id<SOCKSProxySocketDelegate>)delegate;
+
+- (void)relayConnctionReady;
+- (void)relayRemoteData: (NSData*)data;
+- (void)didWriteData: (NSUInteger)length;
 
 @end

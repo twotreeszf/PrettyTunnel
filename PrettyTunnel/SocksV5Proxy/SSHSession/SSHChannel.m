@@ -40,80 +40,60 @@
 {
 	while (true)
 	{
-		int ret;
-		@synchronized(_session)
-		{
-			ret = libssh2_channel_close(_channel);
-		}
-		
+		int ret = libssh2_channel_close(_channel);
 		if (LIBSSH2_ERROR_EAGAIN == ret)
-			[_session waitSession:1];
+			[_session waitSessionWrite:1];
 		else
 			break;
 	}
 
-	@synchronized(_session)
-	{
-		libssh2_channel_free(_channel);
-	}
-	
+	libssh2_channel_free(_channel);
 	_channel = 0;
 }
 
-- (int)waitSession
+- (int)read:(NSData* __autoreleasing*)data
 {
-	return [_session waitSession:1];
-}
+    NSMutableData* data_ = [NSMutableData dataWithLength:kChannelReadBufferLen];
 
-- (int)read:(NSData* __autoreleasing *)data
-{
-	@synchronized(_session)
-	{
-		NSMutableData* data_ = [NSMutableData dataWithLength:kChannelReadBufferLen];
-		
-		int len = (int)libssh2_channel_read(_channel, data_.mutableBytes, data_.length);
-		if (len > 0)
-		{
-			[data_ setLength:len];
-			*data = data_;
-		}
-		
-		return len;
-	}
+    int len = (int)libssh2_channel_read(_channel, data_.mutableBytes, data_.length);
+    if (len > 0)
+    {
+        [data_ setLength:len];
+        *data = data_;
+    }
+
+    return len;
 }
 
 - (int)write:(NSData*)data
 {
-	int sendLen;
-	int leftLen			= (int)data.length;
-	const char* buffer	= (const char*)data.bytes;
+    int sendLen;
+    int leftLen = (int)data.length;
+    const char* buffer = (const char*)data.bytes;
 
-	while (leftLen)
-	{
-		int sendLen;
-		while (true)
-		{
-			@synchronized(_session)
-			{
-				sendLen = (int)libssh2_channel_write(_channel, buffer, leftLen);
-			}
-			
-			if (LIBSSH2_ERROR_EAGAIN == sendLen)
-				[self waitSession];
-			else
-				break;
-		}
-		
-		if (sendLen >= 0)
-		{
-			leftLen -= sendLen;
-			buffer += sendLen;
-		}
-		else
-			break;
-	}
-	
-	return sendLen;
+    while (leftLen)
+    {
+        int sendLen;
+        while (true)
+        {
+            sendLen = (int)libssh2_channel_write(_channel, buffer, leftLen);
+
+            if (LIBSSH2_ERROR_EAGAIN == sendLen)
+                [self waitSession];
+            else
+                break;
+        }
+
+        if (sendLen >= 0)
+        {
+            leftLen -= sendLen;
+            buffer += sendLen;
+        }
+        else
+            break;
+    }
+
+    return sendLen;
 }
 
 - (BOOL)isEOF

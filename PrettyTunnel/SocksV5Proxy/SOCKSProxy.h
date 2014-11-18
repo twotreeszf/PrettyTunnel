@@ -14,8 +14,9 @@
 
 @protocol SOCKSProxyDelegate <NSObject>
 @optional
-- (void) sshSessionFailed: (int)error;
-- (void) sshSessionSuccessed;
+- (void) sshLoginFailed: (int)error;
+- (void) sshLoginSuccessed;
+- (void) sshSessionLost: (NSUInteger)index;
 
 - (void) socksProxy:(SOCKSProxy*)socksProxy clientDidConnect:(SOCKSProxySocket*)clientSocket;
 - (void) socksProxy:(SOCKSProxy*)socksProxy clientDidDisconnect:(SOCKSProxySocket*)clientSocket;
