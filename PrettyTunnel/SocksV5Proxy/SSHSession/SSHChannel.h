@@ -15,11 +15,10 @@
 - (instancetype)initWithSession:(SSHSession*)session Channel:(LIBSSH2_CHANNEL*)channel;
 - (void)dealloc;
 
-- (void)close;
-- (int)waitSession;
-- (int)read:(NSData* __autoreleasing *)data;
-- (int)write:(NSData*)data;
+- (NSData*)read:(int*)error;
+- (int)write:(NSData*)data :(int*)error;
 
 - (BOOL)isEOF;
+- (int)close;
 
 @end

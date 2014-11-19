@@ -27,7 +27,8 @@
 
 @interface SOCKSProxySocket ()
 {
-	GCDAsyncSocket* _proxySocket;
+	GCDAsyncSocket*		_proxySocket;
+	dispatch_queue_t	_socketQueue;
 }
 @end
 
@@ -43,7 +44,7 @@
 		
         _proxySocket = socket;
         _proxySocket.delegate = self;
-        _proxySocket.delegateQueue = self.socketQueue;
+        _proxySocket.delegateQueue = _socketQueue;
 		
 		_state = PSS_InitLocalProxy;
 		_writeDataQueue = [NSMutableArray new];
@@ -171,7 +172,7 @@
 
 - (void)relayConnctionReady
 {
-	dispatch_async(self.socketQueue, ^
+	dispatch_async(_socketQueue, ^
 	{
 		// We write out 5 bytes which we expect to be:
 		// 0: ver  = 5
@@ -200,7 +201,7 @@
 
 - (void)relayRemoteData:(NSData*)data
 {
-    dispatch_async(self.socketQueue, ^
+    dispatch_async(_socketQueue, ^
 	{
 		[_proxySocket writeData:data withTimeout:-1 tag:SOCKS_INCOMING_WRITE];
 		NSUInteger dataLength = data.length;
@@ -218,7 +219,7 @@
 
 - (void)didWriteData:(NSUInteger)length
 {
-	dispatch_async(self.socketQueue, ^
+	dispatch_async(_socketQueue, ^
 	{
 		_totalBytesRead += length;
 		 

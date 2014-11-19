@@ -36,69 +36,59 @@
         [self close];
 }
 
-- (void)close
+- (NSData*)read:(int*)error
 {
-	while (true)
-	{
-		int ret = libssh2_channel_close(_channel);
-		if (LIBSSH2_ERROR_EAGAIN == ret)
-			[_session waitSessionWrite:1];
-		else
-			break;
-	}
+    NSMutableData* data = [NSMutableData dataWithLength:kChannelReadBufferLen];
 
-	libssh2_channel_free(_channel);
-	_channel = 0;
-}
-
-- (int)read:(NSData* __autoreleasing*)data
-{
-    NSMutableData* data_ = [NSMutableData dataWithLength:kChannelReadBufferLen];
-
-    int len = (int)libssh2_channel_read(_channel, data_.mutableBytes, data_.length);
+    int len = (int)libssh2_channel_read(_channel, data.mutableBytes, data.length);
+	*error = len;
+	
     if (len > 0)
-    {
-        [data_ setLength:len];
-        *data = data_;
-    }
-
-    return len;
+	{
+		[data setLength:len];
+		return data;
+	}
+	else
+		return nil;
 }
 
-- (int)write:(NSData*)data
+- (int)write:(NSData*)data :(int*)error
 {
-    int sendLen;
     int leftLen = (int)data.length;
     const char* buffer = (const char*)data.bytes;
 
     while (leftLen)
     {
-        int sendLen;
-        while (true)
+        int sendLen = (int)libssh2_channel_write(_channel, buffer, leftLen);
+		*error = sendLen;
+		
+        if (sendLen > 0)
         {
-            sendLen = (int)libssh2_channel_write(_channel, buffer, leftLen);
-
-            if (LIBSSH2_ERROR_EAGAIN == sendLen)
-                [self waitSession];
-            else
-                break;
-        }
-
-        if (sendLen >= 0)
-        {
-            leftLen -= sendLen;
-            buffer += sendLen;
+            leftLen		-= sendLen;
+            buffer		+= sendLen;
         }
         else
             break;
     }
 
-    return sendLen;
+    return data.length - leftLen;
 }
 
 - (BOOL)isEOF
 {
     return libssh2_channel_eof(_channel);
+}
+
+- (int)close
+{
+	int ret = libssh2_channel_close(_channel);
+	if (LIBSSH2_ERROR_NONE == ret)
+	{
+		libssh2_channel_free(_channel);
+		_channel = 0;
+	}
+	
+	return ret;
 }
 
 @end

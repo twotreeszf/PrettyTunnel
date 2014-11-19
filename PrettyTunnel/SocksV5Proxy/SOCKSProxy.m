@@ -74,10 +74,14 @@
 
 - (void)socket:(GCDAsyncSocket*)sock didAcceptNewSocket:(GCDAsyncSocket*)newSocket
 {
-	if ([_sshProxy connected])
+	if (![_sshProxy connected])
+	{
+		[newSocket disconnect];
+	}
+	else
 	{
 		NSLog(@"Accepted new socket: %@", newSocket);
-#if TARGET_OS_IPHONE
+		#if TARGET_OS_IPHONE
 		[newSocket performBlock:^{
 			BOOL enableBackground = [newSocket enableBackgroundingOnSocket];
 			if (!enableBackground) {
@@ -86,7 +90,8 @@
 				NSLog(@"Backgrounding enabled for new socket: %@", newSocket);
 			}
 		}];
-#endif
+		#endif
+		
 		SOCKSProxySocket* proxySocket = [[SOCKSProxySocket alloc] initWithSocket:newSocket delegate:self];
 		[_sshProxy attachProxySocket:proxySocket];
 		

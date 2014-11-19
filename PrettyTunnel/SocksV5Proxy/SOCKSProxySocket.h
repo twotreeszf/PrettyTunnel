@@ -13,11 +13,10 @@
 
 typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 {
-	PSS_None = 0,
-	PSS_InitLocalProxy,
-	PSS_RequestNewChannel,
+	PSS_InitLocalProxy = 0,
 	PSS_ProxyReady,
-	PSS_RequestCloseChannel
+	PSS_RequestNewChannel,
+	PSS_RequestCloseChannel,
 };
 
 @class SOCKSProxySocket;
@@ -29,10 +28,9 @@ typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 @property (nonatomic, readonly)			NSUInteger						totalBytesWritten;
 @property (nonatomic, readonly)			NSUInteger						totalBytesRead;
 
-@property (nonatomic, assign)			ProxySocketStatus				state;
+@property (atomic, assign)				ProxySocketStatus				state;
 @property (nonatomic, strong)			NSMutableArray*					writeDataQueue;
 @property (nonatomic, weak)				id<SOCKSProxySocketDelegate>	delegate;
-@property (nonatomic, readonly)			dispatch_queue_t				socketQueue;
 @property (nonatomic, strong)			SSHChannel*						sshChannel;
 
 - (id)initWithSocket:(GCDAsyncSocket*)socket delegate:(id<SOCKSProxySocketDelegate>)delegate;

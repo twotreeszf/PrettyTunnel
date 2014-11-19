@@ -8,11 +8,18 @@
 
 #import "SSHProxy.h"
 
-@implementation SSHProxy
+@interface SSHProxy()
 {
 	SSHSession*		_ssh;
 	NSMutableArray* _proxySockets;
+	NSOperation*	_proxyOperation;
 }
+
+- (void)_startProxyOperation;
+
+@end
+
+@implementation SSHProxy
 
 - (instancetype)init
 {
@@ -36,12 +43,20 @@
 
 - (int)connectToHost:(NSString*)host Port:(UInt16)port Username:(NSString*)username Password:(NSString*)password
 {
-	return [_ssh connectToHost:host Port:port Username:username Password:password];
+	int ret = [_ssh connectToHost:host Port:port Username:username Password:password];
+	if (LIBSSH2_ERROR_NONE == ret)
+	{
+		
+	}
+	
+	return ret;
 }
 
 - (void)disconnect
 {
-	// stop ssh operation
+	[_proxyOperation cancel];
+	[_proxyOperation waitUntilFinished];
+	_proxyOperation = nil;
 	
 	[_ssh disconnect];
 	
@@ -57,6 +72,19 @@
 	{
 		[_proxySockets addObject:socket];
 	}
+}
+
+- (void)_startProxyOperation
+{
+	NSBlockOperation* opt = [NSBlockOperation new];
+	__weak NSBlockOperation* weakOpt = opt;
+	[opt addExecutionBlock:^
+	{
+		;
+	}];
+	
+	[[NSOperationQueue globalQueue] addOperation:opt];
+	_proxyOperation = opt;
 }
 
 @end
