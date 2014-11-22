@@ -10,13 +10,15 @@
 #import "SSHChannel.h"
 #import <libssh2/libssh2.h>
 
-typedef NS_ENUM(NSUInteger, SSHSessionStatus)
+
+enum
 {
-    SSHSS_None		= 0,
-    SSHSS_Read		= 1 << 0,
-    SSHSS_Write		= 1 << 1,
-    SSHSS_Except	= 1 << 2
+	SSHSS_None		= 0,
+	SSHSS_Read		= (1 << 0),
+	SSHSS_Write		= (1 << 1),
+	SSHSS_Except	= (1 << 2)
 };
+typedef NSUInteger SSHSessionStatus;
 
 @interface SSHSession : NSObject
 
@@ -33,9 +35,7 @@ typedef NS_ENUM(NSUInteger, SSHSessionStatus)
 - (void)disconnect;
 - (BOOL)isConnected;
 
-- (SSHSessionStatus)waitSessionRead: (NSUInteger)timeoutSec;
-- (SSHSessionStatus)waitSessionWrite:(NSUInteger)timeoutSec;
-- (SSHSessionStatus)waitSessionAny:(NSUInteger)timeoutSec;
+- (SSHSessionStatus)waitSession:(SSHSessionStatus)waitStatus :(NSUInteger)timeoutMillisec;
 - (int)lastError;
 
 - (SSHChannel*)channelDirectTCPIPWithSourceHost:(NSString*)sourceHost SourcePort:(UInt16)sourcePort DestHost:(NSString*)destHost DestPort:(UInt16)destPort;

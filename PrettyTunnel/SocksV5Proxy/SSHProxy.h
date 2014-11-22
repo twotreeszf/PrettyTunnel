@@ -18,6 +18,7 @@
 @property (nonatomic, readonly) BOOL connected;
 
 - (int)connectToHost:(NSString*)host Port:(UInt16)port Username:(NSString*)username Password:(NSString*)password;
+- (int)reconnect;
 - (void)disconnect;
 
 - (void)attachProxySocket: (SOCKSProxySocket*)socket;

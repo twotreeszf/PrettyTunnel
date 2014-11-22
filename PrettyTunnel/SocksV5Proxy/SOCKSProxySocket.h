@@ -14,8 +14,8 @@
 typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 {
 	PSS_InitLocalProxy = 0,
-	PSS_ProxyReady,
 	PSS_RequestNewChannel,
+	PSS_ProxyReady,
 	PSS_RequestCloseChannel,
 };
 
@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 
 @interface SOCKSProxySocket : NSObject <GCDAsyncSocketDelegate>
 
+@property (nonatomic, readonly)			NSString*						localHost;
+@property (nonatomic, readonly)			uint16_t						localPort;
 @property (nonatomic, strong, readonly) NSString*						destinationHost;
 @property (nonatomic, readonly)			uint16_t						destinationPort;
 @property (nonatomic, readonly)			NSUInteger						totalBytesWritten;
@@ -37,6 +39,9 @@ typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 
 - (void)relayConnctionReady;
 - (void)relayRemoteData: (NSData*)data;
+- (void)disconnectLocal;
+
+- (void)didClosed;
 - (void)didWriteData: (NSUInteger)length;
 
 @end

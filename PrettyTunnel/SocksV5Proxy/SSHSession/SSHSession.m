@@ -152,68 +152,14 @@ Exit0:
 	return _conected;
 }
 
-- (SSHSessionStatus)waitSessionRead: (NSUInteger)timeoutSec
+- (SSHSessionStatus)waitSession:(SSHSessionStatus)waitStatus :(NSUInteger)timeoutMillisec;
 {
 	X_ASSERT(_session);
 	X_ASSERT(_socket);
 	
 	struct timeval timeout;
-	timeout.tv_sec = timeoutSec;
-	timeout.tv_usec = 0;
-	
-	fd_set fdRead;
-	FD_ZERO(&fdRead);
-	FD_SET(_socket, &fdRead);
-	
-	int ret = select(_socket + 1, &fdRead, NULL, NULL, &timeout);
-	if (ret > 0)
-		return SSHSS_Read;
-	else if (!ret)
-		return SSHSS_None;
-	else if (-1 == ret)
-		return SSHSS_Except;
-	else
-	{
-		X_ASSERT(false);
-		return SSHSS_None;
-	}
-}
-
-- (SSHSessionStatus)waitSessionWrite:(NSUInteger)timeoutSec
-{
-	X_ASSERT(_session);
-	X_ASSERT(_socket);
-	
-	struct timeval timeout;
-	timeout.tv_sec = timeoutSec;
-	timeout.tv_usec = 0;
-	
-	fd_set fdWrite;
-	FD_ZERO(&fdWrite);
-	FD_SET(_socket, &fdWrite);
-	
-	int ret = select(_socket + 1, NULL, &fdWrite, NULL, &timeout);
-	if (ret > 0)
-		return SSHSS_Write;
-	else if (!ret)
-		return SSHSS_None;
-	else if (-1 == ret)
-		return SSHSS_Except;
-	else
-	{
-		X_ASSERT(false);
-		return SSHSS_None;
-	}
-}
-
-- (SSHSessionStatus)waitSessionAny:(NSUInteger)timeoutSec
-{
-	X_ASSERT(_session);
-	X_ASSERT(_socket);
-	
-	struct timeval timeout;
-	timeout.tv_sec = timeoutSec;
-	timeout.tv_usec = 0;
+	timeout.tv_sec = 0;
+	timeout.tv_usec = timeoutMillisec * 1000;
 
 	fd_set fdRead;
 	FD_ZERO(&fdRead);
@@ -227,7 +173,11 @@ Exit0:
 	FD_ZERO(&fdExcept);
 	FD_SET(_socket, &fdExcept);
 	
-	int ret = select(_socket + 1, &fdRead, &fdWrite, &fdExcept, &timeout);
+	fd_set* readSet = (waitStatus & SSHSS_Read) ? &fdRead : NULL;
+	fd_set* writeSet = (waitStatus & SSHSS_Write) ? &fdWrite : NULL;
+	fd_set* exceptSet = (waitStatus & SSHSS_Except) ? &fdExcept : NULL;
+	
+	int ret = select(_socket + 1, readSet, writeSet, exceptSet, &timeout);
 	if (ret > 0)
 	{
 		SSHSessionStatus status = SSHSS_None;
@@ -265,23 +215,19 @@ Exit0:
 
     SSHChannel* channel;
     {
-        LIBSSH2_CHANNEL* channel_;
-        while (true)
-        {
-            int lastError;
-            channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
-            lastError = [self lastError];
-
-            if (channel_)
-                break;
-            else if (!channel_ && LIBSSH2_ERROR_EAGAIN == lastError)
-            {
-                [self waitSessionWrite:1];
-            }
-            else
-                break;
-        }
-        ERROR_CHECK_BOOL(channel_);
+		LIBSSH2_CHANNEL* channel_;
+		BOOL retry = NO;
+		do
+		{
+			channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
+			int error = [self lastError];
+			
+			retry = !channel_ && (LIBSSH2_ERROR_EAGAIN == error);
+			if (retry)
+				usleep(10 * 1000);
+		}
+		while (retry);
+		ERROR_CHECK_BOOL(channel_);
 
         channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
     }

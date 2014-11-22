@@ -13,7 +13,7 @@
 
 @implementation SSHChannel
 {
-	__weak SSHSession*			_session;
+	__weak SSHSession*	_session;
 	LIBSSH2_CHANNEL*	_channel;
 }
 
@@ -81,12 +81,18 @@
 
 - (int)close
 {
-	int ret = libssh2_channel_close(_channel);
-	if (LIBSSH2_ERROR_NONE == ret)
+	int ret = 0;
+	BOOL retry;
+	while (retry)
 	{
-		libssh2_channel_free(_channel);
-		_channel = 0;
+		ret = libssh2_channel_close(_channel);
+		retry = (LIBSSH2_ERROR_EAGAIN == ret);
+		if (retry)
+			usleep(10 * 1000);
 	}
+	
+	libssh2_channel_free(_channel);
+	_channel = 0;
 	
 	return ret;
 }

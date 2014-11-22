@@ -34,6 +34,16 @@
 
 @implementation SOCKSProxySocket
 
+- (NSString*)localHost
+{
+	return _proxySocket.connectedHost;
+}
+
+- (uint16_t)localPort
+{
+	return _proxySocket.connectedPort;
+}
+
 - (id) initWithSocket:(GCDAsyncSocket*)socket delegate:(id<SOCKSProxySocketDelegate>)delegate;
 {
     if (self = [super init])
@@ -215,6 +225,24 @@
 			});
 		}
     });
+}
+
+- (void)disconnectLocal
+{
+	dispatch_async(_socketQueue, ^
+	{
+		[_proxySocket disconnect];
+	});
+}
+
+- (void)didClosed
+{
+	if (self.delegate && [self.delegate respondsToSelector:@selector(proxySocketDidDisconnect:withError:)])
+	{
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.delegate proxySocketDidDisconnect:self withError:nil];
+		});
+	}
 }
 
 - (void)didWriteData:(NSUInteger)length
