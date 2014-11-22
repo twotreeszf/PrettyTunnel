@@ -197,7 +197,10 @@
 							
 							sock.sshChannel = [_ssh channelDirectTCPIPWithSourceHost:sock.localHost SourcePort:sock.localPort DestHost:sock.destinationHost DestPort:sock.destinationPort];
 							if (sock.sshChannel)
+							{
+								sock.state = PSS_ProxyReady;
 								[sock relayConnctionReady];
+							}
 						}
 						else if (PSS_ProxyReady == sock.state)
 						{

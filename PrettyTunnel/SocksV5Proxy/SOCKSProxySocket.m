@@ -203,9 +203,7 @@
 		memcpy(responseBytes + 5 + _destinationHost.length, &bigEndianPort, portLength);
 		NSData* responseData = [NSData dataWithBytesNoCopy:responseBytes length:responseLength freeWhenDone:YES];
 		[_proxySocket writeData:responseData withTimeout:-1 tag:SOCKS_CONNECT_REPLY];
-		[_proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];
-		
-		_state = PSS_ProxyReady;
+		[_proxySocket readDataWithTimeout:-1 tag:SOCKS_INCOMING_READ];		
 	});
 }
 

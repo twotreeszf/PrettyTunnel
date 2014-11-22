@@ -217,6 +217,7 @@ Exit0:
     {
 		LIBSSH2_CHANNEL* channel_;
 		BOOL retry = NO;
+		NSUInteger count = 64;
 		do
 		{
 			channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
@@ -226,10 +227,10 @@ Exit0:
 			if (retry)
 				usleep(10 * 1000);
 		}
-		while (retry);
-		ERROR_CHECK_BOOL(channel_);
+		while (retry && --count);
 
-        channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
+		if (channel_)
+			channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
     }
 
 Exit0:
