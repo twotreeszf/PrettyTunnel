@@ -29,6 +29,7 @@
 @property (nonatomic, weak) id<SOCKSProxyDelegate>	delegate;
 
 @property (nonatomic, readonly) uint16_t			listeningPort;
+@property (nonatomic, readonly) BOOL				connected;
 @property (nonatomic, readonly) NSUInteger			connectionCount;
 @property (nonatomic, readonly) NSUInteger			totalBytesWritten;
 @property (nonatomic, readonly) NSUInteger			totalBytesRead;

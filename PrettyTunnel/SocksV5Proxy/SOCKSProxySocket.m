@@ -36,7 +36,8 @@
 
 - (NSString*)localHost
 {
-	return _proxySocket.connectedHost;
+	NSString* host = _proxySocket.connectedHost;
+	return host ? host : @"";
 }
 
 - (uint16_t)localPort

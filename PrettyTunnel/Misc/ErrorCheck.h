@@ -74,12 +74,11 @@
         
     #endif
 #else
-	#include <stdio.h>
     #define X_ASSERT(exp)						\
     do                                          \
     {                                           \
         if (!(exp))                             \
-			printf("Assert Faild: %s, %s, %s(%d)", #exp, __X_FUNCTION__, __FILE__, __LINE__);				\
+			DDLogError("Assert Faild: %s, %s, %s(%d)", #exp, __X_FUNCTION__, __FILE__, __LINE__);				\
     } while (0)
     
 #endif

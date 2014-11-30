@@ -30,6 +30,8 @@
 						Password:(NSString*)password
 					   LocalPort:(uint16_t)localPort;
 {
+	KPTraceStack;
+	
 	_sshProxy = [SSHProxy new];
 	_sshProxy.delegate = self;
 	
@@ -41,6 +43,8 @@
 			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
 			
 			[self _startProxyOnPort:localPort];
+			
+			_connected = YES;
 		}
 		
 	Exit0:
@@ -60,6 +64,8 @@
 
 - (void)_startProxyOnPort:(uint16_t)port
 {
+	KPTraceStack;
+	
     self.listeningSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     _listeningPort = port;
 	
@@ -74,21 +80,18 @@
 
 - (void)socket:(GCDAsyncSocket*)sock didAcceptNewSocket:(GCDAsyncSocket*)newSocket
 {
+	KPTraceStack;
+	
 	if (![_sshProxy connected])
 	{
 		[newSocket disconnect];
 	}
 	else
 	{
-		NSLog(@"Accepted new socket: %@", newSocket);
 		#if TARGET_OS_IPHONE
-		[newSocket performBlock:^{
-			BOOL enableBackground = [newSocket enableBackgroundingOnSocket];
-			if (!enableBackground) {
-				NSLog(@"Error enabling background on new socket %@", newSocket);
-			} else {
-				NSLog(@"Backgrounding enabled for new socket: %@", newSocket);
-			}
+		[newSocket performBlock:^
+		{
+			[newSocket enableBackgroundingOnSocket];
 		}];
 		#endif
 		
@@ -107,38 +110,52 @@
 
 - (void)disconnect
 {
+	KPTraceStack;
+
     [self.listeningSocket disconnect];
     self.listeningSocket = nil;
 	
 	[_sshProxy disconnect];
 	
 	[self resetNetworkStatistics];
+	
+	_connected = NO;
 }
 
 - (void)proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError*)error
 {
+	KPTraceStack;
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidDisconnect:)])
         [self.delegate socksProxy:self clientDidDisconnect:proxySocket];
 }
 
 - (void)sshSessionLost: (SSHProxy*)sshProxy
 {
+	KPTraceStack;
+
 	if (self.delegate && [self.delegate respondsToSelector:@selector(sshSessionLost:)])
 		[self.delegate sshSessionLost:0];
 }
 
 - (void)proxySocket:(SOCKSProxySocket*)proxySocket didReadDataOfLength:(NSUInteger)numBytes
 {
+	KPTraceStack;
+
     self.totalBytesRead += numBytes;
 }
 
 - (void)proxySocket:(SOCKSProxySocket*)proxySocket didWriteDataOfLength:(NSUInteger)numBytes
 {
+	KPTraceStack;
+
     self.totalBytesWritten += numBytes;
 }
 
 - (void)resetNetworkStatistics
 {
+	KPTraceStack;
+
     self.totalBytesWritten = 0;
     self.totalBytesRead = 0;
 }

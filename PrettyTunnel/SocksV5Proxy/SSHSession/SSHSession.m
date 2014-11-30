@@ -213,6 +213,9 @@ Exit0:
     X_ASSERT([destHost length]);
     X_ASSERT(destPort);
 
+	// debug
+	// sourceHost = @"127.0.0.1";
+	
     SSHChannel* channel;
     {
 		LIBSSH2_CHANNEL* channel_;
