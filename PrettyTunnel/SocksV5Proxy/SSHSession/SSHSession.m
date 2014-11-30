@@ -206,16 +206,11 @@ Exit0:
 	return libssh2_session_last_error(_session, NULL, NULL, 0);
 }
 
-- (SSHChannel*)channelDirectTCPIPWithSourceHost:(NSString*)sourceHost SourcePort:(UInt16)sourcePort DestHost:(NSString*)destHost DestPort:(UInt16)destPort
+- (SSHChannel*)channelDirectTCPIPWithDestHost:(NSString*)destHost DestPort:(UInt16)destPort;
 {
-    X_ASSERT([sourceHost length]);
-    X_ASSERT(sourcePort);
     X_ASSERT([destHost length]);
     X_ASSERT(destPort);
 
-	// debug
-	// sourceHost = @"127.0.0.1";
-	
     SSHChannel* channel;
     {
 		LIBSSH2_CHANNEL* channel_;
@@ -223,7 +218,7 @@ Exit0:
 		NSUInteger count = 64;
 		do
 		{
-			channel_ = libssh2_channel_direct_tcpip_ex(_session, [destHost UTF8String], destPort, [sourceHost UTF8String], sourcePort);
+			channel_ = libssh2_channel_direct_tcpip(_session, [destHost UTF8String], destPort);
 			int error = [self lastError];
 			
 			retry = !channel_ && (LIBSSH2_ERROR_EAGAIN == error);

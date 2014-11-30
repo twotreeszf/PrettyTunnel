@@ -38,6 +38,6 @@ typedef NSUInteger SSHSessionStatus;
 - (SSHSessionStatus)waitSession:(SSHSessionStatus)waitStatus :(NSUInteger)timeoutMillisec;
 - (int)lastError;
 
-- (SSHChannel*)channelDirectTCPIPWithSourceHost:(NSString*)sourceHost SourcePort:(UInt16)sourcePort DestHost:(NSString*)destHost DestPort:(UInt16)destPort;
+- (SSHChannel*)channelDirectTCPIPWithDestHost:(NSString*)destHost DestPort:(UInt16)destPort;
 
 @end

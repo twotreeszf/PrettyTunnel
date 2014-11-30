@@ -190,16 +190,20 @@
 						}
 						else if (PSS_RequestNewChannel == sock.state)
 						{
-							X_ASSERT(sock.localHost.length);
-							X_ASSERT(sock.localPort);
 							X_ASSERT(sock.destinationHost.length);
 							X_ASSERT(sock.destinationPort);
 							
-							sock.sshChannel = [_ssh channelDirectTCPIPWithSourceHost:sock.localHost SourcePort:sock.localPort DestHost:sock.destinationHost DestPort:sock.destinationPort];
+							sock.sshChannel = [_ssh channelDirectTCPIPWithDestHost:sock.destinationHost DestPort:sock.destinationPort];
 							if (sock.sshChannel)
 							{
 								sock.state = PSS_ProxyReady;
 								[sock relayConnctionReady];
+							}
+							// create TCP direct channel fail, meybe couldn't connect dest host on remote server, force close local socket
+							else
+							{
+								sock.state = PSS_RequestNewChannel;
+								[socketsShouldClose addObject:sock];
 							}
 						}
 						else if (PSS_ProxyReady == sock.state)
