@@ -51,8 +51,6 @@
 			ret = [_pacServer start];
 			ERROR_CHECK_BOOL(ret);
 			
-			NSString* pacURL = _pacServer.pacFileAddress;
-			
 			_connected = YES;
 		}
 		
