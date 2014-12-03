@@ -6,9 +6,9 @@
 //
 //
 
-#import "SSHProxy.h"
+#import "SSHTCPDirectTunnel.h"
 
-@interface SSHProxy()
+@interface SSHTCPDirectTunnel()
 {
 	SSHSession*		_ssh;
 	NSMutableArray* _proxySockets;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation SSHProxy
+@implementation SSHTCPDirectTunnel
 
 - (instancetype)init
 {

@@ -11,7 +11,7 @@
 #import "SOCKSProxySocket.h"
 #import "SSHProxyDelegate.h"
 
-@interface SSHProxy : NSObject
+@interface SSHTCPDirectTunnel : NSObject
 
 @property (nonatomic, weak) id<SOCKSProxySocketDelegate> delegate;
 @property (nonatomic, readonly) NSUInteger connectionCount;

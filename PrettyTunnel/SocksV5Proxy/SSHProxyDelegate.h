@@ -10,14 +10,14 @@
 #define PrettyTunnel_SSHProxyDelegate_h
 
 @class SOCKSProxySocket;
-@class SSHProxy;
+@class SSHTCPDirectTunnel;
 @protocol SOCKSProxySocketDelegate <NSObject>
 @optional
 - (void)proxySocket:(SOCKSProxySocket*)proxySocket didReadDataOfLength:(NSUInteger)numBytes;
 - (void)proxySocket:(SOCKSProxySocket*)proxySocket didWriteDataOfLength:(NSUInteger)numBytes;
 
 - (void)proxySocketDidDisconnect:(SOCKSProxySocket*)proxySocket withError:(NSError*)error;
-- (void)sshSessionLost: (SSHProxy*)sshProxy;
+- (void)sshSessionLost: (SSHTCPDirectTunnel*)sshProxy;
 @end
 
 #endif

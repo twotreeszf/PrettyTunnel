@@ -8,15 +8,17 @@
 
 #import "SOCKSProxy.h"
 #import "SOCKSProxySocket.h"
-#import "SSHProxy.h"
+#import "SSHTCPDirectTunnel.h"
+#import "PacServer/PacServer.h"
 
 @interface SOCKSProxy ()
 
-@property (nonatomic, strong) GCDAsyncSocket*	listeningSocket;
-@property (nonatomic, strong) SSHProxy*			sshProxy;
+@property (nonatomic, strong) GCDAsyncSocket*		listeningSocket;
+@property (nonatomic, strong) SSHTCPDirectTunnel*	sshTunnel;
+@property (nonatomic, strong) PacServer*			pacServer;
 
-@property (nonatomic) NSUInteger				totalBytesWritten;
-@property (nonatomic) NSUInteger				totalBytesRead;
+@property (nonatomic) NSUInteger					totalBytesWritten;
+@property (nonatomic) NSUInteger					totalBytesRead;
 
 - (void)_startProxyOnPort:(uint16_t)port;
 
@@ -32,17 +34,24 @@
 {
 	KPTraceStack;
 	
-	_sshProxy = [SSHProxy new];
-	_sshProxy.delegate = self;
+	_sshTunnel = [SSHTCPDirectTunnel new];
+	_sshTunnel.delegate = self;
+	
+	_pacServer = [[PacServer alloc] initWithLocalProxyPort:localPort];
 	
 	[[NSOperationQueue globalQueue] addOperationWithBlock:^
 	{
 		int ret = LIBSSH2_ERROR_NONE;
 		{
-			ret = [_sshProxy connectToHost:remoteHost Port:remotePort Username:userName Password:password];
+			ret = [_sshTunnel connectToHost:remoteHost Port:remotePort Username:userName Password:password];
 			ERROR_CHECK_BOOL(LIBSSH2_ERROR_NONE == ret);
 			
 			[self _startProxyOnPort:localPort];
+			
+			ret = [_pacServer start];
+			ERROR_CHECK_BOOL(ret);
+			
+			NSString* pacURL = _pacServer.pacFileAddress;
 			
 			_connected = YES;
 		}
@@ -82,7 +91,7 @@
 {
 	KPTraceStack;
 	
-	if (![_sshProxy connected])
+	if (![_sshTunnel connected])
 	{
 		[newSocket disconnect];
 	}
@@ -96,7 +105,7 @@
 		#endif
 		
 		SOCKSProxySocket* proxySocket = [[SOCKSProxySocket alloc] initWithSocket:newSocket delegate:self];
-		[_sshProxy attachProxySocket:proxySocket];
+		[_sshTunnel attachProxySocket:proxySocket];
 		
 		if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
 			[self.delegate socksProxy:self clientDidConnect:proxySocket];
@@ -105,17 +114,19 @@
 
 - (NSUInteger)connectionCount
 {
-	return _sshProxy.connectionCount;
+	return _sshTunnel.connectionCount;
 }
 
 - (void)disconnect
 {
 	KPTraceStack;
+	
+	[_pacServer stop];
 
     [self.listeningSocket disconnect];
     self.listeningSocket = nil;
 	
-	[_sshProxy disconnect];
+	[_sshTunnel disconnect];
 	
 	[self resetNetworkStatistics];
 	
@@ -130,7 +141,7 @@
         [self.delegate socksProxy:self clientDidDisconnect:proxySocket];
 }
 
-- (void)sshSessionLost: (SSHProxy*)sshProxy
+- (void)sshSessionLost: (SSHTCPDirectTunnel*)sshProxy
 {
 	KPTraceStack;
 
