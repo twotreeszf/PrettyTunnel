@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  PrettyTunnel
+
+  Created by zhang fan on 14/12/4.
+
+*/
+"Settings" = "设置";
+"Help" = "帮助";
+"Interstellar" = "星际穿越";
+"Not Connected" = "未连接";
+"CONNECTION CONFIG" = "连接配置";
+"Not Configured" = "尚未配置";
+"CONNECTION STATE" = "连接状态";
+"Connected Time" = "连接时间";
+"Total Send" = "已发送";
+"Total Receive" = "已接收";
+"Request Count" = "连接数";
+"Connection Settings" = "连接设置";
+"Save" = "保存";
+"PAC Proxy" = "PAC代理";
+"Connection Settings" = "连接设置";
+"Description" = "描述";
+"Remote Server" = "远程服务器";
+"Remote Port" = "远程端口";
+"User Name" = "用户名";
+"Password" = "密码";
+"Copy" = "复制";

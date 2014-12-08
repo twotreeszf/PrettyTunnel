@@ -47,6 +47,10 @@
 		7D75E3151A0A068300E022F2 /* PrettyTunnelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */; };
 		7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */; };
 		7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */; };
+		7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DE0A5781A30555400B3E50F /* Localizable.strings */; };
+		7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5881A307A5000B3E50F /* AutoLocalize.m */; };
+		7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */; };
+		7DE0A59A1A35D8A500B3E50F /* PTConnectionSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */; };
 		7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */; };
 		7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */; };
 		7DEE9A831A0B7A0400E52C04 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A801A0B7A0400E52C04 /* libcrypto.a */; };
@@ -102,7 +106,6 @@
 		7D26109D1A2DF3AF00BC5FEF /* PacServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacServer.m; sourceTree = "<group>"; };
 		7D2610AE1A2EF3D300BC5FEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7D2610B01A2EF47B00BC5FEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		7D2610B81A2EF77500BC5FEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
 		7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
 		7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Stack.h"; sourceTree = "<group>"; };
@@ -158,6 +161,14 @@
 		7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		7D75E3211A0A08C200E022F2 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		7DE0A5771A30555400B3E50F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7DE0A5791A30555600B3E50F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7DE0A5871A307A5000B3E50F /* AutoLocalize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLocalize.h; sourceTree = "<group>"; };
+		7DE0A5881A307A5000B3E50F /* AutoLocalize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLocalize.m; sourceTree = "<group>"; };
+		7DE0A5911A308B2300B3E50F /* PTMainSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTMainSettingsVC.h; sourceTree = "<group>"; };
+		7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTMainSettingsVC.m; sourceTree = "<group>"; };
+		7DE0A5981A35D8A500B3E50F /* PTConnectionSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTConnectionSettings.h; sourceTree = "<group>"; };
+		7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTConnectionSettings.m; sourceTree = "<group>"; };
 		7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxy.h; sourceTree = "<group>"; };
 		7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxy.m; sourceTree = "<group>"; };
 		7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxySocket.h; sourceTree = "<group>"; };
@@ -351,6 +362,7 @@
 		7D75E2F71A0A068300E022F2 /* PrettyTunnel */ = {
 			isa = PBXGroup;
 			children = (
+				7DE0A5901A308AFE00B3E50F /* UI */,
 				7D26106A1A2DEF8900BC5FEF /* GCDWebServer */,
 				7DEE9A791A0B779300E52C04 /* Misc */,
 				7D4B3F341A2616DC00C64E3C /* BackgroundRunner */,
@@ -374,6 +386,7 @@
 				7D75E2FA1A0A068300E022F2 /* main.m */,
 				7DEE9A7B1A0B780100E52C04 /* Prefix.pch */,
 				7D2610AF1A2EF3D300BC5FEF /* InfoPlist.strings */,
+				7DE0A5781A30555400B3E50F /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -422,11 +435,32 @@
 			path = SocksV5Proxy;
 			sourceTree = "<group>";
 		};
+		7DE0A5861A307A5000B3E50F /* AutoLocalize */ = {
+			isa = PBXGroup;
+			children = (
+				7DE0A5871A307A5000B3E50F /* AutoLocalize.h */,
+				7DE0A5881A307A5000B3E50F /* AutoLocalize.m */,
+			);
+			path = AutoLocalize;
+			sourceTree = "<group>";
+		};
+		7DE0A5901A308AFE00B3E50F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7DE0A5911A308B2300B3E50F /* PTMainSettingsVC.h */,
+				7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */,
+				7DE0A5981A35D8A500B3E50F /* PTConnectionSettings.h */,
+				7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		7DEE9A791A0B779300E52C04 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				7D4B3F081A26133200C64E3C /* CommonDef.h */,
+				7DE0A5861A307A5000B3E50F /* AutoLocalize */,
 				7D4B3F091A26133200C64E3C /* Log */,
+				7D4B3F081A26133200C64E3C /* CommonDef.h */,
 				7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */,
 				7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */,
 				7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */,
@@ -549,6 +583,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */,
 				7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */,
 				7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */,
 				7D4B3F391A2616DC00C64E3C /* mute.mp3 in Resources */,
@@ -612,10 +647,12 @@
 				7DEE9A8C1A0B7CB700E52C04 /* SSHSession.m in Sources */,
 				7D2610951A2DEF8900BC5FEF /* GCDWebServerFileResponse.m in Sources */,
 				7D4B3F2F1A26133200C64E3C /* DDDispatchQueueLogFormatter.m in Sources */,
+				7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */,
 				7D4B3F381A2616DC00C64E3C /* KPBackgroundRunner.m in Sources */,
 				7D4B3F291A26133200C64E3C /* DDASLLogCapture.m in Sources */,
 				7D4B3F2A1A26133200C64E3C /* DDASLLogger.m in Sources */,
 				7D4B3F321A26133200C64E3C /* KPLog.m in Sources */,
+				7DE0A59A1A35D8A500B3E50F /* PTConnectionSettings.m in Sources */,
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
 				7D2610941A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m in Sources */,
 				7D2610931A2DEF8900BC5FEF /* GCDWebServerDataResponse.m in Sources */,
@@ -626,6 +663,7 @@
 				7D26109E1A2DF3AF00BC5FEF /* PacServer.m in Sources */,
 				7D26108C1A2DEF8900BC5FEF /* GCDWebServerFunctions.m in Sources */,
 				7DEE9A921A0BA29600E52C04 /* SSHGlobal.m in Sources */,
+				7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */,
 				7D4B3F281A26133200C64E3C /* DDAbstractDatabaseLogger.m in Sources */,
 				7D4B3F2C1A26133200C64E3C /* DDLog.m in Sources */,
 			);
@@ -663,9 +701,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				7D75E3031A0A068300E022F2 /* Base */,
-				7D2610B81A2EF77500BC5FEF /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7DE0A5781A30555400B3E50F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7DE0A5771A30555400B3E50F /* Base */,
+				7DE0A5791A30555600B3E50F /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
