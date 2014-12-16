@@ -227,6 +227,11 @@
 								int writeLength = [sock.sshChannel write:dataToWrite :&error];
 								if (error > 0 || LIBSSH2_ERROR_NONE == error || LIBSSH2_ERROR_EAGAIN == error)
 								{
+									[[NSOperationQueue mainQueue] addOperationWithBlock:^
+									 {
+										 [_delegate proxySocket:sock didWriteDataOfLength:writeLength];
+									 }];
+
 									@synchronized(sock.writeDataQueue)
 									{
 										if (writeLength == dataToWrite.length)

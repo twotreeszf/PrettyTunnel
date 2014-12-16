@@ -24,6 +24,7 @@
 	__weak UILabel*		_connectedTimeLabel;
 	__weak UILabel*		_totalSendLabel;
 	__weak UILabel*		_totalRecvLabel;
+	__weak UILabel*		_requestCountLabel;
 
 	SOCKSProxy*			_proxy;
 	NSDate*				_connectedTime;
@@ -61,6 +62,7 @@
 	if (sender.on)
 	{
 		_connectionStateLabel.text = LString(@"Connectting...");
+		_connectionSwitch.enabled = NO;
 		
 		PTPreference* prefs = [PTPreference sharedInstance];
 		[_proxy startProxyWithRemoteHost:prefs.remoteServer RemotePort:prefs.remotePort UserName:prefs.userName Password:prefs.password LocalPort:7777];
@@ -151,6 +153,9 @@
 	if (!_totalRecvLabel)
 		_totalRecvLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"TotalRecv"];
 	
+	if (!_requestCountLabel)
+		_requestCountLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"RequestCount"];
+	
     return cell;
 }
 
@@ -174,8 +179,9 @@
 		NSInteger second	= (long)interval % kSeconds1Min;
 		
 		_connectedTimeLabel.text	= [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-		_totalSendLabel.text		= [NSString stringWithFormat:@"%f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
-		_totalRecvLabel.text		= [NSString stringWithFormat:@"%f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
+		_totalSendLabel.text		= [NSString stringWithFormat:@"%.02f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
+		_totalRecvLabel.text		= [NSString stringWithFormat:@"%.02f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
+		_requestCountLabel.text		= [NSString stringWithFormat:@"%d", _proxy.connectionCount];
 	}
 	else
 	{
@@ -184,8 +190,9 @@
 		_connectionStateLabel.text	= LString(@"Not Connected");
 		_pacFileURLLabel.text		= @"";
 		_connectedTimeLabel.text	= @"00:00:00";
-		_totalSendLabel.text		= @"0.0(MB)";
-		_totalRecvLabel.text		= @"0.0(MB)";
+		_totalSendLabel.text		= @"0.00(MB)";
+		_totalRecvLabel.text		= @"0.00(MB)";
+		_requestCountLabel.text		= @"0";
 	}
 }
 
