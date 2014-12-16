@@ -179,8 +179,8 @@
 		NSInteger second	= (long)interval % kSeconds1Min;
 		
 		_connectedTimeLabel.text	= [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-		_totalSendLabel.text		= [NSString stringWithFormat:@"%.02f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
-		_totalRecvLabel.text		= [NSString stringWithFormat:@"%.02f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
+		_totalSendLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
+		_totalRecvLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
 		_requestCountLabel.text		= [NSString stringWithFormat:@"%d", _proxy.connectionCount];
 	}
 	else
@@ -190,8 +190,8 @@
 		_connectionStateLabel.text	= LString(@"Not Connected");
 		_pacFileURLLabel.text		= @"";
 		_connectedTimeLabel.text	= @"00:00:00";
-		_totalSendLabel.text		= @"0.00(MB)";
-		_totalRecvLabel.text		= @"0.00(MB)";
+		_totalSendLabel.text		= @"0.0(MB)";
+		_totalRecvLabel.text		= @"0.0(MB)";
 		_requestCountLabel.text		= @"0";
 	}
 }
