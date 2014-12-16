@@ -11,4 +11,8 @@
 #define kGagaByte								(1024 * 1024 * 1024)
 
 #define kSeconds1Day							(60 * 60 * 24)
+#define kSeconds1Hour							(60 * 60)
 #define kSeconds1Min							60
+
+#define LString(key) \
+[[NSBundle mainBundle] localizedStringForKey:key value:key table:nil]

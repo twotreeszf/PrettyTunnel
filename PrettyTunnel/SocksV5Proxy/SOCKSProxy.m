@@ -48,8 +48,8 @@
 			
 			[self _startProxyOnPort:localPort];
 			
-			ret = [_pacServer start];
-			ERROR_CHECK_BOOL(ret);
+			BOOL b = [_pacServer start];
+			ERROR_CHECK_BOOLEX(b, ret = LIBSSH2_ERROR_SOCKET_NONE);
 			
 			_connected = YES;
 		}
@@ -108,6 +108,11 @@
 		if (self.delegate && [self.delegate respondsToSelector:@selector(socksProxy:clientDidConnect:)])
 			[self.delegate socksProxy:self clientDidConnect:proxySocket];
 	}
+}
+
+- (NSString*)pacFileAddress
+{
+	return _pacServer.pacFileAddress;
 }
 
 - (NSUInteger)connectionCount

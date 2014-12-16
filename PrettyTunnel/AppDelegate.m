@@ -35,19 +35,13 @@
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-	UIColor* globalColor = [UIColor colorWithRed:70.0/255 green:70.0/255.0 blue:70.0/255.0 alpha:1.0];
-	[[UINavigationBar appearance] setBarTintColor:globalColor];
-	[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
-	[[[[UIApplication sharedApplication] delegate] window ] setTintColor:globalColor];
-
-	// [self _initApp];
+	[self _initApp];
     return YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application
 {
-	// [self _uninitApp];
+	[self _uninitApp];
 }
 
 - (void)_initApp
@@ -55,8 +49,6 @@
 	[KPLog startup];
 	
 	_proxy = [SOCKSProxy new];
-	[_proxy startProxyWithRemoteHost:@"www.kikjoy.com" RemotePort:22 UserName:@"fasttunnel" Password:@"bagemima" LocalPort:7070];
-	
 	_backgroundRunner = [KPBackgroundRunner new];
 }
 

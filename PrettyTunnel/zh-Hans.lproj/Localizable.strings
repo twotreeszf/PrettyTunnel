@@ -9,6 +9,10 @@
 "Help" = "帮助";
 "Interstellar" = "星际穿越";
 "Not Connected" = "未连接";
+"Connectting..." = "正在连接...";
+"Connecte Failed" = "连接失败";
+"Connected" = "已连接";
+
 "CONNECTION CONFIG" = "连接配置";
 "Not Configured" = "尚未配置";
 "CONNECTION STATE" = "连接状态";

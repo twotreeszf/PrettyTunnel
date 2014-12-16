@@ -41,7 +41,6 @@
 		7D4B3F391A2616DC00C64E3C /* mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D4B3F371A2616DC00C64E3C /* mute.mp3 */; };
 		7D75E2FB1A0A068300E022F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E2FA1A0A068300E022F2 /* main.m */; };
 		7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E2FD1A0A068300E022F2 /* AppDelegate.m */; };
-		7D75E3011A0A068300E022F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3001A0A068300E022F2 /* ViewController.m */; };
 		7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D75E3021A0A068300E022F2 /* Main.storyboard */; };
 		7D75E3061A0A068300E022F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D75E3051A0A068300E022F2 /* Images.xcassets */; };
 		7D75E3151A0A068300E022F2 /* PrettyTunnelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */; };
@@ -51,6 +50,8 @@
 		7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5881A307A5000B3E50F /* AutoLocalize.m */; };
 		7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */; };
 		7DE0A59A1A35D8A500B3E50F /* PTConnectionSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */; };
+		7DE0A59E1A35DB5200B3E50F /* PTPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A59D1A35DB5200B3E50F /* PTPreference.m */; };
+		7DE0A5A81A35E74200B3E50F /* UIView+UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5A71A35E74200B3E50F /* UIView+UserData.m */; };
 		7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */; };
 		7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A6A1A0A557000E52C04 /* SOCKSProxySocket.m */; };
 		7DEE9A831A0B7A0400E52C04 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEE9A801A0B7A0400E52C04 /* libcrypto.a */; };
@@ -150,8 +151,6 @@
 		7D75E2FA1A0A068300E022F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D75E2FC1A0A068300E022F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D75E2FD1A0A068300E022F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7D75E2FF1A0A068300E022F2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7D75E3001A0A068300E022F2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7D75E3031A0A068300E022F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D75E3051A0A068300E022F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7D75E30E1A0A068300E022F2 /* PrettyTunnelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrettyTunnelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +168,10 @@
 		7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTMainSettingsVC.m; sourceTree = "<group>"; };
 		7DE0A5981A35D8A500B3E50F /* PTConnectionSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTConnectionSettings.h; sourceTree = "<group>"; };
 		7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTConnectionSettings.m; sourceTree = "<group>"; };
+		7DE0A59C1A35DB5200B3E50F /* PTPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPreference.h; sourceTree = "<group>"; };
+		7DE0A59D1A35DB5200B3E50F /* PTPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPreference.m; sourceTree = "<group>"; };
+		7DE0A5A61A35E74200B3E50F /* UIView+UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UserData.h"; sourceTree = "<group>"; };
+		7DE0A5A71A35E74200B3E50F /* UIView+UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UserData.m"; sourceTree = "<group>"; };
 		7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxy.h; sourceTree = "<group>"; };
 		7DEE9A681A0A557000E52C04 /* SOCKSProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOCKSProxy.m; sourceTree = "<group>"; };
 		7DEE9A691A0A557000E52C04 /* SOCKSProxySocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOCKSProxySocket.h; sourceTree = "<group>"; };
@@ -362,6 +365,7 @@
 		7D75E2F71A0A068300E022F2 /* PrettyTunnel */ = {
 			isa = PBXGroup;
 			children = (
+				7DE0A59B1A35DB3B00B3E50F /* Preference */,
 				7DE0A5901A308AFE00B3E50F /* UI */,
 				7D26106A1A2DEF8900BC5FEF /* GCDWebServer */,
 				7DEE9A791A0B779300E52C04 /* Misc */,
@@ -370,8 +374,6 @@
 				7D75E3251A0A097E00E022F2 /* SocksV5Proxy */,
 				7D75E2FC1A0A068300E022F2 /* AppDelegate.h */,
 				7D75E2FD1A0A068300E022F2 /* AppDelegate.m */,
-				7D75E2FF1A0A068300E022F2 /* ViewController.h */,
-				7D75E3001A0A068300E022F2 /* ViewController.m */,
 				7D75E3021A0A068300E022F2 /* Main.storyboard */,
 				7D75E3051A0A068300E022F2 /* Images.xcassets */,
 				7D75E2F81A0A068300E022F2 /* Supporting Files */,
@@ -455,6 +457,15 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7DE0A59B1A35DB3B00B3E50F /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				7DE0A59C1A35DB5200B3E50F /* PTPreference.h */,
+				7DE0A59D1A35DB5200B3E50F /* PTPreference.m */,
+			);
+			path = Preference;
+			sourceTree = "<group>";
+		};
 		7DEE9A791A0B779300E52C04 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +479,8 @@
 				7DEE9A931A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.h */,
 				7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */,
 				7DEE9A7A1A0B779300E52C04 /* ErrorCheck.h */,
+				7DE0A5A61A35E74200B3E50F /* UIView+UserData.h */,
+				7DE0A5A71A35E74200B3E50F /* UIView+UserData.m */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -638,9 +651,9 @@
 				7D4B3F301A26133200C64E3C /* DDMultiFormatter.m in Sources */,
 				7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */,
 				7D4B3F2B1A26133200C64E3C /* DDFileLogger.m in Sources */,
+				7DE0A59E1A35DB5200B3E50F /* PTPreference.m in Sources */,
 				7D4B3F311A26133200C64E3C /* NSThread+SequenceNumber.m in Sources */,
 				7D4B3F2E1A26133200C64E3C /* DDContextFilterLogFormatter.m in Sources */,
-				7D75E3011A0A068300E022F2 /* ViewController.m in Sources */,
 				7DEE9A951A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m in Sources */,
 				7D2610921A2DEF8900BC5FEF /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				7D26108B1A2DEF8900BC5FEF /* GCDWebServerConnection.m in Sources */,
@@ -649,6 +662,7 @@
 				7D4B3F2F1A26133200C64E3C /* DDDispatchQueueLogFormatter.m in Sources */,
 				7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */,
 				7D4B3F381A2616DC00C64E3C /* KPBackgroundRunner.m in Sources */,
+				7DE0A5A81A35E74200B3E50F /* UIView+UserData.m in Sources */,
 				7D4B3F291A26133200C64E3C /* DDASLLogCapture.m in Sources */,
 				7D4B3F2A1A26133200C64E3C /* DDASLLogger.m in Sources */,
 				7D4B3F321A26133200C64E3C /* KPLog.m in Sources */,

@@ -77,9 +77,18 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="ConnectionState"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7rz-i2-ZcJ">
                                             <rect key="frame" x="251" y="6" width="51" height="31"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="ConnectionSwitch"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="connectionSwitchChanged:" destination="aSE-kn-4mx" eventType="valueChanged" id="wNv-G5-fQE"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>
@@ -104,6 +113,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="ConnectionDescription"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzc-Zo-xrU" userLabel="Detail">
                                             <rect key="frame" x="278" y="11" width="22" height="22"/>
@@ -135,7 +147,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://127.0.0.1:8088/global.pac" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoF-CE-kl4">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoF-CE-kl4">
                                             <rect key="frame" x="140" y="2" width="90" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="2mF-cA-WVi"/>
@@ -146,6 +158,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="PACFileURL"/>
+                                            </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="2mF-cA-WVi"/>
@@ -160,6 +175,9 @@
                                                 <constraint firstAttribute="width" constant="40" id="YoB-D9-SHK"/>
                                             </constraints>
                                             <state key="normal" title="Copy"/>
+                                            <connections>
+                                                <action selector="onCopyPACAddress:" destination="aSE-kn-4mx" eventType="touchUpInside" id="byT-rd-u0c"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -193,7 +211,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:28:14" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZl-YN-47m">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZl-YN-47m">
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="3TS-7a-8bl"/>
@@ -204,6 +222,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="ConnectedTime"/>
+                                            </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="GNc-Hl-ueA"/>
@@ -235,7 +256,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.5(MB)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-no-y2i">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0(MB)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-no-y2i">
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="6RJ-yt-UVo"/>
@@ -246,6 +267,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="TotalSend"/>
+                                            </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="8zO-ch-a4V"/>
@@ -277,7 +301,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="127.3(MB)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVx-Zu-91k">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0(MB)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVx-Zu-91k">
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="MVR-Yu-Jya"/>
@@ -288,6 +312,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="TotalRecv"/>
+                                            </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="VYz-1J-sQA"/>
@@ -319,7 +346,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="69" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMp-cx-fGf">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMp-cx-fGf">
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="BQu-C5-loK"/>
@@ -394,6 +421,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="WE1-S4-rAb"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -426,7 +456,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="R56-Y7-RxL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <connections>
+                                                        <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="SLB-yv-1N8"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -459,7 +492,10 @@
                                                         <constraint firstAttribute="width" constant="140" id="t8Y-bg-dTM"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="Mm0-Js-krh"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -492,7 +528,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="kc0-O0-EEh"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <connections>
+                                                        <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="oTE-LY-hsN"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -525,7 +564,10 @@
                                                         <constraint firstAttribute="width" constant="140" id="nzJ-YQ-SYL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <connections>
+                                                        <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="TwC-Kj-Chn"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -546,10 +588,22 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Connection Settings" id="pIG-pV-4Nj">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="DNe-jQ-sT2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="DNe-jQ-sT2">
+                            <connections>
+                                <action selector="onSave:" destination="EHy-kk-HfI" id="dPz-b6-mNS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="connectionName" destination="tc4-Jz-GBq" id="Up5-sg-kES"/>
+                        <outlet property="password" destination="8pH-ls-I0W" id="TYa-O6-21j"/>
+                        <outlet property="save" destination="DNe-jQ-sT2" id="JNy-mx-3Jc"/>
+                        <outlet property="serverAddress" destination="NFD-sT-ufq" id="8KN-hW-eVR"/>
+                        <outlet property="serverPort" destination="Xmx-2Z-n1h" id="Jn1-mo-F64"/>
+                        <outlet property="userName" destination="ZI3-bL-cAB" id="lmg-LX-3sJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7Y-s6-GZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -625,5 +679,4 @@
         <image name="Info" width="32" height="32"/>
         <image name="MainHeader" width="320" height="160"/>
     </resources>
-    <color key="tintColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
 </document>
