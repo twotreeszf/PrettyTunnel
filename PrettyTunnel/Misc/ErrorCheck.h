@@ -78,7 +78,7 @@
     do                                          \
     {                                           \
         if (!(exp))                             \
-			DDLogError("Assert Faild: %s, %s, %s(%d)", #exp, __X_FUNCTION__, __FILE__, __LINE__);				\
+			DDLogError(@"Assert Faild: %s, %s, %s(%d)", #exp, __X_FUNCTION__, __FILE__, __LINE__);				\
     } while (0)
     
 #endif

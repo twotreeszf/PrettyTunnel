@@ -22,6 +22,7 @@
 		7D2610961A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2610891A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m */; };
 		7D26109E1A2DF3AF00BC5FEF /* PacServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D26109D1A2DF3AF00BC5FEF /* PacServer.m */; };
 		7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D2610AF1A2EF3D300BC5FEF /* InfoPlist.strings */; };
+		7D2895D11A4146BF00F52D66 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */; };
 		7D2E59D01A1B468D00C196CB /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */; };
 		7D2E59D11A1B468D00C196CB /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CF1A1B468D00C196CB /* NSMutableArray+Stack.m */; };
 		7D2E59D41A1B48F100C196CB /* SSHTCPDirectTunnel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59D31A1B48F100C196CB /* SSHTCPDirectTunnel.m */; };
@@ -107,6 +108,7 @@
 		7D26109D1A2DF3AF00BC5FEF /* PacServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacServer.m; sourceTree = "<group>"; };
 		7D2610AE1A2EF3D300BC5FEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7D2610B01A2EF47B00BC5FEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
 		7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
 		7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Stack.h"; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				7DEE9A7B1A0B780100E52C04 /* Prefix.pch */,
 				7D2610AF1A2EF3D300BC5FEF /* InfoPlist.strings */,
 				7DE0A5781A30555400B3E50F /* Localizable.strings */,
+				7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */,
 				7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */,
 				7D4B3F391A2616DC00C64E3C /* mute.mp3 in Resources */,
+				7D2895D11A4146BF00F52D66 /* LaunchScreen.xib in Resources */,
 				7D75E3061A0A068300E022F2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

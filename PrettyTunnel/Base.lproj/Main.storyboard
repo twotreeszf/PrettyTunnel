@@ -28,7 +28,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TkK-KV-Z5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-201" y="273"/>
+            <point key="canvasLocation" x="-1121.25" y="279.92957746478874"/>
         </scene>
         <!--Settings Main Table-->
         <scene sceneID="S9l-cY-nD3">
@@ -37,6 +37,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="q54-4Q-yY6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="kLz-Mq-oD5">
                             <rect key="frame" x="0.0" y="64" width="320" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -149,10 +150,8 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoF-CE-kl4">
                                             <rect key="frame" x="140" y="2" width="90" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="2mF-cA-WVi"/>
                                                 <constraint firstAttribute="height" constant="40" id="IcP-Jx-6Jb"/>
                                                 <constraint firstAttribute="width" constant="90" id="Vtv-wI-Mlp"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="imQ-6n-OB3"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -160,12 +159,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="PACFileURL"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="2mF-cA-WVi"/>
-                                                    <exclude reference="imQ-6n-OB3"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbf-tU-JpR">
                                             <rect key="frame" x="272" y="11" width="40" height="22"/>
@@ -180,7 +173,6 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="WoF-CE-kl4" firstAttribute="trailing" secondItem="XWa-4b-Q8Q" secondAttribute="trailingMargin" constant="-12" id="Lt2-RG-pYE"/>
                                         <constraint firstItem="Ur2-F5-H8P" firstAttribute="leading" secondItem="XWa-4b-Q8Q" secondAttribute="leadingMargin" constant="12" id="RO9-b1-sPP"/>
                                         <constraint firstItem="WoF-CE-kl4" firstAttribute="leading" secondItem="Ur2-F5-H8P" secondAttribute="trailing" id="VC1-Uf-j3i"/>
                                         <constraint firstAttribute="centerY" secondItem="fbf-tU-JpR" secondAttribute="centerY" id="Yc3-LY-AKM"/>
@@ -188,11 +180,6 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="fbf-tU-JpR" secondAttribute="trailing" id="xmu-J5-Ayi"/>
                                         <constraint firstAttribute="centerY" secondItem="WoF-CE-kl4" secondAttribute="centerY" id="xqH-dX-GsY"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Lt2-RG-pYE"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectedTimeCell" id="1ho-pm-fML">
@@ -214,9 +201,7 @@
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="3TS-7a-8bl"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="GNc-Hl-ueA"/>
                                                 <constraint firstAttribute="width" constant="120" id="cYF-fd-tAa"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="fJg-Dj-LMb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -224,12 +209,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="ConnectedTime"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="GNc-Hl-ueA"/>
-                                                    <exclude reference="fJg-Dj-LMb"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -259,9 +238,7 @@
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="6RJ-yt-UVo"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="8zO-ch-a4V"/>
                                                 <constraint firstAttribute="width" constant="120" id="N8l-gc-Hg4"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="gG5-fD-IFW"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -269,12 +246,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="TotalSend"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="8zO-ch-a4V"/>
-                                                    <exclude reference="gG5-fD-IFW"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -304,9 +275,7 @@
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="MVR-Yu-Jya"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="VYz-1J-sQA"/>
                                                 <constraint firstAttribute="height" constant="21" id="cNq-mn-cVM"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="r95-Nr-ExK"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -314,12 +283,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="TotalRecv"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="VYz-1J-sQA"/>
-                                                    <exclude reference="r95-Nr-ExK"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -349,9 +312,7 @@
                                             <rect key="frame" x="180" y="11" width="120" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="BQu-C5-loK"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="DFk-LT-3kB"/>
                                                 <constraint firstAttribute="width" constant="120" id="YKS-Uz-tRv"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="xBj-HH-DP6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -359,12 +320,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="RequestCount"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="DFk-LT-3kB"/>
-                                                    <exclude reference="xBj-HH-DP6"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -387,7 +342,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6F-T8-QA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="-75"/>
+            <point key="canvasLocation" x="-169" y="-43"/>
         </scene>
         <!--Connection Settings-->
         <scene sceneID="zSI-Xx-CSq">
@@ -609,7 +564,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7Y-s6-GZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130" y="-73"/>
+            <point key="canvasLocation" x="292" y="-43"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Fi1-6h-UKt">
@@ -637,7 +592,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ON-9U-cjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="855.5" y="765.5"/>
+            <point key="canvasLocation" x="-169" y="719"/>
         </scene>
         <!--Help Navigation-->
         <scene sceneID="5e5-Vd-oyF">
@@ -655,7 +610,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4b-bj-vsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="321.5" y="765.5"/>
+            <point key="canvasLocation" x="-633" y="719"/>
         </scene>
         <!--Settings Navigation-->
         <scene sceneID="Ufg-0X-0Lb">
@@ -673,7 +628,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tpn-tE-uf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="321.5" y="-72.5"/>
+            <point key="canvasLocation" x="-633" y="-43"/>
         </scene>
     </scenes>
     <resources>
