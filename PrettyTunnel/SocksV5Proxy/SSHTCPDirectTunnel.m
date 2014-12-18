@@ -8,6 +8,8 @@
 
 #import "SSHTCPDirectTunnel.h"
 
+#define kCreateChannelTimeout				30.0
+
 @interface SSHTCPDirectTunnel()
 {
 	SSHSession*		_ssh;
@@ -193,16 +195,26 @@
 							X_ASSERT(sock.destinationHost.length);
 							X_ASSERT(sock.destinationPort);
 							
-							sock.sshChannel = [_ssh channelDirectTCPIPWithDestHost:sock.destinationHost DestPort:sock.destinationPort];
-							if (sock.sshChannel)
+							// start create channel
+							if (!sock.createChannelStartTime)
+								sock.createChannelStartTime = [NSDate date];
+
+							// try create channel
+							NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:sock.createChannelStartTime];
+							if (timeInterval < kCreateChannelTimeout)
 							{
-								sock.state = PSS_ProxyReady;
-								[sock relayConnctionReady];
+								sock.sshChannel = [_ssh channelDirectTCPIPWithDestHost:sock.destinationHost DestPort:sock.destinationPort];
+								if (sock.sshChannel)
+								{
+									sock.state = PSS_ProxyReady;
+									[sock relayConnctionReady];
+								}
+
 							}
 							// create TCP direct channel fail, meybe couldn't connect dest host on remote server, force close local socket
 							else
 							{
-								sock.state = PSS_RequestNewChannel;
+								[sock disconnectLocal];
 								[socketsShouldClose addObject:sock];
 							}
 						}

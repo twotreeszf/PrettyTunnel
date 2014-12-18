@@ -213,22 +213,11 @@ Exit0:
 
     SSHChannel* channel;
     {
-		LIBSSH2_CHANNEL* channel_;
-		BOOL retry = NO;
-		NSUInteger count = 64;
-		do
-		{
-			channel_ = libssh2_channel_direct_tcpip(_session, [destHost UTF8String], destPort);
-			int error = [self lastError];
-			
-			retry = !channel_ && (LIBSSH2_ERROR_EAGAIN == error);
-			if (retry)
-				usleep(10 * 1000);
-		}
-		while (retry && --count);
-
-		if (channel_)
-			channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
+		LIBSSH2_CHANNEL* channel_ = libssh2_channel_direct_tcpip(_session, [destHost UTF8String], destPort);
+		ERROR_CHECK_BOOL(channel_);
+		channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
+		
+		// DDLogError(@"create remote channel failed, host:%@, port:%hu", destHost, destPort);
     }
 
 Exit0:

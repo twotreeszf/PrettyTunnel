@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, ProxySocketStatus)
 @property (atomic, assign)				ProxySocketStatus				state;
 @property (nonatomic, strong)			NSMutableArray*					writeDataQueue;
 @property (nonatomic, weak)				id<SOCKSProxySocketDelegate>	delegate;
+@property (nonatomic, strong)			NSDate*							createChannelStartTime;
 @property (nonatomic, strong)			SSHChannel*						sshChannel;
 
 - (id)initWithSocket:(GCDAsyncSocket*)socket delegate:(id<SOCKSProxySocketDelegate>)delegate;
