@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-static const NSUInteger ddLogLevel = LOG_LEVEL_VERBOSE;
+static const DDLogLevel ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @interface KPLog : NSObject
 

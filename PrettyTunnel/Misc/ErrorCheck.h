@@ -47,7 +47,7 @@
 				do													\
 				{													\
 					if (!(exp))										\
-						pthread_kill(pthread_self(), SIGINT);	\
+						pthread_kill(pthread_self(), SIGINT);		\
 				} while (0)
 			#endif
 

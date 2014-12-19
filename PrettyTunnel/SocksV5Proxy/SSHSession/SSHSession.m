@@ -216,8 +216,6 @@ Exit0:
 		LIBSSH2_CHANNEL* channel_ = libssh2_channel_direct_tcpip(_session, [destHost UTF8String], destPort);
 		ERROR_CHECK_BOOL(channel_);
 		channel = [[SSHChannel alloc] initWithSession:self Channel:channel_];
-		
-		// DDLogError(@"create remote channel failed, host:%@, port:%hu", destHost, destPort);
     }
 
 Exit0:

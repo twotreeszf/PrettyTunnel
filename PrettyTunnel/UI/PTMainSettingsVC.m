@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	__weak UILabel*		_connectionDescriptionLabel;
 	
 	__weak UILabel*		_pacFileURLLabel;
+	__weak UILabel*		_dnsAddressLabel;
 	__weak UILabel*		_connectedTimeLabel;
 	__weak UILabel*		_totalSendLabel;
 	__weak UILabel*		_totalRecvLabel;
@@ -59,7 +60,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 	NSArray* configCellsID = @[ @"ConnectionStateCell", @"ConnectionConfigCell" ];
-	NSArray* statusCellsID = @[ @"ProxyAddressCell", @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
+	NSArray* statusCellsID = @[ @"ProxyAddressCell", @"DNSAddressCell", @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
 	_sectionAndCells = @[ configCellsID, statusCellsID ];
 	
 	_proxy = [[AppDelegate sharedInstance] socksProxy];
@@ -109,6 +110,11 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 - (IBAction)onCopyPACAddress:(id)sender
 {
 	[UIPasteboard generalPasteboard].string = _pacFileURLLabel.text;
+}
+
+- (IBAction)onCopyDNSAddress:(id)sender
+{
+	[UIPasteboard generalPasteboard].string = _dnsAddressLabel.text;
 }
 
 #pragma mark - Status Delegate
@@ -178,6 +184,9 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	if (!_pacFileURLLabel)
 		_pacFileURLLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"PACFileURL"];
 	
+	if (!_dnsAddressLabel)
+		_dnsAddressLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"DNSAddr"];
+	
 	if (!_connectedTimeLabel)
 		_connectedTimeLabel	= (UILabel*)[cell findSubviewByKey:@"ID" Value:@"ConnectedTime"];
 	
@@ -207,6 +216,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.on		= NO;
 			_connectionStateLabel.text	= LString(@"Not Connected");
 			_pacFileURLLabel.text		= @"";
+			_dnsAddressLabel.text		= @"";
 			_connectedTimeLabel.text	= @"00:00:00";
 			_totalSendLabel.text		= @"0.0(MB)";
 			_totalRecvLabel.text		= @"0.0(MB)";
@@ -219,6 +229,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			break;
 			
 		case PTCS_Failed:
+			_connectionSwitch.on		= NO;
 			_connectionSwitch.enabled	= YES;
 			_connectionStateLabel.text = LString(@"Connecte Failed");
 			break;
@@ -228,6 +239,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.on		= YES;
 			_connectionStateLabel.text	= LString(@"Connected");
 			_pacFileURLLabel.text		= _proxy.pacFileAddress;
+			_dnsAddressLabel.text		= _proxy.dnsAddress;
 			
 			NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_connectedTime];
 			NSInteger hour		= (long)interval / kSeconds1Hour;

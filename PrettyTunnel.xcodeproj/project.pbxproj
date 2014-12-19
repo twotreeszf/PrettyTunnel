@@ -20,9 +20,11 @@
 		7D2610941A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2610851A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m */; };
 		7D2610951A2DEF8900BC5FEF /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2610871A2DEF8900BC5FEF /* GCDWebServerFileResponse.m */; };
 		7D2610961A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2610891A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m */; };
-		7D26109E1A2DF3AF00BC5FEF /* PacServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D26109D1A2DF3AF00BC5FEF /* PacServer.m */; };
+		7D26109E1A2DF3AF00BC5FEF /* PTPacServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D26109D1A2DF3AF00BC5FEF /* PTPacServer.m */; };
 		7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D2610AF1A2EF3D300BC5FEF /* InfoPlist.strings */; };
 		7D2895D11A4146BF00F52D66 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */; };
+		7D2895FF1A44096800F52D66 /* ttdnsd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D2895F71A44096800F52D66 /* ttdnsd.mm */; };
+		7D2896041A440FA100F52D66 /* PTDNSForwarder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D2896031A440FA100F52D66 /* PTDNSForwarder.mm */; };
 		7D2E59D01A1B468D00C196CB /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */; };
 		7D2E59D11A1B468D00C196CB /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59CF1A1B468D00C196CB /* NSMutableArray+Stack.m */; };
 		7D2E59D41A1B48F100C196CB /* SSHTCPDirectTunnel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E59D31A1B48F100C196CB /* SSHTCPDirectTunnel.m */; };
@@ -104,11 +106,15 @@
 		7D2610871A2DEF8900BC5FEF /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
 		7D2610881A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
 		7D2610891A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
-		7D26109C1A2DF3AF00BC5FEF /* PacServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacServer.h; sourceTree = "<group>"; };
-		7D26109D1A2DF3AF00BC5FEF /* PacServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacServer.m; sourceTree = "<group>"; };
+		7D26109C1A2DF3AF00BC5FEF /* PTPacServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPacServer.h; sourceTree = "<group>"; };
+		7D26109D1A2DF3AF00BC5FEF /* PTPacServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPacServer.m; sourceTree = "<group>"; };
 		7D2610AE1A2EF3D300BC5FEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7D2610B01A2EF47B00BC5FEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		7D2895F61A44096800F52D66 /* ttdnsd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttdnsd.h; sourceTree = "<group>"; };
+		7D2895F71A44096800F52D66 /* ttdnsd.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ttdnsd.mm; sourceTree = "<group>"; };
+		7D2896021A440FA100F52D66 /* PTDNSForwarder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTDNSForwarder.h; sourceTree = "<group>"; };
+		7D2896031A440FA100F52D66 /* PTDNSForwarder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTDNSForwarder.mm; sourceTree = "<group>"; };
 		7D2E59CC1A1B468D00C196CB /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
 		7D2E59CD1A1B468D00C196CB /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
 		7D2E59CE1A1B468D00C196CB /* NSMutableArray+Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Stack.h"; sourceTree = "<group>"; };
@@ -278,10 +284,21 @@
 		7D26109B1A2DF37900BC5FEF /* PacServer */ = {
 			isa = PBXGroup;
 			children = (
-				7D26109C1A2DF3AF00BC5FEF /* PacServer.h */,
-				7D26109D1A2DF3AF00BC5FEF /* PacServer.m */,
+				7D26109C1A2DF3AF00BC5FEF /* PTPacServer.h */,
+				7D26109D1A2DF3AF00BC5FEF /* PTPacServer.m */,
 			);
 			path = PacServer;
+			sourceTree = "<group>";
+		};
+		7D2895F11A44096800F52D66 /* DNSForwarder */ = {
+			isa = PBXGroup;
+			children = (
+				7D2895F61A44096800F52D66 /* ttdnsd.h */,
+				7D2895F71A44096800F52D66 /* ttdnsd.mm */,
+				7D2896021A440FA100F52D66 /* PTDNSForwarder.h */,
+				7D2896031A440FA100F52D66 /* PTDNSForwarder.mm */,
+			);
+			path = DNSForwarder;
 			sourceTree = "<group>";
 		};
 		7D4B3F091A26133200C64E3C /* Log */ = {
@@ -427,6 +444,7 @@
 		7D75E3251A0A097E00E022F2 /* SocksV5Proxy */ = {
 			isa = PBXGroup;
 			children = (
+				7D2895F11A44096800F52D66 /* DNSForwarder */,
 				7D26109B1A2DF37900BC5FEF /* PacServer */,
 				7DEE9A891A0B7C8A00E52C04 /* SSHSession */,
 				7DEE9A671A0A557000E52C04 /* SOCKSProxy.h */,
@@ -671,6 +689,7 @@
 				7D4B3F2A1A26133200C64E3C /* DDASLLogger.m in Sources */,
 				7D4B3F321A26133200C64E3C /* KPLog.m in Sources */,
 				7DE0A59A1A35D8A500B3E50F /* PTConnectionSettings.m in Sources */,
+				7D2895FF1A44096800F52D66 /* ttdnsd.mm in Sources */,
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
 				7D2610941A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m in Sources */,
 				7D2610931A2DEF8900BC5FEF /* GCDWebServerDataResponse.m in Sources */,
@@ -678,10 +697,11 @@
 				7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */,
 				7D2610911A2DEF8900BC5FEF /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				7D75E2FB1A0A068300E022F2 /* main.m in Sources */,
-				7D26109E1A2DF3AF00BC5FEF /* PacServer.m in Sources */,
+				7D26109E1A2DF3AF00BC5FEF /* PTPacServer.m in Sources */,
 				7D26108C1A2DEF8900BC5FEF /* GCDWebServerFunctions.m in Sources */,
 				7DEE9A921A0BA29600E52C04 /* SSHGlobal.m in Sources */,
 				7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */,
+				7D2896041A440FA100F52D66 /* PTDNSForwarder.mm in Sources */,
 				7D4B3F281A26133200C64E3C /* DDAbstractDatabaseLogger.m in Sources */,
 				7D4B3F2C1A26133200C64E3C /* DDLog.m in Sources */,
 			);

@@ -153,7 +153,7 @@
                                                 <constraint firstAttribute="height" constant="40" id="IcP-Jx-6Jb"/>
                                                 <constraint firstAttribute="width" constant="90" id="Vtv-wI-Mlp"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -179,6 +179,56 @@
                                         <constraint firstAttribute="centerY" secondItem="Ur2-F5-H8P" secondAttribute="centerY" id="ZaP-xZ-Xa1"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fbf-tU-JpR" secondAttribute="trailing" id="xmu-J5-Ayi"/>
                                         <constraint firstAttribute="centerY" secondItem="WoF-CE-kl4" secondAttribute="centerY" id="xqH-dX-GsY"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DNSAddressCell" id="cGS-nZ-ZUL">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cGS-nZ-ZUL" id="OiV-Jw-QFR">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS Server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4w-uo-tkN">
+                                            <rect key="frame" x="20" y="11" width="120" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="YjY-3q-SZ9"/>
+                                                <constraint firstAttribute="height" constant="21" id="eft-1n-UWw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6U3-ZU-FH7">
+                                            <rect key="frame" x="140" y="2" width="90" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="Aps-As-Lol"/>
+                                                <constraint firstAttribute="height" constant="40" id="hU2-JV-bj0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="DNSAddr"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zzm-wW-az9">
+                                            <rect key="frame" x="272" y="11" width="40" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="5Bv-rV-qfn"/>
+                                                <constraint firstAttribute="height" constant="22" id="JSd-GS-gXZ"/>
+                                            </constraints>
+                                            <state key="normal" title="Copy"/>
+                                            <connections>
+                                                <action selector="onCopyDNSAddress:" destination="aSE-kn-4mx" eventType="touchUpInside" id="OWl-fP-6zf"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6U3-ZU-FH7" firstAttribute="leading" secondItem="r4w-uo-tkN" secondAttribute="trailing" id="J6J-NC-y4v"/>
+                                        <constraint firstAttribute="centerY" secondItem="6U3-ZU-FH7" secondAttribute="centerY" id="R11-m0-tf5"/>
+                                        <constraint firstItem="r4w-uo-tkN" firstAttribute="leading" secondItem="OiV-Jw-QFR" secondAttribute="leadingMargin" constant="12" id="Wsm-Lt-cMx"/>
+                                        <constraint firstAttribute="centerY" secondItem="Zzm-wW-az9" secondAttribute="centerY" id="fMV-wW-RpC"/>
+                                        <constraint firstAttribute="centerY" secondItem="r4w-uo-tkN" secondAttribute="centerY" id="oms-3Y-Heh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Zzm-wW-az9" secondAttribute="trailing" id="wA2-0D-jdk"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -351,7 +401,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dN1-V9-UXr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="wLr-AR-4AG">
                                 <cells>

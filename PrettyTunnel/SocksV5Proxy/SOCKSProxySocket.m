@@ -122,16 +122,20 @@
     }
     else if (tag == SOCKS_CONNECT_IPv4)
     {
-        uint8_t* address = malloc(INET_ADDRSTRLEN * sizeof(uint8_t));
+        char* address = malloc(INET_ADDRSTRLEN * sizeof(uint8_t));
         inet_ntop(AF_INET, data.bytes, (char*)address, INET_ADDRSTRLEN);
-        _destinationHost = [[NSString alloc] initWithBytesNoCopy:address length:INET_ADDRSTRLEN encoding:NSUTF8StringEncoding freeWhenDone:YES];
+		_destinationHost = [NSString stringWithUTF8String:address];
+		free(address);
+		
         [sock readDataToLength:2 withTimeout:TIMEOUT_LOCAL_READ tag:SOCKS_CONNECT_PORT];
     }
     else if (tag == SOCKS_CONNECT_IPv6)
     {
-        uint8_t* address = malloc(INET6_ADDRSTRLEN * sizeof(uint8_t));
+        char* address = malloc(INET6_ADDRSTRLEN * sizeof(uint8_t));
         inet_ntop(AF_INET6, data.bytes, (char*)address, INET6_ADDRSTRLEN);
-        _destinationHost = [[NSString alloc] initWithBytesNoCopy:address length:INET6_ADDRSTRLEN encoding:NSUTF8StringEncoding freeWhenDone:YES];
+        _destinationHost = [NSString stringWithUTF8String:address];
+		free(address);
+		
         [sock readDataToLength:2 withTimeout:TIMEOUT_LOCAL_READ tag:SOCKS_CONNECT_PORT];
     }
     else if (tag == SOCKS_CONNECT_DOMAIN)

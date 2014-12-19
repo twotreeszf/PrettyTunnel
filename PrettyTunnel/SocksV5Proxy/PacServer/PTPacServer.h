@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PacServer : NSObject
+@interface PTPacServer : NSObject
 
 @property(nonatomic, readonly) NSString*	pacFileAddress;
 @property(nonatomic, readonly) BOOL			isRunning;

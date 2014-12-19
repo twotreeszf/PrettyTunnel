@@ -6,7 +6,7 @@
 //
 //
 
-#import "PacServer.h"
+#import "PTPacServer.h"
 #import "../../GCDWebServer/Core/GCDWebServer.h"
 #import "../../GCDWebServer/Core/GCDWebServerConnection.h"
 #import "../../GCDWebServer/Responses/GCDWebServerDataResponse.h"
@@ -34,14 +34,14 @@ function FindProxyForURL(url, host)\
 	}\
 }"
 
-@interface PacServer()
+@interface PTPacServer()
 {
 	unsigned short	_proxyPort;
 	GCDWebServer*	_webServer;
 }
 @end
 
-@implementation PacServer
+@implementation PTPacServer
 
 - (instancetype)initWithLocalProxyPort: (unsigned short)port
 {
@@ -50,7 +50,7 @@ function FindProxyForURL(url, host)\
 	_proxyPort = port;
 	_webServer = [GCDWebServer new];
 	
-	__weak PacServer* weakSelf = self;
+	__weak PTPacServer* weakSelf = self;
 	[_webServer addHandlerForMethod:@"GET" path:kRootPath kPacFilePath requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request)
 	{
 		return [weakSelf globalPac:request];
