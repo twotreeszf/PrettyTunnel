@@ -12,6 +12,14 @@
 #import "../SocksV5Proxy/SOCKSProxy.h"
 #import "../AppDelegate.h"
 
+typedef NS_ENUM(NSUInteger, PTConnectStatus)
+{
+	PTCS_Disconnected = 0,
+	PTCS_Waitting,
+	PTCS_Connected,
+	PTCS_Failed
+};
+
 @interface PTMainSettingsVC () <SOCKSProxyDelegate>
 {
 	NSArray* _sectionAndCells;
@@ -27,10 +35,17 @@
 	__weak UILabel*		_requestCountLabel;
 
 	SOCKSProxy*			_proxy;
+	PTConnectStatus		_status;
 	NSDate*				_connectedTime;
+	NSTimer*			_timer;
 }
 
 - (void)_updateStatus;
+- (void)_onTimer;
+- (void)_startTimer;
+- (void)_stopTimer;
+- (void)_onApplicationDidEnterBackground: (NSNotification*)notification;
+- (void)_onApplicationWillEnterForeground: (NSNotification*)notification;
 
 @end
 
@@ -49,6 +64,21 @@
 	
 	_proxy = [[AppDelegate sharedInstance] socksProxy];
 	_proxy.delegate = self;
+	_status = PTCS_Disconnected;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(_onApplicationDidEnterBackground:)
+												 name:UIApplicationDidEnterBackgroundNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(_onApplicationWillEnterForeground:)
+												 name:UIApplicationWillEnterForegroundNotification
+											   object:nil];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,8 +91,8 @@
 {
 	if (sender.on)
 	{
-		_connectionStateLabel.text = LString(@"Connectting...");
-		_connectionSwitch.enabled = NO;
+		_status = PTCS_Waitting;
+		[self _updateStatus];
 		
 		PTPreference* prefs = [PTPreference sharedInstance];
 		[_proxy startProxyWithRemoteHost:prefs.remoteServer RemotePort:prefs.remotePort UserName:prefs.userName Password:prefs.password LocalPort:7777];
@@ -70,6 +100,8 @@
 	else
 	{
 		[_proxy disconnect];
+		
+		_status = PTCS_Disconnected;
 		[self _updateStatus];
 	}
 }
@@ -82,22 +114,24 @@
 #pragma mark - Status Delegate
 - (void)sshLoginFailed: (int)error
 {
+	_status = PTCS_Failed;
 	[self _updateStatus];
-	_connectionStateLabel.text = LString(@"Connecte Failed");
-	
-	// todo: popup alert
 }
 
 - (void)sshLoginSuccessed
 {
 	_connectedTime = [NSDate date];
+	_status = PTCS_Connected;
 	
 	[self _updateStatus];
+	[self _startTimer];
 }
 
 - (void)sshSessionLost: (NSUInteger)index
 {
 	[_proxy disconnect];
+	
+	_status = PTCS_Disconnected;
 	[self _updateStatus];
 }
 
@@ -166,34 +200,79 @@
 	BOOL configValid = prefs.connectionDescription.length && prefs.remoteServer.length && prefs.remotePort && prefs.userName.length && prefs.password.length;
 	_connectionDescriptionLabel.text = configValid ? prefs.connectionDescription : LString(@"Not Configured");
 	
-	if (_proxy.connected)
+	switch (_status)
 	{
-		_connectionSwitch.enabled	= YES;
-		_connectionSwitch.on		= YES;
-		_connectionStateLabel.text	= LString(@"Connected");
-		_pacFileURLLabel.text		= _proxy.pacFileAddress;
-		
-		NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_connectedTime];
-		NSInteger hour		= (long)interval / kSeconds1Hour;
-		NSInteger minute	= ((long)interval % kSeconds1Hour) / kSeconds1Min;
-		NSInteger second	= (long)interval % kSeconds1Min;
-		
-		_connectedTimeLabel.text	= [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-		_totalSendLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
-		_totalRecvLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
-		_requestCountLabel.text		= [NSString stringWithFormat:@"%d", _proxy.connectionCount];
+		case PTCS_Disconnected:
+			_connectionSwitch.enabled	= configValid;
+			_connectionSwitch.on		= NO;
+			_connectionStateLabel.text	= LString(@"Not Connected");
+			_pacFileURLLabel.text		= @"";
+			_connectedTimeLabel.text	= @"00:00:00";
+			_totalSendLabel.text		= @"0.0(MB)";
+			_totalRecvLabel.text		= @"0.0(MB)";
+			_requestCountLabel.text		= @"0";
+			break;
+			
+		case PTCS_Waitting:
+			_connectionStateLabel.text = LString(@"Connectting...");
+			_connectionSwitch.enabled = NO;
+			break;
+			
+		case PTCS_Failed:
+			_connectionSwitch.enabled	= YES;
+			_connectionStateLabel.text = LString(@"Connecte Failed");
+			break;
+
+		case PTCS_Connected:
+			_connectionSwitch.enabled	= YES;
+			_connectionSwitch.on		= YES;
+			_connectionStateLabel.text	= LString(@"Connected");
+			_pacFileURLLabel.text		= _proxy.pacFileAddress;
+			
+			NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_connectedTime];
+			NSInteger hour		= (long)interval / kSeconds1Hour;
+			NSInteger minute	= ((long)interval % kSeconds1Hour) / kSeconds1Min;
+			NSInteger second	= (long)interval % kSeconds1Min;
+			
+			_connectedTimeLabel.text	= [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+			_totalSendLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesWritten / kMegaByte];
+			_totalRecvLabel.text		= [NSString stringWithFormat:@"%.01f(MB)", (double)_proxy.totalBytesRead / kMegaByte];
+			_requestCountLabel.text		= [NSString stringWithFormat:@"%d", _proxy.connectionCount];
+			break;
+  default:
+			break;
 	}
-	else
-	{
-		_connectionSwitch.enabled	= configValid;
-		_connectionSwitch.on		= NO;
-		_connectionStateLabel.text	= LString(@"Not Connected");
-		_pacFileURLLabel.text		= @"";
-		_connectedTimeLabel.text	= @"00:00:00";
-		_totalSendLabel.text		= @"0.0(MB)";
-		_totalRecvLabel.text		= @"0.0(MB)";
-		_requestCountLabel.text		= @"0";
-	}
+}
+
+- (void)_onTimer
+{
+	[self _updateStatus];
+	
+	if (_status != PTCS_Connected)
+		[self _stopTimer];
+}
+
+- (void)_startTimer
+{
+	_timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_onTimer) userInfo:nil repeats:YES];
+}
+
+- (void)_stopTimer
+{
+	[_timer invalidate];
+	_timer = nil;
+}
+
+- (void)_onApplicationDidEnterBackground: (NSNotification*)notification
+{
+	if (PTCS_Connected == _status)
+		[self _stopTimer];
+}
+
+- (void)_onApplicationWillEnterForeground: (NSNotification*)notification
+{
+	if (PTCS_Connected == _status)
+		[self _startTimer];
 }
 
 @end
