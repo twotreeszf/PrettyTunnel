@@ -179,7 +179,11 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 		_connectionSwitch = (UISwitch*)[cell findSubviewByKey:@"ID" Value:@"ConnectionSwitch"];
 	
 	if (!_connectionDescriptionLabel)
+	{
 		_connectionDescriptionLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"ConnectionDescription"];
+		if (_connectionDescriptionLabel)
+			[self _updateStatus];
+	}
 	
 	if (!_pacFileURLLabel)
 		_pacFileURLLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"PACFileURL"];
