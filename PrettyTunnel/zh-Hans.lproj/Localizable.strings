@@ -11,7 +11,11 @@
 "Not Connected" = "未连接";
 "Connectting..." = "正在连接...";
 "Connecte Failed" = "连接失败";
+"User name and password not match" = "用户名密码不匹配";
+"Can not connect to server" = "无法连接到服务器";
+"Connect Success" = "连接成功";
 "Connected" = "已连接";
+"Copied" = "复制成功";
 
 "CONNECTION CONFIG" = "连接配置";
 "Not Configured" = "尚未配置";

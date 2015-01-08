@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PTMainSettingsVC : UITableViewController
+@interface PTMainSettingsVC : UIViewController
 
 @end
