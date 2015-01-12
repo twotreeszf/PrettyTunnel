@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -638,34 +639,6 @@
             </objects>
             <point key="canvasLocation" x="-190" y="-43"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="Fi1-6h-UKt">
-            <objects>
-                <tableViewController id="dC4-gM-HTP" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Fgk-QU-TMc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TqL-O9-6tr">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TqL-O9-6tr" id="vq9-5a-591">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="dC4-gM-HTP" id="ck0-xX-Vis"/>
-                            <outlet property="delegate" destination="dC4-gM-HTP" id="RO9-Z2-dA2"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="wYr-MN-kNE"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4ON-9U-cjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-169" y="719"/>
-        </scene>
         <!--Help Navigation-->
         <scene sceneID="5e5-Vd-oyF">
             <objects>
@@ -677,12 +650,70 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="dC4-gM-HTP" kind="relationship" relationship="rootViewController" id="ga8-bH-dyG"/>
+                        <segue destination="ECQ-pj-gWc" kind="relationship" relationship="rootViewController" id="a0m-tu-WzM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4b-bj-vsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-633" y="719"/>
+        </scene>
+        <!--Guide Pages-->
+        <scene sceneID="fbA-dM-ta5">
+            <objects>
+                <pageViewController storyboardIdentifier="GuideVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ECQ-pj-gWc" userLabel="Guide Pages" customClass="PTGuideVC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Feature Guide" id="5Ke-JC-FQy"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7eh-Bs-wXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-190" y="719"/>
+        </scene>
+        <!--GuidePage-->
+        <scene sceneID="B0O-Ql-Ruf">
+            <objects>
+                <viewController storyboardIdentifier="GuidePage" id="RqV-Pq-pux" userLabel="GuidePage" customClass="PTGuidePage" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T9s-3b-2f3"/>
+                        <viewControllerLayoutGuide type="bottom" id="wDn-As-bdB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3lZ-qO-AQJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nwm-Kp-hJK">
+                                <rect key="frame" x="0.0" y="124" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nwm-Kp-hJK" secondAttribute="height" multiplier="1:1" id="a43-hs-cs4"/>
+                                    <constraint firstAttribute="height" constant="320" id="hIY-LL-iS8"/>
+                                    <constraint firstAttribute="width" constant="320" id="yWE-2i-uuR"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="a43-hs-cs4"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="nwm-Kp-hJK" secondAttribute="centerY" id="3M9-tZ-zn0"/>
+                            <constraint firstItem="nwm-Kp-hJK" firstAttribute="width" secondItem="3lZ-qO-AQJ" secondAttribute="width" id="OoI-MP-9KZ"/>
+                            <constraint firstAttribute="centerX" secondItem="nwm-Kp-hJK" secondAttribute="centerX" id="quk-WE-JIo"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="OoI-MP-9KZ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="guideImage" destination="nwm-Kp-hJK" id="oKW-h7-Sdt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y31-9S-Tnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="292" y="719"/>
         </scene>
         <!--Settings Navigation-->
         <scene sceneID="Ufg-0X-0Lb">

@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		7D0D963F1A5E5B3A00D16BC0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D963E1A5E5B3A00D16BC0 /* MBProgressHUD.m */; };
+		7D0D96461A63DB9F00D16BC0 /* PTGuidePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D96451A63DB9F00D16BC0 /* PTGuidePage.m */; };
+		7D0D96491A63DC3200D16BC0 /* PTGuideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D96481A63DC3200D16BC0 /* PTGuideVC.m */; };
+		7D0D96531A63DF3400D16BC0 /* Guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D964B1A63DF3400D16BC0 /* Guide1.png */; };
+		7D0D96541A63DF3400D16BC0 /* Guide2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D964C1A63DF3400D16BC0 /* Guide2.png */; };
+		7D0D96551A63DF3400D16BC0 /* Guide3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D964D1A63DF3400D16BC0 /* Guide3.png */; };
+		7D0D96561A63DF3400D16BC0 /* Guide4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D964E1A63DF3400D16BC0 /* Guide4.png */; };
+		7D0D96571A63DF3400D16BC0 /* Guide5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D964F1A63DF3400D16BC0 /* Guide5.png */; };
+		7D0D96581A63DF3400D16BC0 /* Guide6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D96501A63DF3400D16BC0 /* Guide6.png */; };
+		7D0D96591A63DF3400D16BC0 /* Guide7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D96511A63DF3400D16BC0 /* Guide7.png */; };
+		7D0D965A1A63DF3400D16BC0 /* Guide8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D0D96521A63DF3400D16BC0 /* Guide8.png */; };
 		7D26108A1A2DEF8900BC5FEF /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D26106D1A2DEF8900BC5FEF /* GCDWebServer.m */; };
 		7D26108B1A2DEF8900BC5FEF /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D26106F1A2DEF8900BC5FEF /* GCDWebServerConnection.m */; };
 		7D26108C1A2DEF8900BC5FEF /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2610711A2DEF8900BC5FEF /* GCDWebServerFunctions.m */; };
@@ -81,6 +91,18 @@
 /* Begin PBXFileReference section */
 		7D0D963D1A5E5B3A00D16BC0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		7D0D963E1A5E5B3A00D16BC0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		7D0D96441A63DB9F00D16BC0 /* PTGuidePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTGuidePage.h; sourceTree = "<group>"; };
+		7D0D96451A63DB9F00D16BC0 /* PTGuidePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTGuidePage.m; sourceTree = "<group>"; };
+		7D0D96471A63DC3200D16BC0 /* PTGuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTGuideVC.h; sourceTree = "<group>"; };
+		7D0D96481A63DC3200D16BC0 /* PTGuideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTGuideVC.m; sourceTree = "<group>"; };
+		7D0D964B1A63DF3400D16BC0 /* Guide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide1.png; sourceTree = "<group>"; };
+		7D0D964C1A63DF3400D16BC0 /* Guide2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide2.png; sourceTree = "<group>"; };
+		7D0D964D1A63DF3400D16BC0 /* Guide3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide3.png; sourceTree = "<group>"; };
+		7D0D964E1A63DF3400D16BC0 /* Guide4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide4.png; sourceTree = "<group>"; };
+		7D0D964F1A63DF3400D16BC0 /* Guide5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide5.png; sourceTree = "<group>"; };
+		7D0D96501A63DF3400D16BC0 /* Guide6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide6.png; sourceTree = "<group>"; };
+		7D0D96511A63DF3400D16BC0 /* Guide7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide7.png; sourceTree = "<group>"; };
+		7D0D96521A63DF3400D16BC0 /* Guide8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guide8.png; sourceTree = "<group>"; };
 		7D26106C1A2DEF8900BC5FEF /* GCDWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServer.h; sourceTree = "<group>"; };
 		7D26106D1A2DEF8900BC5FEF /* GCDWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServer.m; sourceTree = "<group>"; };
 		7D26106E1A2DEF8900BC5FEF /* GCDWebServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerConnection.h; sourceTree = "<group>"; };
@@ -232,6 +254,21 @@
 				7D0D963E1A5E5B3A00D16BC0 /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		7D0D964A1A63DF3400D16BC0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7D0D964B1A63DF3400D16BC0 /* Guide1.png */,
+				7D0D964C1A63DF3400D16BC0 /* Guide2.png */,
+				7D0D964D1A63DF3400D16BC0 /* Guide3.png */,
+				7D0D964E1A63DF3400D16BC0 /* Guide4.png */,
+				7D0D964F1A63DF3400D16BC0 /* Guide5.png */,
+				7D0D96501A63DF3400D16BC0 /* Guide6.png */,
+				7D0D96511A63DF3400D16BC0 /* Guide7.png */,
+				7D0D96521A63DF3400D16BC0 /* Guide8.png */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		7D26106A1A2DEF8900BC5FEF /* GCDWebServer */ = {
@@ -415,6 +452,7 @@
 		7D75E2F81A0A068300E022F2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7D0D964A1A63DF3400D16BC0 /* Resource */,
 				7D75E2F91A0A068300E022F2 /* Info.plist */,
 				7D75E2FA1A0A068300E022F2 /* main.m */,
 				7DEE9A7B1A0B780100E52C04 /* Prefix.pch */,
@@ -486,6 +524,10 @@
 				7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */,
 				7DE0A5981A35D8A500B3E50F /* PTConnectionSettings.h */,
 				7DE0A5991A35D8A500B3E50F /* PTConnectionSettings.m */,
+				7D0D96441A63DB9F00D16BC0 /* PTGuidePage.h */,
+				7D0D96451A63DB9F00D16BC0 /* PTGuidePage.m */,
+				7D0D96471A63DC3200D16BC0 /* PTGuideVC.h */,
+				7D0D96481A63DC3200D16BC0 /* PTGuideVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -630,12 +672,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0D96571A63DF3400D16BC0 /* Guide5.png in Resources */,
+				7D0D96581A63DF3400D16BC0 /* Guide6.png in Resources */,
+				7D0D96591A63DF3400D16BC0 /* Guide7.png in Resources */,
 				7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */,
 				7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */,
 				7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */,
 				7D4B3F391A2616DC00C64E3C /* mute.mp3 in Resources */,
+				7D0D96551A63DF3400D16BC0 /* Guide3.png in Resources */,
+				7D0D96531A63DF3400D16BC0 /* Guide1.png in Resources */,
+				7D0D96541A63DF3400D16BC0 /* Guide2.png in Resources */,
 				7D2895D11A4146BF00F52D66 /* LaunchScreen.xib in Resources */,
+				7D0D965A1A63DF3400D16BC0 /* Guide8.png in Resources */,
 				7D75E3061A0A068300E022F2 /* Images.xcassets in Resources */,
+				7D0D96561A63DF3400D16BC0 /* Guide4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +741,7 @@
 				7D4B3F2E1A26133200C64E3C /* DDContextFilterLogFormatter.m in Sources */,
 				7DEE9A951A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m in Sources */,
 				7D2610921A2DEF8900BC5FEF /* GCDWebServerURLEncodedFormRequest.m in Sources */,
+				7D0D96491A63DC3200D16BC0 /* PTGuideVC.m in Sources */,
 				7D26108B1A2DEF8900BC5FEF /* GCDWebServerConnection.m in Sources */,
 				7DEE9A8C1A0B7CB700E52C04 /* SSHSession.m in Sources */,
 				7D2610951A2DEF8900BC5FEF /* GCDWebServerFileResponse.m in Sources */,
@@ -707,6 +758,7 @@
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
 				7D2610941A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m in Sources */,
 				7D2610931A2DEF8900BC5FEF /* GCDWebServerDataResponse.m in Sources */,
+				7D0D96461A63DB9F00D16BC0 /* PTGuidePage.m in Sources */,
 				7D26108D1A2DEF8900BC5FEF /* GCDWebServerRequest.m in Sources */,
 				7DEE9A6B1A0A557000E52C04 /* SOCKSProxy.m in Sources */,
 				7D2610911A2DEF8900BC5FEF /* GCDWebServerMultiPartFormRequest.m in Sources */,

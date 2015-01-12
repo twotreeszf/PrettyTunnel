@@ -59,6 +59,9 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 
 - (void)viewDidLoad
 {
+	
+	UIPageViewController* pvc;
+	
     [super viewDidLoad];
 	
     [self setAutoLocalize:YES];
