@@ -661,6 +661,7 @@
         <scene sceneID="fbA-dM-ta5">
             <objects>
                 <pageViewController storyboardIdentifier="GuideVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ECQ-pj-gWc" userLabel="Guide Pages" customClass="PTGuideVC" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Feature Guide" id="5Ke-JC-FQy"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </pageViewController>

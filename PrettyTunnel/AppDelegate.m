@@ -46,6 +46,12 @@
 
 - (void)_initApp
 {
+	self.window.backgroundColor = [UIColor whiteColor];
+	UIPageControl *pageControl = [UIPageControl appearance];
+	pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+	pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+	pageControl.backgroundColor = [UIColor whiteColor];
+	
 	[KPLog startup];
 	
 	_proxy = [SOCKSProxy new];
