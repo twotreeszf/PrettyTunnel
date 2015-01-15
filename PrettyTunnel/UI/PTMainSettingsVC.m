@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	__weak UILabel*		_connectionDescriptionLabel;
 	
 	__weak UILabel*		_pacFileURLLabel;
-	__weak UILabel*		_dnsAddressLabel;
 	__weak UILabel*		_connectedTimeLabel;
 	__weak UILabel*		_totalSendLabel;
 	__weak UILabel*		_totalRecvLabel;
@@ -133,18 +132,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	}
 }
 
-- (IBAction)onCopyDNSAddress:(id)sender
-{
-	if (_dnsAddressLabel.text.length)
-	{
-		[UIPasteboard generalPasteboard].string = _dnsAddressLabel.text;
-		
-		_messageHUD = [MBProgressHUD initHUBAddedTo:nil withTitle:NSLocalizedString(@"Copied", nil) withMode:MBProgressHUDModeText];
-		[_messageHUD show:YES];
-		[_messageHUD hide:YES afterDelay:0.5];
-	}
-}
-
 #pragma mark - Status Delegate
 - (void)sshLoginFailed: (int)error
 {
@@ -234,9 +221,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	if (!_pacFileURLLabel)
 		_pacFileURLLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"PACFileURL"];
 	
-	if (!_dnsAddressLabel)
-		_dnsAddressLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"DNSAddr"];
-	
 	if (!_connectedTimeLabel)
 		_connectedTimeLabel	= (UILabel*)[cell findSubviewByKey:@"ID" Value:@"ConnectedTime"];
 	
@@ -266,7 +250,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.on		= NO;
 			_connectionStateLabel.text	= LString(@"Not Connected");
 			_pacFileURLLabel.text		= @"";
-			_dnsAddressLabel.text		= @"";
 			_connectedTimeLabel.text	= @"00:00:00";
 			_totalSendLabel.text		= @"0.0(MB)";
 			_totalRecvLabel.text		= @"0.0(MB)";
@@ -289,7 +272,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.on		= YES;
 			_connectionStateLabel.text	= LString(@"Connected");
 			_pacFileURLLabel.text		= _proxy.pacFileAddress;
-			_dnsAddressLabel.text		= _proxy.dnsAddress;
 			
 			NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_connectedTime];
 			NSInteger hour		= (long)interval / kSeconds1Hour;

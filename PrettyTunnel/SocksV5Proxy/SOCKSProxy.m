@@ -10,14 +10,12 @@
 #import "SOCKSProxySocket.h"
 #import "SSHTCPDirectTunnel.h"
 #import "PacServer/PTPacServer.h"
-#import "DNSForwarder/PTDNSForwarder.h"
 
 @interface SOCKSProxy ()
 
 @property (nonatomic, strong) GCDAsyncSocket*		listeningSocket;
 @property (nonatomic, strong) SSHTCPDirectTunnel*	sshTunnel;
 @property (nonatomic, strong) PTPacServer*			pacServer;
-@property (nonatomic, strong) PTDNSForwarder*		dnsForwarder;
 
 @property (nonatomic) NSUInteger					totalBytesWritten;
 @property (nonatomic) NSUInteger					totalBytesRead;
@@ -40,7 +38,6 @@
 	_sshTunnel.delegate = self;
 	
 	_pacServer = [[PTPacServer alloc] initWithLocalProxyPort:localPort];
-	_dnsForwarder = [PTDNSForwarder new];
 	
 	[[NSOperationQueue globalQueue] addOperationWithBlock:^
 	{
@@ -53,8 +50,6 @@
 			
 			BOOL b = [_pacServer start];
 			ERROR_CHECK_BOOLEX(b, ret = LIBSSH2_ERROR_SOCKET_NONE);
-			
-			[_dnsForwarder startWithSocketAddr:@"127.0.0.1" Port:localPort];
 			
 			_connected = YES;
 		}
@@ -120,13 +115,6 @@
 	return _pacServer.pacFileAddress;
 }
 
-- (NSString*)dnsAddress
-{
-	NSString* address = _dnsForwarder.localDNSAddr;
-	address = [address stringByAppendingString:@",8.8.8.8"];
-	return address;
-}
-
 - (NSUInteger)connectionCount
 {
 	return _sshTunnel.connectionCount;
@@ -135,8 +123,6 @@
 - (void)disconnect
 {
 	KPTraceStack;
-	
-	[_dnsForwarder stop];
 	
 	[_pacServer stop];
 

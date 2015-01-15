@@ -17,7 +17,6 @@
 "Connected" = "已连接";
 "Copied" = "复制成功";
 "Feature Guide" = "功能引导";
-
 "CONNECTION CONFIG" = "连接配置";
 "Not Configured" = "尚未配置";
 "CONNECTION STATE" = "连接状态";
@@ -28,7 +27,6 @@
 "Connection Settings" = "连接设置";
 "Save" = "保存";
 "PAC Proxy" = "PAC代理";
-"DNS Server" = "DNS服务器";
 "Connection Settings" = "连接设置";
 "Description" = "描述";
 "Remote Server" = "远程服务器";
@@ -36,3 +34,5 @@
 "User Name" = "用户名";
 "Password" = "密码";
 "Copy" = "复制";
+"OK" = "好的";
+"Background running is about to expire, please go back again!" = "后台运行即将过期，请返回一次app！";
