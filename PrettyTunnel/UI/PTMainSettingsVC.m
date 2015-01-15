@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	self.tableView.dataSource = self;
 
 	NSArray* configCellsID = @[ @"ConnectionStateCell", @"ConnectionConfigCell" ];
-	NSArray* statusCellsID = @[ @"ProxyAddressCell", @"DNSAddressCell", @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
+	NSArray* statusCellsID = @[ @"ProxyAddressCell", @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
 	_sectionAndCells = @[ configCellsID, statusCellsID ];
 	
 	_proxy = [[AppDelegate sharedInstance] socksProxy];
