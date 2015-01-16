@@ -58,6 +58,10 @@
 		7D75E3151A0A068300E022F2 /* PrettyTunnelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */; };
 		7D75E3231A0A08C200E022F2 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */; };
 		7D75E3241A0A08C200E022F2 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */; };
+		7DD9D09F1A67C4B3001E92C6 /* TTSystemProxyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9D09E1A67C4B3001E92C6 /* TTSystemProxyManager.m */; };
+		7DD9D0A11A68C0BE001E92C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD9D0A01A68C0BE001E92C6 /* SystemConfiguration.framework */; };
+		7DD9D0A41A68E6BF001E92C6 /* TTCFEasyReleasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9D0A31A68E6BF001E92C6 /* TTCFEasyReleasePool.m */; };
+		7DD9D0BB1A68FE10001E92C6 /* PrettyTunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */; };
 		7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DE0A5781A30555400B3E50F /* Localizable.strings */; };
 		7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5881A307A5000B3E50F /* AutoLocalize.m */; };
 		7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */; };
@@ -187,6 +191,13 @@
 		7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		7D75E3211A0A08C200E022F2 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		7D75E3221A0A08C200E022F2 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		7DD9D0991A67BCA9001E92C6 /* PrivateSystemConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSystemConfiguration.h; sourceTree = "<group>"; };
+		7DD9D09D1A67C4B3001E92C6 /* TTSystemProxyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSystemProxyManager.h; sourceTree = "<group>"; };
+		7DD9D09E1A67C4B3001E92C6 /* TTSystemProxyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSystemProxyManager.m; sourceTree = "<group>"; };
+		7DD9D0A01A68C0BE001E92C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7DD9D0A21A68E6BF001E92C6 /* TTCFEasyReleasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCFEasyReleasePool.h; sourceTree = "<group>"; };
+		7DD9D0A31A68E6BF001E92C6 /* TTCFEasyReleasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCFEasyReleasePool.m; sourceTree = "<group>"; };
+		7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrettyTunnel.entitlements; sourceTree = "<group>"; };
 		7DE0A5771A30555400B3E50F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7DE0A5791A30555600B3E50F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7DE0A5871A307A5000B3E50F /* AutoLocalize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLocalize.h; sourceTree = "<group>"; };
@@ -224,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD9D0A11A68C0BE001E92C6 /* SystemConfiguration.framework in Frameworks */,
 				7DEE9A871A0B7A1D00E52C04 /* libz.dylib in Frameworks */,
 				7DEE9A831A0B7A0400E52C04 /* libcrypto.a in Frameworks */,
 				7DEE9A841A0B7A0400E52C04 /* libssh2.a in Frameworks */,
@@ -442,6 +454,7 @@
 				7D2610AF1A2EF3D300BC5FEF /* InfoPlist.strings */,
 				7DE0A5781A30555400B3E50F /* Localizable.strings */,
 				7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */,
+				7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -490,6 +503,24 @@
 			path = SocksV5Proxy;
 			sourceTree = "<group>";
 		};
+		7DD9D0971A67BC7B001E92C6 /* PrivateAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7DD9D0981A67BC7B001E92C6 /* SystemConfiguration */,
+			);
+			path = PrivateAPI;
+			sourceTree = "<group>";
+		};
+		7DD9D0981A67BC7B001E92C6 /* SystemConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				7DD9D0991A67BCA9001E92C6 /* PrivateSystemConfiguration.h */,
+				7DD9D09D1A67C4B3001E92C6 /* TTSystemProxyManager.h */,
+				7DD9D09E1A67C4B3001E92C6 /* TTSystemProxyManager.m */,
+			);
+			path = SystemConfiguration;
+			sourceTree = "<group>";
+		};
 		7DE0A5861A307A5000B3E50F /* AutoLocalize */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +557,7 @@
 		7DEE9A791A0B779300E52C04 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				7DD9D0971A67BC7B001E92C6 /* PrivateAPI */,
 				7D0D963C1A5E5B3A00D16BC0 /* MBProgressHUD */,
 				7DE0A5861A307A5000B3E50F /* AutoLocalize */,
 				7D4B3F091A26133200C64E3C /* Log */,
@@ -539,6 +571,8 @@
 				7DEE9A7A1A0B779300E52C04 /* ErrorCheck.h */,
 				7DE0A5A61A35E74200B3E50F /* UIView+UserData.h */,
 				7DE0A5A71A35E74200B3E50F /* UIView+UserData.m */,
+				7DD9D0A21A68E6BF001E92C6 /* TTCFEasyReleasePool.h */,
+				7DD9D0A31A68E6BF001E92C6 /* TTCFEasyReleasePool.m */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -546,6 +580,7 @@
 		7DEE9A881A0B7A4E00E52C04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7DD9D0A01A68C0BE001E92C6 /* SystemConfiguration.framework */,
 				7DEE9A861A0B7A1D00E52C04 /* libz.dylib */,
 				7DEE9A801A0B7A0400E52C04 /* libcrypto.a */,
 				7DEE9A811A0B7A0400E52C04 /* libssh2.a */,
@@ -656,6 +691,7 @@
 				7D0D96571A63DF3400D16BC0 /* Guide5.png in Resources */,
 				7D0D96581A63DF3400D16BC0 /* Guide6.png in Resources */,
 				7D0D96591A63DF3400D16BC0 /* Guide7.png in Resources */,
+				7DD9D0BB1A68FE10001E92C6 /* PrettyTunnel.entitlements in Resources */,
 				7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */,
 				7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */,
 				7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */,
@@ -709,6 +745,7 @@
 				7D4B3F2D1A26133200C64E3C /* DDTTYLogger.m in Sources */,
 				7D26108F1A2DEF8900BC5FEF /* GCDWebServerDataRequest.m in Sources */,
 				7DEE9A8F1A0B7FBA00E52C04 /* SSHChannel.m in Sources */,
+				7DD9D0A41A68E6BF001E92C6 /* TTCFEasyReleasePool.m in Sources */,
 				7D2610961A2DEF8900BC5FEF /* GCDWebServerStreamedResponse.m in Sources */,
 				7D2E59D41A1B48F100C196CB /* SSHTCPDirectTunnel.m in Sources */,
 				7DEE9A6C1A0A557000E52C04 /* SOCKSProxySocket.m in Sources */,
@@ -734,6 +771,7 @@
 				7D4B3F2A1A26133200C64E3C /* DDASLLogger.m in Sources */,
 				7D4B3F321A26133200C64E3C /* KPLog.m in Sources */,
 				7D0D963F1A5E5B3A00D16BC0 /* MBProgressHUD.m in Sources */,
+				7DD9D09F1A67C4B3001E92C6 /* TTSystemProxyManager.m in Sources */,
 				7DE0A59A1A35D8A500B3E50F /* PTConnectionSettings.m in Sources */,
 				7D75E2FE1A0A068300E022F2 /* AppDelegate.m in Sources */,
 				7D2610941A2DEF8900BC5FEF /* GCDWebServerErrorResponse.m in Sources */,
@@ -887,6 +925,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PrettyTunnel/PrettyTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PrettyTunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -903,6 +942,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PrettyTunnel/PrettyTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PrettyTunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -12,6 +12,7 @@
 #import "../SocksV5Proxy/SOCKSProxy.h"
 #import "../AppDelegate.h"
 #import "../Misc/MBProgressHUD/MBProgressHUD.h"
+#import "../Misc/PrivateAPI/SystemConfiguration/TTSystemProxyManager.h"
 
 typedef NS_ENUM(NSUInteger, PTConnectStatus)
 {
@@ -58,9 +59,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 
 - (void)viewDidLoad
 {
-	
-	UIPageViewController* pvc;
-	
     [super viewDidLoad];
 	
     [self setAutoLocalize:YES];
@@ -85,6 +83,8 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 											 selector:@selector(_onApplicationWillEnterForeground:)
 												 name:UIApplicationWillEnterForegroundNotification
 											   object:nil];
+	
+	[[TTSystemProxyManager sharedInstance] disableProxy];
 }
 
 - (void)dealloc
@@ -114,6 +114,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	else
 	{
 		[_proxy disconnect];
+		[[TTSystemProxyManager sharedInstance] disableProxy];
 		
 		_status = PTCS_Disconnected;
 		[self _updateStatus];
@@ -153,6 +154,8 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 
 - (void)sshLoginSuccessed
 {
+	[[TTSystemProxyManager sharedInstance] enableSocksProxy:@"127.0.0.1" :_proxy.listeningPort];
+	
 	[_loadingHUD hide:YES];
 	
 	_messageHUD = [MBProgressHUD initHUBAddedTo:nil withTitle:NSLocalizedString(@"Connect Success", nil) withMode:MBProgressHUDModeText];
