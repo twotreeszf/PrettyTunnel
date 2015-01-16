@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	__weak UISwitch*	_connectionSwitch;
 	__weak UILabel*		_connectionDescriptionLabel;
 	
-	__weak UILabel*		_pacFileURLLabel;
 	__weak UILabel*		_connectedTimeLabel;
 	__weak UILabel*		_totalSendLabel;
 	__weak UILabel*		_totalRecvLabel;
@@ -68,7 +67,7 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 	self.tableView.dataSource = self;
 
 	NSArray* configCellsID = @[ @"ConnectionStateCell", @"ConnectionConfigCell" ];
-	NSArray* statusCellsID = @[ @"ProxyAddressCell", @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
+	NSArray* statusCellsID = @[ @"ConnectedTimeCell", @"TotalSendCell", @"TotalReceiveCell", @"RequestCountCell" ];
 	_sectionAndCells = @[ configCellsID, statusCellsID ];
 	
 	_proxy = [[AppDelegate sharedInstance] socksProxy];
@@ -118,18 +117,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 		
 		_status = PTCS_Disconnected;
 		[self _updateStatus];
-	}
-}
-
-- (IBAction)onCopyPACAddress:(id)sender
-{
-	if (_pacFileURLLabel.text.length)
-	{
-		[UIPasteboard generalPasteboard].string = _pacFileURLLabel.text;
-		
-		_messageHUD = [MBProgressHUD initHUBAddedTo:nil withTitle:NSLocalizedString(@"Copied", nil) withMode:MBProgressHUDModeText];
-		[_messageHUD show:YES];
-		[_messageHUD hide:YES afterDelay:0.5];
 	}
 }
 
@@ -221,9 +208,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			[self _updateStatus];
 	}
 	
-	if (!_pacFileURLLabel)
-		_pacFileURLLabel = (UILabel*)[cell findSubviewByKey:@"ID" Value:@"PACFileURL"];
-	
 	if (!_connectedTimeLabel)
 		_connectedTimeLabel	= (UILabel*)[cell findSubviewByKey:@"ID" Value:@"ConnectedTime"];
 	
@@ -252,7 +236,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.enabled	= configValid;
 			_connectionSwitch.on		= NO;
 			_connectionStateLabel.text	= LString(@"Not Connected");
-			_pacFileURLLabel.text		= @"";
 			_connectedTimeLabel.text	= @"00:00:00";
 			_totalSendLabel.text		= @"0.0(MB)";
 			_totalRecvLabel.text		= @"0.0(MB)";
@@ -274,7 +257,6 @@ typedef NS_ENUM(NSUInteger, PTConnectStatus)
 			_connectionSwitch.enabled	= YES;
 			_connectionSwitch.on		= YES;
 			_connectionStateLabel.text	= LString(@"Connected");
-			_pacFileURLLabel.text		= _proxy.pacFileAddress;
 			
 			NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_connectedTime];
 			NSInteger hour		= (long)interval / kSeconds1Hour;

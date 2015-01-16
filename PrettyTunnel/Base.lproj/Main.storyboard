@@ -100,7 +100,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="R56-Y7-RxL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                                     <connections>
                                                         <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="SLB-yv-1N8"/>
                                                     </connections>
@@ -136,7 +136,7 @@
                                                         <constraint firstAttribute="width" constant="140" id="t8Y-bg-dTM"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="Mm0-Js-krh"/>
                                                     </connections>
@@ -172,7 +172,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="kc0-O0-EEh"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                                     <connections>
                                                         <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="oTE-LY-hsN"/>
                                                     </connections>
@@ -208,7 +208,7 @@
                                                         <constraint firstAttribute="width" constant="140" id="nzJ-YQ-SYL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" secureTextEntry="YES"/>
                                                     <connections>
                                                         <action selector="onInputChanged:" destination="EHy-kk-HfI" eventType="editingChanged" id="TwC-Kj-Chn"/>
                                                     </connections>
@@ -363,56 +363,6 @@
                                                 <constraint firstItem="uVy-U6-8X1" firstAttribute="leading" secondItem="4Lj-uf-Uda" secondAttribute="leadingMargin" constant="12" id="Nll-j8-Erq"/>
                                                 <constraint firstAttribute="centerY" secondItem="Nzc-Zo-xrU" secondAttribute="centerY" id="YP3-Lu-Uo7"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Nzc-Zo-xrU" secondAttribute="trailing" constant="12" id="iNN-3w-pes"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProxyAddressCell" id="QRT-YI-L1x">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QRT-YI-L1x" id="XWa-4b-Q8Q">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAC Proxy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-F5-H8P">
-                                                    <rect key="frame" x="20" y="11" width="120" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="Xxf-1p-fIY"/>
-                                                        <constraint firstAttribute="height" constant="21" id="wDC-ku-Li8"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoF-CE-kl4">
-                                                    <rect key="frame" x="140" y="2" width="90" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="IcP-Jx-6Jb"/>
-                                                        <constraint firstAttribute="width" constant="90" id="Vtv-wI-Mlp"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="userData.ID" value="PACFileURL"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbf-tU-JpR">
-                                                    <rect key="frame" x="272" y="11" width="40" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="Pw5-Ja-3ze"/>
-                                                        <constraint firstAttribute="width" constant="40" id="YoB-D9-SHK"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Copy"/>
-                                                    <connections>
-                                                        <action selector="onCopyPACAddress:" destination="Jla-RZ-of6" eventType="touchUpInside" id="PcA-wG-ffg"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Ur2-F5-H8P" firstAttribute="leading" secondItem="XWa-4b-Q8Q" secondAttribute="leadingMargin" constant="12" id="RO9-b1-sPP"/>
-                                                <constraint firstItem="WoF-CE-kl4" firstAttribute="leading" secondItem="Ur2-F5-H8P" secondAttribute="trailing" id="VC1-Uf-j3i"/>
-                                                <constraint firstAttribute="centerY" secondItem="fbf-tU-JpR" secondAttribute="centerY" id="Yc3-LY-AKM"/>
-                                                <constraint firstAttribute="centerY" secondItem="Ur2-F5-H8P" secondAttribute="centerY" id="ZaP-xZ-Xa1"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fbf-tU-JpR" secondAttribute="trailing" id="xmu-J5-Ayi"/>
-                                                <constraint firstAttribute="centerY" secondItem="WoF-CE-kl4" secondAttribute="centerY" id="xqH-dX-GsY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
