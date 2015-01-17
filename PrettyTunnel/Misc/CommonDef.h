@@ -1,6 +1,6 @@
 //
 //  KPCommonDef.h
-//  KuaiPan
+//  PrettyTunnel
 //
 //  Created by zhang fan on 14-7-10.
 //
