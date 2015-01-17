@@ -52,7 +52,6 @@
 		7DD9D09F1A67C4B3001E92C6 /* TTSystemProxyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9D09E1A67C4B3001E92C6 /* TTSystemProxyManager.m */; };
 		7DD9D0A11A68C0BE001E92C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD9D0A01A68C0BE001E92C6 /* SystemConfiguration.framework */; };
 		7DD9D0A41A68E6BF001E92C6 /* TTCFEasyReleasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9D0A31A68E6BF001E92C6 /* TTCFEasyReleasePool.m */; };
-		7DD9D0BB1A68FE10001E92C6 /* PrettyTunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */; };
 		7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DE0A5781A30555400B3E50F /* Localizable.strings */; };
 		7DE0A5891A307A5000B3E50F /* AutoLocalize.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5881A307A5000B3E50F /* AutoLocalize.m */; };
 		7DE0A5931A308B2300B3E50F /* PTMainSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0A5921A308B2300B3E50F /* PTMainSettingsVC.m */; };
@@ -69,6 +68,7 @@
 		7DEE9A8F1A0B7FBA00E52C04 /* SSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A8E1A0B7FBA00E52C04 /* SSHChannel.m */; };
 		7DEE9A921A0BA29600E52C04 /* SSHGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A911A0BA29600E52C04 /* SSHGlobal.m */; };
 		7DEE9A951A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE9A941A0BA6AA00E52C04 /* NSOperationQueue+GlobalQueue.m */; };
+		7DF725C71A6A68D300696A26 /* PrettyTunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -567,6 +567,7 @@
 				7DEE9A741A0B6F1900E52C04 /* Run Script */,
 				7D75E2F21A0A068300E022F2 /* Frameworks */,
 				7D75E2F31A0A068300E022F2 /* Resources */,
+				7DF725C61A6A63AE00696A26 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -619,8 +620,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DF725C71A6A68D300696A26 /* PrettyTunnel.entitlements in Resources */,
 				7D2748881A6A1DA6009B7352 /* portrait.jpg in Resources */,
-				7DD9D0BB1A68FE10001E92C6 /* PrettyTunnel.entitlements in Resources */,
 				7DE0A5761A30555400B3E50F /* Localizable.strings in Resources */,
 				7D75E3041A0A068300E022F2 /* Main.storyboard in Resources */,
 				7D2610AD1A2EF3D300BC5FEF /* InfoPlist.strings in Resources */,
@@ -646,6 +647,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		7DF725C61A6A63AE00696A26 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/bin/bash ${PROJECT_DIR}/extra/build-extra.sh\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
