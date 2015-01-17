@@ -6,7 +6,7 @@
 
 */
 "Settings" = "设置";
-"Help" = "帮助";
+"About" = "关于";
 "Interstellar" = "星际穿越";
 "Not Connected" = "未连接";
 "Connectting..." = "正在连接...";
@@ -33,6 +33,3 @@
 "Remote Port" = "远程端口";
 "User Name" = "用户名";
 "Password" = "密码";
-"Copy" = "复制";
-"OK" = "好的";
-"Background running is about to expire, please go back again!" = "后台运行即将过期，请返回一次app！";
