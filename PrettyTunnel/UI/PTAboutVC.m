@@ -19,6 +19,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.autoLocalize = YES;
+	
+	NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+	NSString* build = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+	NSString* displayVersion = [NSString stringWithFormat:@"%@ build %@", version, build];
+	self.appVersion.text = displayVersion;
 }
 
 - (IBAction)onTwitter:(id)sender

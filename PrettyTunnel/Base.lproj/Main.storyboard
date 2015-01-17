@@ -556,7 +556,7 @@
             </objects>
             <point key="canvasLocation" x="-633" y="719"/>
         </scene>
-        <!--AboutVC-->
+        <!--About-->
         <scene sceneID="Ojg-4Z-b17">
             <objects>
                 <viewController id="Cfr-BE-H13" customClass="PTAboutVC" sceneMemberID="viewController">
@@ -651,7 +651,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="i8l-p5-2ar"/>
+                    <navigationItem key="navigationItem" title="About" id="i8l-p5-2ar"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="appVersion" destination="9Ly-6b-Ndz" id="to0-CU-wQ4"/>
