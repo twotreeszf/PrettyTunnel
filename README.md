@@ -32,7 +32,9 @@ You will be able to install it from Cydia, please wait for me to submit it to th
 
 ##Development Requirements & Tips
 * The newest version of XCode, current 6.1.1
+
 ###For Jailbreak iDevice and you didn't have an APPLE developer account
+
 * You have to install dpkg
 
 ```
