@@ -23,9 +23,9 @@ SSH, Sock5, Proxy, iOS, Jailbreak, Pritave API, Background Runing
 Works on any iDevice running iOS 7.1-8.1
 
 ##Screenshot
-![](/Resource/Screenshot1.png =320x)
-![](/Resource/Screenshot2.png =320x)
-![](/Resource/Screenshot3.png =320x)
+![](/Resource/Screenshot1.png)
+![](/Resource/Screenshot2.png)
+![](/Resource/Screenshot3.png)
 
 ##Installation
 You will be able to install it from Cydia, please wait for me to submit it to the Bigboss, or if you a developer you can continuing to refer the following information
