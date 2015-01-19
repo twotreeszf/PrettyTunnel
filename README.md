@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/twotreeszf/PrettyTunnel/master/Resource/Logo.png)
+![](/Resource/Logo.png)
 
 #PrettyTunnel
 
@@ -23,9 +23,9 @@ SSH, Sock5, Proxy, iOS, Jailbreak, Pritave API, Background Runing
 Works on any iDevice running iOS 7.1-8.1
 
 ##Screenshot
-![](https://raw.githubusercontent.com/twotreeszf/PrettyTunnel/master/Resource/Screenshot1.png =320x)
-![](https://raw.githubusercontent.com/twotreeszf/PrettyTunnel/master/Resource/Screenshot2.png =320x)
-![](https://raw.githubusercontent.com/twotreeszf/PrettyTunnel/master/Resource/Screenshot3.png =320x)
+![](/Resource/Screenshot1.png =320x)
+![](/Resource/Screenshot2.png =320x)
+![](/Resource/Screenshot3.png =320x)
 
 ##Installation
 You will be able to install it from Cydia, please wait for me to submit it to the Bigboss, or if you a developer you can continuing to refer the following information
