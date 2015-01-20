@@ -28,7 +28,9 @@ Works on any iDevice running iOS 7.1-8.1
 ![](/Resource/Screenshot3.png)
 
 ##Installation
-You will be able to install it from Cydia, please wait for me to submit it to the Bigboss, or if you a developer you can continuing to refer the following information
+* Open Cydia
+* Add Source: http://apt.so/twotrees
+* Search **PrettyTunnel**, install
 
 ##Development Requirements & Tips
 * The newest version of XCode, current 6.1.1

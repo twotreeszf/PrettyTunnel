@@ -156,8 +156,6 @@
 		7D75E2FD1A0A068300E022F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7D75E3031A0A068300E022F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D75E3051A0A068300E022F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7D75E3131A0A068300E022F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrettyTunnelTests.m; sourceTree = "<group>"; };
 		7D75E31F1A0A08C200E022F2 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		7D75E3201A0A08C200E022F2 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		7D75E3211A0A08C200E022F2 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 			children = (
 				7D75E2F71A0A068300E022F2 /* PrettyTunnel */,
 				7DEE9A881A0B7A4E00E52C04 /* Frameworks */,
-				7D75E3111A0A068300E022F2 /* PrettyTunnelTests */,
 				7D75E2F61A0A068300E022F2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -411,23 +408,6 @@
 				7DE0A5781A30555400B3E50F /* Localizable.strings */,
 				7D2895D01A4146BF00F52D66 /* LaunchScreen.xib */,
 				7DD9D0BA1A68FE10001E92C6 /* PrettyTunnel.entitlements */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7D75E3111A0A068300E022F2 /* PrettyTunnelTests */ = {
-			isa = PBXGroup;
-			children = (
-				7D75E3141A0A068300E022F2 /* PrettyTunnelTests.m */,
-				7D75E3121A0A068300E022F2 /* Supporting Files */,
-			);
-			path = PrettyTunnelTests;
-			sourceTree = "<group>";
-		};
-		7D75E3121A0A068300E022F2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7D75E3131A0A068300E022F2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
