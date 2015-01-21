@@ -76,6 +76,7 @@ Just clone and open the project in XCode, Debug and Run it on any iDevice!
 * [libssh2-for-iOS](https://github.com/x2on/libssh2-for-iOS)
 * [ProxyKit](https://github.com/chrisballinger/proxykit)
 * [CocoaAsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket)
+* [GCDWebServer](https://github.com/swisspol/GCDWebServer)
 
 ##License
 Licensed under MIT.
