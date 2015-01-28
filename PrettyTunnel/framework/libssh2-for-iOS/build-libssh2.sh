@@ -4,7 +4,7 @@
 #  for iPhoneOS and iPhoneSimulator
 #
 #  Created by Felix Schulze on 02.02.11.
-#  Copyright 2010 Felix Schulze. All rights reserved.
+#  Copyright 2010-2015 Felix Schulze. All rights reserved.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@
 #  Change values here
 #
 VERSION="1.4.3"
-SDKVERSION="8.1"
 #
 ###########################################################################
 #
 # Don't change anything here
+SDKVERSION=`xcrun -sdk iphoneos --show-sdk-version`                                                          
 CURRENTPATH=`pwd`
 ARCHS="i386 x86_64 armv7 armv7s arm64"
 DEVELOPER=`xcode-select -print-path`
