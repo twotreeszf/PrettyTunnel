@@ -27,13 +27,16 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-static int waitsocket(int socket_fd, LIBSSH2_SESSION* session)
+
+
+
+static int waitsocket(int socket_fd, LIBSSH2_SESSION *session)
 {
     struct timeval timeout;
     int rc;
     fd_set fd;
-    fd_set* writefd = NULL;
-    fd_set* readfd = NULL;
+    fd_set *writefd = NULL;
+    fd_set *readfd = NULL;
     int dir;
 
     timeout.tv_sec = 10;
@@ -46,10 +49,10 @@ static int waitsocket(int socket_fd, LIBSSH2_SESSION* session)
     /* now make sure we wait in the correct direction */
     dir = libssh2_session_block_directions(session);
 
-    if (dir & LIBSSH2_SESSION_BLOCK_INBOUND)
+    if(dir & LIBSSH2_SESSION_BLOCK_INBOUND)
         readfd = &fd;
 
-    if (dir & LIBSSH2_SESSION_BLOCK_OUTBOUND)
+    if(dir & LIBSSH2_SESSION_BLOCK_OUTBOUND)
         writefd = &fd;
 
     rc = select(socket_fd + 1, readfd, writefd, NULL, &timeout);
@@ -57,31 +60,28 @@ static int waitsocket(int socket_fd, LIBSSH2_SESSION* session)
     return rc;
 }
 
-@implementation SSHWrapper
-{
+@implementation SSHWrapper {
     int sock;
-    LIBSSH2_SESSION* session;
-    LIBSSH2_CHANNEL* channel;
+    LIBSSH2_SESSION *session;
+    LIBSSH2_CHANNEL *channel;
     int rc;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self closeConnection];
     session = nil;
     channel = nil;
 }
 
-- (void)connectToHost:(NSString*)host port:(int)port user:(NSString*)user password:(NSString*)password error:(NSError**)error
-{
-    if (host.length == 0)
-    {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:300 userInfo:@{ NSLocalizedDescriptionKey : @"No host" }];
+
+- (void)connectToHost:(NSString *)host port:(int)port user:(NSString *)user password:(NSString *)password error:(NSError **)error {
+    if (host.length == 0) {
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:300 userInfo:@{NSLocalizedDescriptionKey:@"No host"}];
         return;
     }
-    const char* hostChar = [host cStringUsingEncoding:NSUTF8StringEncoding];
-    const char* userChar = [user cStringUsingEncoding:NSUTF8StringEncoding];
-    const char* passwordChar = [password cStringUsingEncoding:NSUTF8StringEncoding];
+	const char* hostChar = [host cStringUsingEncoding:NSUTF8StringEncoding];
+	const char* userChar = [user cStringUsingEncoding:NSUTF8StringEncoding];
+	const char* passwordChar = [password cStringUsingEncoding:NSUTF8StringEncoding];
     struct sockaddr_in sock_serv_addr;
     unsigned long hostaddr = inet_addr(hostChar);
 
@@ -89,108 +89,103 @@ static int waitsocket(int socket_fd, LIBSSH2_SESSION* session)
     sock_serv_addr.sin_family = AF_INET;
     sock_serv_addr.sin_port = htons(port);
     sock_serv_addr.sin_addr.s_addr = hostaddr;
-    if (connect(sock, (struct sockaddr*)(&sock_serv_addr), sizeof(sock_serv_addr)) != 0)
-    {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:400 userInfo:@{ NSLocalizedDescriptionKey : @"Failed to connect" }];
+    if (connect(sock, (struct sockaddr *) (&sock_serv_addr), sizeof(sock_serv_addr)) != 0) {
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:400 userInfo:@{NSLocalizedDescriptionKey:@"Failed to connect"}];
         return;
     }
-
+	
     /* Create a session instance */
     session = libssh2_session_init();
-    if (!session)
-    {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:401 userInfo:@{ NSLocalizedDescriptionKey : @"Create session failed" }];
+    if (!session) {
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:401 userInfo:@{NSLocalizedDescriptionKey : @"Create session failed"}];
         return;
     }
-
+	
     /* tell libssh2 we want it all done non-blocking */
     libssh2_session_set_blocking(session, 0);
-
+	
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
      */
-    while ((rc = libssh2_session_startup(session, sock)) == LIBSSH2_ERROR_EAGAIN)
-        ;
-    if (rc)
-    {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:402 userInfo:@{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Failure establishing SSH session: %d", rc] }];
+    while ((rc = libssh2_session_startup(session, sock)) ==
+           LIBSSH2_ERROR_EAGAIN);
+    if (rc) {
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:402 userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Failure establishing SSH session: %d", rc]}];
         return;
     }
 
-    if (strlen(passwordChar) != 0)
-    {
-        /* We could authenticate via password */
-        while ((rc = libssh2_userauth_password(session, userChar, passwordChar)) == LIBSSH2_ERROR_EAGAIN)
-            ;
-        if (rc)
-        {
-            *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:403 userInfo:@{ NSLocalizedDescriptionKey : @"Authentication by password failed." }];
+    if ( strlen(passwordChar) != 0 ) {
+		/* We could authenticate via password */
+        while ((rc = libssh2_userauth_password(session, userChar, passwordChar)) == LIBSSH2_ERROR_EAGAIN);
+		if (rc) {
+            *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:403 userInfo:@{NSLocalizedDescriptionKey : @"Authentication by password failed."}];
             return;
-        }
-    }
+		}
+	}
 }
 
-- (NSString*)executeCommand:(NSString*)command error:(NSError**)error
-{
-    const char* commandChar = [command cStringUsingEncoding:NSUTF8StringEncoding];
+- (NSString *)executeCommand:(NSString *)command error:(NSError **)error {
+	const char* commandChar = [command cStringUsingEncoding:NSUTF8StringEncoding];
 
-    NSString* result = nil;
-
+	NSString *result = nil;
+	
     /* Exec non-blocking on the remove host */
-    while ((channel = libssh2_channel_open_session(session)) == NULL && libssh2_session_last_error(session, NULL, NULL, 0) == LIBSSH2_ERROR_EAGAIN)
+    while( (channel = libssh2_channel_open_session(session)) == NULL &&
+		  libssh2_session_last_error(session,NULL,NULL,0) == LIBSSH2_ERROR_EAGAIN )
     {
         waitsocket(sock, session);
     }
-    if (channel == NULL)
+    if( channel == NULL )
     {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:501 userInfo:@{ NSLocalizedDescriptionKey : @"No channel found." }];
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:501 userInfo:@{NSLocalizedDescriptionKey : @"No channel found."}];
         return nil;
     }
-    while ((rc = libssh2_channel_exec(channel, commandChar)) == LIBSSH2_ERROR_EAGAIN)
+    while( (rc = libssh2_channel_exec(channel, commandChar)) == LIBSSH2_ERROR_EAGAIN )
     {
         waitsocket(sock, session);
     }
-    if (rc != 0)
+    if( rc != 0 )
     {
-        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:502 userInfo:@{ NSLocalizedDescriptionKey : @"Error while exec command." }];
+        *error = [NSError errorWithDomain:@"de.felixschulze.sshwrapper" code:502 userInfo:@{NSLocalizedDescriptionKey : @"Error while exec command."}];
         return nil;
     }
-    for (;;)
+    for( ;; )
     {
         /* loop until we block */
         int rc1;
         do
         {
             char buffer[0x2000];
-            rc1 = libssh2_channel_read(channel, buffer, sizeof(buffer));
-            if (rc1 > 0)
+            rc1 = libssh2_channel_read( channel, buffer, sizeof(buffer) );
+            if( rc1 > 0 )
             {
-                result = @(buffer);
+				result = @(buffer);
             }
-        } while (rc1 > 0);
-
+        }
+        while( rc1 > 0 );
+		
         /* this is due to blocking that would occur otherwise so we loop on
 		 this condition */
-        if (rc1 == LIBSSH2_ERROR_EAGAIN)
+        if( rc1 == LIBSSH2_ERROR_EAGAIN )
         {
             waitsocket(sock, session);
         }
         else
             break;
     }
-    while ((rc = libssh2_channel_close(channel)) == LIBSSH2_ERROR_EAGAIN)
+    while( (rc = libssh2_channel_close(channel)) == LIBSSH2_ERROR_EAGAIN )
         waitsocket(sock, session);
-
+	
     libssh2_channel_free(channel);
     channel = NULL;
-
+	
     return result;
+	
 }
 
-- (void)closeConnection
-{
-    if (session)
-    {
+
+- (void)closeConnection {
+    if (session) {
         libssh2_session_disconnect(session, "Normal Shutdown, Thank you for playing");
         libssh2_session_free(session);
         session = nil;

@@ -4,7 +4,7 @@
 #  for iPhoneOS and iPhoneSimulator
 #
 #  Created by Felix Schulze on 01.02.11.
-#  Copyright 2010 Felix Schulze. All rights reserved.
+#  Copyright 2010-2015 Felix Schulze. All rights reserved.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ if [ "$1" == "openssl" ];
 then
 	echo "Building openssl:"
 	./openssl/build-libssl.sh $2
+	./openssl/create-openssl-framework.sh
 	echo "Build libssh2:"
 	./build-libssh2.sh openssl
 elif [ "$1" == "libgcrypt" ];
