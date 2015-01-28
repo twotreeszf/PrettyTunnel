@@ -95,8 +95,8 @@ extern "C" {
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
 #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#define ENGINESDIR "/Users/apple/Documents/PrettyTunnel/PrettyTunnel/framework/libssh2-for-iOS/bin/iPhoneSimulator8.1-i386.sdk/lib/engines"
-#define OPENSSLDIR "/Users/apple/Documents/PrettyTunnel/PrettyTunnel/framework/libssh2-for-iOS/bin/iPhoneSimulator8.1-i386.sdk"
+#define ENGINESDIR "/Users/zhangfan/Documents/src/PrettyTunnel/PrettyTunnel/framework/libssh2-for-iOS/bin/iPhoneSimulator8.1-i386.sdk/lib/engines"
+#define OPENSSLDIR "/Users/zhangfan/Documents/src/PrettyTunnel/PrettyTunnel/framework/libssh2-for-iOS/bin/iPhoneSimulator8.1-i386.sdk"
 #endif
 #endif
 
